@@ -25,8 +25,6 @@ services:
         condition: service_healthy
     ports:
       - "3000:80"
-    volumes:
-      - bundle:/usr/local/bundle
     environment:
       - RAILS_ENV=development
       - SECRET_KEY_BASE=${SECRET_KEY_BASE}

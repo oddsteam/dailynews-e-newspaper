@@ -18,14 +18,13 @@ services:
       - rails_network
 
   rails:
-    build: .
+    image: ghcr.io/oddsteam/dailynews-e-newspaper:latest
+    platform: linux/amd64
     depends_on:
       db:
         condition: service_healthy
     ports:
       - "3000:80"
-    volumes:
-      - bundle:/usr/local/bundle
     environment:
       - RAILS_ENV=production
       - SECRET_KEY_BASE=${SECRET_KEY_BASE}
