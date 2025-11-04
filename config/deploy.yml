@@ -9,10 +9,6 @@ servers:
   web:
     hosts:
       - 110.238.119.35
-    options:
-      publish:
-        - 3000:80
-    proxy: false
   # job:
   #   hosts:
   #     - 192.168.0.1
