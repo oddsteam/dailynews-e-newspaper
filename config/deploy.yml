@@ -94,7 +94,7 @@ builder:
   #   - RAILS_MASTER_KEY
 
 proxy:
-  ssl: true
+  # ssl: true
   path_prefix: "/e-newspaper"
 
 # Use a different ssh user than root
