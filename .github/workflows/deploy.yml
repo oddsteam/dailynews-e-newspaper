@@ -1,0 +1,68 @@
+name: CD - Deploy (DEV, UAT, PROD)
+
+on:
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: "Docker image tag (e.g. sha-asd02w, v1.0.0-alpha, v1.0.0)"
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Determine environment from image tag
+        id: env_map
+        run: |
+          TAG="${{ github.event.inputs.image_tag }}"
+
+          if [[ "$TAG" == sha-* ]]; then
+            echo "env_name=dev" >> $GITHUB_OUTPUT
+            echo "server=${{ secrets.DEV_HOST }}" >> $GITHUB_OUTPUT
+            echo "user=${{ secrets.DEV_SSH_USER }}" >> $GITHUB_OUTPUT
+            echo "compose_file=docker-compose-dev.yml" >> $GITHUB_OUTPUT
+          elif [[ "$TAG" == v*"-alpha" ]]; then
+            echo "env_name=uat" >> $GITHUB_OUTPUT
+            echo "server=${{ secrets.UAT_HOST }}" >> $GITHUB_OUTPUT
+            echo "user=${{ secrets.UAT_SSH_USER }}" >> $GITHUB_OUTPUT
+            echo "compose_file=docker-compose-uat.yml" >> $GITHUB_OUTPUT
+          elif [[ "$TAG" == v* ]]; then
+            echo "env_name=prod" >> $GITHUB_OUTPUT
+            echo "server=${{ secrets.PROD_HOST }}" >> $GITHUB_OUTPUT
+            echo "user=${{ secrets.PROD_SSH_USER }}" >> $GITHUB_OUTPUT
+            echo "compose_file=docker-compose-prod.yml" >> $GITHUB_OUTPUT
+          else
+            echo "Unknown image tag format: $TAG"
+            exit 1
+          fi
+
+      - name: Show selected environment
+        run: |
+          echo "Environment: ${{ steps.env_map.outputs.env_name }}"
+          echo "Server: ${{ steps.env_map.outputs.server }}"
+          echo "Compose file: ${{ steps.env_map.outputs.compose_file }}"
+
+      - name: Upload docker-compose file to server
+        env:
+          USER: ${{ steps.env_map.outputs.user }}
+          HOST: ${{ steps.env_map.outputs.server }}
+          FILE: ${{ steps.env_map.outputs.compose_file }}
+        run: |
+          scp -o StrictHostKeyChecking=no $FILE $USER@$HOST:/home/$USER/docker-compose.yml
+
+      - name: Deploy via SSH
+        env:
+          USER: ${{ steps.env_map.outputs.user }}
+          HOST: ${{ steps.env_map.outputs.server }}
+          TAG: ${{ github.event.inputs.image_tag }}
+        run: |
+          ssh -o StrictHostKeyChecking=no $USER@$HOST "
+            cd /home/$USER &&
+            echo 'Deploying image tag: $TAG' &&
+            docker compose pull &&
+            docker compose up -d &&
+            docker system prune -f
+          "
