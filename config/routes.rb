@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  # scope "e-newspaper" do
+    # scope "e-newspaper" do
     # Scoped Devise routes for Members (STI)
     devise_for :members, class_name: "Member", controllers: {
       registrations: "members/registrations",
@@ -89,8 +89,8 @@ Rails.application.routes.draw do
     # Style Guide (only accessible in development/staging)
     get "style-guide" => "style_guide#index", as: :style_guide
 
-    # Defines the root path route ("/")
-    # root "home#index", as: :scoped_root
+  # Defines the root path route ("/")
+  # root "home#index", as: :scoped_root
   # end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
