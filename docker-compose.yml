@@ -20,6 +20,7 @@ services:
   rails:
     image: ghcr.io/oddsteam/dailynews-e-newspaper:latest
     platform: linux/amd64
+    command: ["./bin/thrust", "./bin/rails", "server"]
     depends_on:
       db:
         condition: service_healthy
