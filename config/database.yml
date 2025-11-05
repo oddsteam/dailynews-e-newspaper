@@ -19,7 +19,7 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%= ENV["DATABASE_USERNAME"] || Rails.application.credentials.dig(:database, :username) %>
-  password: <%= ENV["DATABASE_PASSWORD"] || "'#{Rails.application.credentials.dig(:database, :password)}'" %>
+  password: <%= ENV["DATABASE_PASSWORD"] || Rails.application.credentials.dig(:database, :password) %>
   host: <%= ENV["DATABASE_HOST"] || Rails.application.credentials.dig(:database, :host) %>
   port: <%= ENV["DATABASE_PORT"] || Rails.application.credentials.dig(:database, :port) %>
 
