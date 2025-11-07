@@ -23,8 +23,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    ports:
-      - "80:80"
+    expose:
+      - "3000"
     environment:
       - RAILS_ENV=production
       - SECRET_KEY_BASE=${SECRET_KEY_BASE}
@@ -38,6 +38,7 @@ services:
       - HUAWEICLOUD_REGION=${HUAWEICLOUD_REGION}
     networks:
       - rails_network
+      - kamal
 
   nginx:
     image: nginx:alpine
@@ -49,6 +50,7 @@ services:
       - rails
     networks:
       - rails_network
+      - kamal
     restart: always
 
 
@@ -56,6 +58,8 @@ services:
 
 networks:
   rails_network:
+  kamal:
+    external: true
 
 volumes:
   postgres:
