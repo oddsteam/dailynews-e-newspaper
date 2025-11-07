@@ -27,7 +27,7 @@ jobs:
 
     steps:
       - name: Install packages
-        run: sudo apt-get install poppler-utils imagemagick
+        run: sudo apt-get update && sudo apt-get install poppler-utils imagemagick
 
       - name: Checkout code
         uses: actions/checkout@v4
