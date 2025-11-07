@@ -5,7 +5,7 @@ RSpec.describe "Members::Sessions", type: :request do
 
   describe "GET /members/sign_in" do
     it "renders the sign in page" do
-      get "/members/sign_in"
+      get new_member_session_path
       expect(response).to have_http_status(:ok)
     end
   end

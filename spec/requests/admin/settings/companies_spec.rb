@@ -6,14 +6,14 @@ RSpec.describe "Admin::Settings::Companies", type: :request do
 
   describe "GET /show" do
     it "returns http success" do
-      get "/admin/settings/company"
+      get admin_settings_company_path
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "PUT /update" do
     it "returns http success" do
-      put "/admin/settings/company", params: {
+      put admin_settings_company_path, params: {
         company: {
           id: 1,
           name: "Test Co.",
@@ -37,7 +37,7 @@ RSpec.describe "Admin::Settings::Companies", type: :request do
 
   describe "PATCH /update" do
     it "returns http success" do
-      patch "/admin/settings/company", params: {
+      patch admin_settings_company_path, params: {
         company: {
           id: 1,
           name: "Test Co.",

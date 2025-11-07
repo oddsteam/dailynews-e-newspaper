@@ -6,28 +6,28 @@ RSpec.describe "Admin::Customers", type: :request do
   before { sign_in admin }
   describe "GET /index" do
     it "returns http success" do
-      get "/admin/customers"
+      get admin_customers_path
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET /show" do
     it "returns http success" do
-      get "/admin/customers/#{member.id}"
+      get admin_customer_path(member)
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET /edit" do
     it "returns http success" do
-      get "/admin/customers/#{member.id}/edit"
+      get edit_admin_customer_path(member)
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "PUT /update" do
     it "updates and redirects" do
-      put "/admin/customers/#{member.id}", params: {
+      put admin_customer_path(member), params: {
         member: {
           id: member.id,
           first_name: "Pom",
@@ -42,7 +42,7 @@ RSpec.describe "Admin::Customers", type: :request do
 
   describe "GET /subscriptions/new" do
     it "returns http success" do
-      get "/admin/customers/#{member.id}/subscriptions/new"
+      get new_admin_customer_subscription_path(member)
       expect(response).to have_http_status(:success)
     end
   end
