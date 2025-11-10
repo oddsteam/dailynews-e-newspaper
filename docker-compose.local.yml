@@ -18,27 +18,27 @@ services:
     networks:
       - rails_network
 
-  rails:
-    build: .
-    depends_on:
-      db:
-        condition: service_healthy
-    ports:
-      - "3000:80"
-    environment:
-      - RAILS_ENV=production
-      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
-      - DATABASE_HOST=${DATABASE_HOST}
-      - DATABASE_USERNAME=${DATABASE_USERNAME}
-      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
-      - DATABASE_PORT=${DATABASE_PORT}
-      - DATABASE_NAME=${DATABASE_NAME}
-      - HUAWEICLOUD_ACCESS_KEY_ID=${HUAWEICLOUD_ACCESS_KEY_ID}
-      - HUAWEICLOUD_SECRET_ACCESS_KEY=${HUAWEICLOUD_SECRET_ACCESS_KEY}
-      - HUAWEICLOUD_BUCKET=${HUAWEICLOUD_BUCKET}
-      - HUAWEICLOUD_REGION=${HUAWEICLOUD_REGION}
-    networks:
-      - rails_network
+  # rails:
+  #   build: .
+  #   depends_on:
+  #     db:
+  #       condition: service_healthy
+  #   ports:
+  #     - "3000:80"
+  #   environment:
+  #     - RAILS_ENV=production
+  #     - SECRET_KEY_BASE=${SECRET_KEY_BASE}
+  #     - DATABASE_HOST=${DATABASE_HOST}
+  #     - DATABASE_USERNAME=${DATABASE_USERNAME}
+  #     - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+  #     - DATABASE_PORT=${DATABASE_PORT}
+  #     - DATABASE_NAME=${DATABASE_NAME}
+  #     - HUAWEICLOUD_ACCESS_KEY_ID=${HUAWEICLOUD_ACCESS_KEY_ID}
+  #     - HUAWEICLOUD_SECRET_ACCESS_KEY=${HUAWEICLOUD_SECRET_ACCESS_KEY}
+  #     - HUAWEICLOUD_BUCKET=${HUAWEICLOUD_BUCKET}
+  #     - HUAWEICLOUD_REGION=${HUAWEICLOUD_REGION}
+  #   networks:
+  #     - rails_network
 
     
 

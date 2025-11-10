@@ -55,7 +55,7 @@ Rails.application.routes.draw do
     # This will be deprecated once all team management moves to settings
 
     # Redirect /admin/settings to default tab
-    get "settings", to: redirect("/e-newspaper/admin/settings/team")
+    get "settings", to: redirect("#{Rails.application.config.relative_url_root}/admin/settings/team")
 
     resources :customers, only: %i[index show edit update] do
       resources :subscriptions, only: %i[new create]
