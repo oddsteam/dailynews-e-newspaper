@@ -31,6 +31,7 @@ services:
     environment:
       - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
       - APP_ENV=uat
+      - SCRIPT_NAME=/e-newspaper
     networks:
       - rails_network
       - kamal
