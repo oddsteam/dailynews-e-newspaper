@@ -148,6 +148,18 @@ jobs:
     needs: build_and_push_docker_image
     if: github.ref == 'refs/heads/main'
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Copy docker-compose.yml to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          source: "docker-compose.yml,nginx.conf"
+          target: "/root"
+
       - name: Deploy to server
         uses: appleboy/ssh-action@v0.1.10
         with:
@@ -156,6 +168,26 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd /root
-            docker compose pull rails
-            docker compose up -d rails
+            docker compose pull
+            docker compose up -d
+            # Clean up old images from ghcr.io registry (keep only the latest)
+            docker images 'ghcr.io/oddsteam/dailynews-e-newspaper' --format '{{.ID}} {{.Tag}}' | grep -v 'latest' | awk '{print $1}' | xargs -r docker rmi -f || true
+
+      - name: Health check
+        run: |
+          echo "Waiting for services to start..."
+          sleep 15
+
+          echo "Checking application health..."
+          for i in {1..5}; do
+            if curl -f -s http://${{ secrets.SERVER_HOST }}/up > /dev/null; then
+              echo "✓ Health check passed!"
+              exit 0
+            fi
+            echo "Attempt $i failed, retrying in 10 seconds..."
+            sleep 10
+          done
+
+          echo "✗ Health check failed after 5 attempts"
+          exit 1
                   
