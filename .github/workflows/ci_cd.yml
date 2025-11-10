@@ -180,7 +180,7 @@ jobs:
 
           echo "Checking application health..."
           for i in {1..5}; do
-            if curl -f -s http://${{ secrets.SERVER_HOST }}/up > /dev/null; then
+            if curl -f -s http://${{ secrets.SERVER_HOST }}/e-newspaper/up > /dev/null; then
               echo "✓ Health check passed!"
               exit 0
             fi
