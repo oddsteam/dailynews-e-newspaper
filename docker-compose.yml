@@ -1,30 +1,11 @@
 services:
-  db:
-    image: postgres:17.2-alpine
-    volumes:
-      - 'postgres:/var/lib/postgresql/data'
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    ports:
-      - '5432:5432'
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    networks:
-      - rails_network
-
   rails:
     image: ghcr.io/oddsteam/dailynews-e-newspaper:latest
     platform: linux/amd64
-    depends_on:
-      db:
-        condition: service_healthy
     expose:
       - "3000"
+    ports:
+      - "3000:3000"
     environment:
       - RAILS_ENV=production
       - SECRET_KEY_BASE=${SECRET_KEY_BASE}
@@ -52,9 +33,6 @@ services:
       - rails_network
       - kamal
     restart: always
-
-
-    
 
 networks:
   rails_network:
