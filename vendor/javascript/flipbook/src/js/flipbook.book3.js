@@ -1,8 +1,8 @@
 /*
  * Real3D FlipBook [https://real3dflipbook.com]
  * @author creativeinteractivemedia [https://codecanyon.net/user/creativeinteractivemedia/portfolio]
- * @version 4.12
- * @date 2025-08-12
+ * @version 4.16.1
+ * @date 2025-11-10
  */
 'use strict';
 
@@ -73,16 +73,8 @@ FLIPBOOK.Book3 = class extends FLIPBOOK.Book {
         this.animating = false;
 
         var p = this.options.pages;
-        var evenPages = p.length % 2 == 0;
-        var numSheets = evenPages ? p.length / 2 : (p.length + 1) / 2;
-        if (!this.options.cover && evenPages) {
-            numSheets += 1;
-        }
-        if (this.options.singlePageMode) numSheets = p.length;
-        this.numSheets = numSheets;
 
-        // for (let i = 0; i < numSheets; i++) {
-        for (let i = 0; i < p.length; i++) {
+        for (let i = 0; i < this.numSheets; i++) {
             const page = new FLIPBOOK.Page3(this, i);
             this.pagesArr.push(page);
             this.centerContainer.appendChild(page.wrapper);
@@ -410,17 +402,36 @@ FLIPBOOK.Book3 = class extends FLIPBOOK.Book {
         this.updateBookPosition();
 
         this.options.main.setLoadingProgress(0.1);
-        if (left && !this.singlePage) await this.loadPageAsync(left, 'back');
-        if (right) this.loadPageAsync(right, 'front');
+        if (left && !this.singlePage) {
+            await this.loadPageAsync(left, 'back');
+            this.pageLoaded(left, 'back');
+        }
+        if (right) {
+            await this.loadPageAsync(right, 'front');
+            this.pageLoaded(right, 'front');
+        }
         this.options.main.setLoadingProgress(1);
+
         if (left && !this.singlePage) await this.loadHTMLAsync(left, 'back');
         if (right) await this.loadHTMLAsync(right, 'front');
 
-        if (next) await this.loadPageAsync(next, 'front');
-        if (right) await this.loadPageAsync(right, 'back');
+        if (next) {
+            await this.loadPageAsync(next, 'front');
+            this.pageLoaded(next, 'front');
+        }
+        if (right) {
+            await this.loadPageAsync(right, 'back');
+            this.pageLoaded(right, 'back');
+        }
 
-        if (prev) await this.loadPageAsync(prev, 'back');
-        if (left) await this.loadPageAsync(left, 'front');
+        if (prev) {
+            await this.loadPageAsync(prev, 'back');
+            this.pageLoaded(prev, 'back');
+        }
+        if (left) {
+            await this.loadPageAsync(left, 'front');
+            this.pageLoaded(left, 'front');
+        }
     }
 
     enable() {
@@ -792,8 +803,6 @@ FLIPBOOK.Book3 = class extends FLIPBOOK.Book {
         function fit() {
             if (self.iscroll) {
                 self.iscroll.options.zoomMin = self.ratio * options.zoomMin;
-            }
-            if (self.iscroll) {
                 self.iscroll.options.zoomMax = self.ratio * options.zoomMax;
             }
 
@@ -966,55 +975,66 @@ FLIPBOOK.Page3 = class {
         var pageIndex = this.book.singlePage ? this.index : isFront ? this.index * 2 : this.index * 2 + 1;
         var index = o.rightToLeft ? this.book.pagesArr.length * 2 - pageIndex - 1 : pageIndex;
 
-        if (
-            (this.sizeFront == size && isFront && this.indexFront == index) ||
-            (this.sizeBack == size && !isFront && this.indexBack == index)
-        ) {
+        var self = this;
+
+        if (!o.cover) index--;
+        if (isFront) this.indexFront = index;
+        else this.indexBack = index;
+
+        o.main.loadPage(index, size, function (page) {
+            if (page && page.image) {
+                var img = page.image[size] || page.image;
+                var page = o.pages[index];
+                if (
+                    (isFront && page && page.side == 'right') ||
+                    (o.rightToLeft && isFront && page && page.side == 'left')
+                ) {
+                    //make image clone for double page with cover
+                    if (!img.clone) {
+                        img.clone = new Image();
+                        img.clone.src = img.src;
+                    }
+                    img = img.clone;
+                    img.style.transform = 'translateX(-50%)';
+                }
+
+                self.images = self.images || {};
+                self.images[side] = self.images[side] || {};
+                self.images[side][size] = img;
+
+                // if (isFront) {
+                //     self.imagesFront = self.imagesFront || {};
+                //     self.imagesFront[size] = img;
+                // } else {
+                //     self.imagesBack = self.imagesBack || {};
+                //     self.imagesBack[size] = img;
+                // }
+            }
+
             if (callback) {
-                callback.call(this);
+                callback.call(self);
+            }
+        });
+    }
+
+    loaded(side) {
+        var isFront = side == 'front' || this.book.singlePage;
+        const size = this.book.currentPageTextureSize;
+
+        if (isFront) {
+            if (size != this.sizeFront) {
+                if (this.bgFront) this.bgFront.replaceChildren(this.images[side][size]);
+                // this.bgFront.style.backgroundImage = `url(${this.images[side][size].src})`;
+                if (this.preloaderFront) this.preloaderFront.style.display = 'none';
+                this.sizeFront = size;
             }
         } else {
-            if (isFront) {
-                this.sizeFront = size;
-            } else {
+            if (size != this.sizeBack) {
+                if (this.bgBack) this.bgBack.replaceChildren(this.images[side][size]);
+                // this.bgBack.style.backgroundImage = `url(${this.images[side][size].src})`;
+                if (this.preloaderBack) this.preloaderBack.style.display = 'none';
                 this.sizeBack = size;
             }
-
-            var self = this;
-
-            if (!o.cover) index--;
-            if (isFront) this.indexFront = index;
-            else this.indexBack = index;
-
-            o.main.loadPage(index, size, function (page) {
-                if (page && page.image) {
-                    var img = page.image[size] || page.image;
-                    var page = o.pages[index];
-                    if (
-                        (isFront && page && page.side == 'right') ||
-                        (o.rightToLeft && isFront && page && page.side == 'left')
-                    ) {
-                        if (!img.clone) {
-                            img.clone = new Image();
-                            img.clone.src = img.src;
-                        }
-                        img = img.clone;
-                        img.style.transform = 'translateX(-50%)';
-                    }
-
-                    if (isFront) {
-                        if (self.bgFront) self.bgFront.replaceChildren(img);
-                        if (self.preloaderFront) self.preloaderFront.style.display = 'none';
-                    } else {
-                        if (self.bgBack) self.bgBack.replaceChildren(img);
-                        if (self.preloaderBack) self.preloaderBack.style.display = 'none';
-                    }
-                }
-
-                if (callback) {
-                    callback.call(self);
-                }
-            });
         }
     }
 
@@ -1135,8 +1155,6 @@ FLIPBOOK.Page3 = class {
 
     _setAngle(angle) {
         angle = -angle;
-
-        // console.log(this.index, angle);
 
         if (angle != this.angle) {
             this.setShadowOpacity((1 - Math.abs(angle + 90) / 90) * 0.2);

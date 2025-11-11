@@ -1,8 +1,8 @@
 /*
  * Real3D FlipBook [https://real3dflipbook.com]
  * @author creativeinteractivemedia [https://codecanyon.net/user/creativeinteractivemedia/portfolio]
- * @version 4.12
- * @date 2025-08-12
+ * @version 4.16.1
+ * @date 2025-11-10
  */
 'use strict';
 
@@ -59,11 +59,13 @@ FLIPBOOK.BookWebGL = class extends FLIPBOOK.Book {
 
         var container = this.wrapper;
         var c = document.createElement('canvas');
-        c.getContext('webgl');
+        var context = c.getContext('webgl2') || c.getContext('webgl');
 
         this.renderer = new THREE.WebGLRenderer({
             antialias: this.options.antialias,
             alpha: true,
+            canvas: c,
+            context: context,
         });
 
         this.renderer.gammaInput = true;
@@ -78,10 +80,8 @@ FLIPBOOK.BookWebGL = class extends FLIPBOOK.Book {
 
         window.webglrenderers.push(this.renderer);
 
-        this.renderer.setSize(container.clientWidth, container.clientHeight);
-        var pr = window.devicePixelRatio < o.minPixelRatio ? o.minPixelRatio : window.devicePixelRatio;
-        this.renderer.setPixelRatio(pr);
-        this.pixelRatio = pr;
+        this.updateRendererSize(container.clientWidth, container.clientHeight);
+
         container.appendChild(this.renderer.domElement);
 
         var htmlLayer = false;
@@ -96,11 +96,10 @@ FLIPBOOK.BookWebGL = class extends FLIPBOOK.Book {
             this.initHtmlContent();
         }
 
-        this.canvas = this.renderer.domElement;
-        this.canvas.style.position = 'relative';
-        this.canvas.style.pointerEvents = 'none';
+        c.style.position = 'relative';
+        c.style.pointerEvents = 'none';
 
-        this.canvas.addEventListener(
+        c.addEventListener(
             'webglcontextlost',
             (event) => {
                 debugger;
@@ -171,6 +170,27 @@ FLIPBOOK.BookWebGL = class extends FLIPBOOK.Book {
             if (self.renderLoop) requestAnimationFrame(self.renderLoop);
         };
         this.renderLoop();
+    }
+
+    updateRendererSize(w, h) {
+        if (this.rendererW != w || this.renderH != h) {
+            this.renderer.setSize(w, h);
+            this.rendererW = w;
+            this.rendererH = h;
+
+            this.updatePixelRatio();
+        }
+    }
+
+    updatePixelRatio() {
+        const thresholdSize = 1200;
+        let minPixelRatio = this.options.minPixelRatio;
+        if (this.rendererW < thresholdSize || this.rendererH < thresholdSize) minPixelRatio = 2;
+        const pr = Math.max(window.devicePixelRatio, minPixelRatio);
+        if (pr !== this.pixelRatio) {
+            this.renderer.setPixelRatio(pr);
+            this.pixelRatio = pr;
+        }
     }
 
     onPageUnloaded(index) {
@@ -450,29 +470,36 @@ FLIPBOOK.BookWebGL = class extends FLIPBOOK.Book {
         var r1 = w / h;
         var r2 = pw / ph;
 
-        if (h < 1000 && window.devicePixelRatio == 1) {
-            this.renderer.setPixelRatio(2);
-        } else {
-            var pr = window.devicePixelRatio < o.minPixelRatio ? o.minPixelRatio : window.devicePixelRatio;
-            this.renderer.setPixelRatio(pr);
-        }
+        // if (h < 1000 && window.devicePixelRatio == 1) {
+        //     this.renderer.setPixelRatio(2);
+        // } else {
+        //     var pr = window.devicePixelRatio < o.minPixelRatio ? o.minPixelRatio : window.devicePixelRatio;
+        //     this.renderer.setPixelRatio(pr);
+        // }
+
+        // var pr = window.devicePixelRatio < o.minPixelRatio ? o.minPixelRatio : window.devicePixelRatio;
+        // this.renderer.setPixelRatio(pr);
 
         var s = Math.min(this.zoom, 1);
 
         var zoomMin = Number(o.zoomMin);
 
         if (o.responsiveView && w <= o.responsiveViewTreshold && r1 < 2 * r2 && r1 < o.responsiveViewRatio) {
+            // responsive view
             this.view = 1;
 
             if (r2 > r1) {
+                // landscape book
                 this.sc = (zoomMin * r1) / (r2 * s);
             } else {
                 this.sc = 1;
             }
         } else {
+            // double page view
             this.view = 2;
 
             if (r1 < bw * r2) {
+                // landscape book
                 this.sc = (zoomMin * r1) / (bw * r2 * s);
             } else {
                 this.sc = 1;
@@ -483,7 +510,7 @@ FLIPBOOK.BookWebGL = class extends FLIPBOOK.Book {
         this.Camera.updateProjectionMatrix();
         this.updateCameraPosition();
 
-        this.renderer.setSize(w, h);
+        this.updateRendererSize(w, h);
 
         if (!doNotUpdatePosition) this.updateBookPosition();
 
@@ -1001,7 +1028,9 @@ FLIPBOOK.BookWebGL = class extends FLIPBOOK.Book {
         main.setLoadingProgress(0.1);
 
         await this.loadPageAsync(leftPage, 'back');
+        this.pageLoaded(leftPage, 'back');
         await this.loadPageAsync(rightPage, 'front');
+        this.pageLoaded(rightPage, 'front');
         main.setLoadingProgress(1);
         await this.loadHTMLAsync(leftPage, 'back');
         await this.loadHTMLAsync(rightPage, 'front');
@@ -1194,14 +1223,18 @@ FLIPBOOK.BookWebGL = class extends FLIPBOOK.Book {
         const left = this.pages[this.flippedleft - 1];
         const prev = this.pages[this.flippedleft - 2];
         await this.loadPageAsync(prev, 'back');
+        this.pageLoaded(prev, 'back');
         await this.loadPageAsync(left, 'front');
+        this.pageLoaded(left, 'front');
     }
 
     async loadNextSpread() {
         const right = this.pages[this.flippedleft];
         const next = this.pages[this.flippedleft + 1];
         await this.loadPageAsync(right, 'back');
+        this.pageLoaded(right, 'back');
         await this.loadPageAsync(next, 'front');
+        this.pageLoaded(next, 'front');
     }
 
     loadMorePages() {
@@ -1331,9 +1364,9 @@ FLIPBOOK.BookWebGL = class extends FLIPBOOK.Book {
             }
         }
 
-        if (this.htmlLayer) {
-            this.startPageItems(this.htmlLayer.element);
-        }
+        // if (this.htmlLayer) {
+        //     this.startPageItems(this.htmlLayer.element);
+        // }
 
         this.main.trigger('showpagehtml', { page: {} });
     }
@@ -1834,7 +1867,10 @@ FLIPBOOK.PageWebGL = class {
                     const pageSide = o.pages[self.indexF].side;
                     const t1 = self.createTexture(page, size, pageSide);
                     const mat = self.createMaterial(t1, side);
-                    self.setMat(mat, side);
+
+                    self.materials = self.materials || {};
+                    self.materials[side] = self.materials[side] || {};
+                    self.materials[side][size] = mat;
 
                     if (callback) {
                         callback.call(self);
@@ -1871,13 +1907,23 @@ FLIPBOOK.PageWebGL = class {
                     const pageSide = o.pages[self.indexB].side;
                     const t2 = self.createTexture(page, size, pageSide);
                     const mat = self.createMaterial(t2, side);
-                    self.setMat(mat, side);
+
+                    self.materials = self.materials || {};
+                    self.materials[side] = self.materials[side] || {};
+                    self.materials[side][size] = mat;
 
                     if (callback) {
                         callback.call(self);
                     }
                 });
             }
+        }
+    }
+
+    loaded(side) {
+        const size = this.book.currentPageTextureSize;
+        if (this.materials && this.materials[side]) {
+            this.setMat(this.materials[side][size], side);
         }
     }
 
@@ -1902,8 +1948,13 @@ FLIPBOOK.PageWebGL = class {
         }
 
         texture.minFilter = THREE.LinearFilter;
-
         texture.generateMipmaps = false;
+
+        // with anisotropy it is blurry
+
+        // texture.generateMipmaps = true;
+        // texture.minFilter = THREE.LinearMipmapLinearFilter;
+        // texture.anisotropy = this.book.renderer.capabilities.getMaxAnisotropy();
 
         texture.needsUpdate = true;
         return texture;
@@ -1963,7 +2014,7 @@ FLIPBOOK.PageWebGL = class {
         }
 
         this.disposed = true;
-        this.loaded = false;
+        // this.loaded = false;
     }
 
     createMaterial(map, side) {
