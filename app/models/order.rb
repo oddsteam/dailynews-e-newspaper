@@ -33,4 +33,26 @@ class Order < ApplicationRecord
   def tax_rate_percentage
     (TAX_RATE * 100).to_i
   end
+
+  # Generate receipt number in format: DNT-YYYYMMDD-XXXXX
+  def generate_receipt_number
+    return if receipt_number.present?
+
+    date_prefix = Time.current.strftime("%Y%m%d")
+
+    # Get the last receipt number for today
+    last_receipt = Order.where("receipt_number LIKE ?", "DNT-#{date_prefix}-%")
+                        .order(receipt_number: :desc)
+                        .first
+
+    if last_receipt && last_receipt.receipt_number.present?
+      # Extract sequence number and increment
+      sequence = last_receipt.receipt_number.split("-").last.to_i + 1
+    else
+      # Start with 1 for the first receipt of the day
+      sequence = 1
+    end
+
+    self.receipt_number = "DNT-#{date_prefix}-#{sequence.to_s.rjust(5, '0')}"
+  end
 end

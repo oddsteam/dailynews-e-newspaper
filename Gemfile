@@ -48,6 +48,7 @@ gem "aws-sdk-s3", require: false
 gem "pdftoimage"
 gem "money-rails"
 gem "prawn"
+gem "prawn-table"
 gem "omise"
 gem "pagy"
 gem "openssl"
@@ -68,13 +69,16 @@ group :development, :test do
   gem "rspec-rails"
   gem "factory_bot_rails"
   gem "launchy"
-  gem "rack-mini-profiler", require: false
+  gem "rack-mini-profiler"
   gem "sinatra", require: false
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+
+  # Preview emails in the browser instead of sending them
+  gem "letter_opener"
 end
 
 group :test do

@@ -1,0 +1,53 @@
+h1 ขอบคุณสำหรับการสมัครสมาชิก
+
+p
+  | สวัสดีคุณ #{@user.email}
+
+p
+  | ขอบคุณที่เลือกใช้บริการ Daily News เราได้รับการชำระเงินของคุณเรียบร้อยแล้ว
+
+h2 รายละเอียดการสั่งซื้อ
+
+table style="border-collapse: collapse; margin: 20px 0;"
+  tr
+    td style="padding: 8px; font-weight: bold;" เลขที่ใบเสร็จ:
+    td style="padding: 8px;"
+      = @order.receipt_number
+  tr
+    td style="padding: 8px; font-weight: bold;" วันที่:
+    td style="padding: 8px;"
+      = @order.paid_at&.strftime("%d/%m/%Y") || @order.created_at.strftime("%d/%m/%Y")
+  tr
+    td style="padding: 8px; font-weight: bold;" สินค้า:
+    td style="padding: 8px;"
+      = @product.title
+  - if @subscription
+    tr
+      td style="padding: 8px; font-weight: bold;" ระยะเวลาสมาชิก:
+      td style="padding: 8px;"
+        = @subscription.start_date.strftime("%d/%m/%Y")
+        | &nbsp;-&nbsp;
+        = @subscription.end_date.strftime("%d/%m/%Y")
+  tr
+    td style="padding: 8px; font-weight: bold;" ยอดชำระ:
+    td style="padding: 8px;"
+      = number_to_currency(@order.total_cents / 100.0, unit: "฿", format: "%u%n")
+
+p
+  | ใบเสร็จรับเงินแนบมาพร้อมอีเมลนี้
+
+h2 เริ่มอ่านหนังสือพิมพ์ของคุณได้เลย!
+
+p
+  | คุณสามารถเข้าถึงคลังหนังสือพิมพ์ทั้งหมดของเราได้แล้ว
+
+p style="text-align: center; margin: 30px 0;"
+  = link_to "เริ่มอ่านหนังสือพิมพ์", library_url, style: "background-color: #3B82F6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block; font-weight: bold;"
+
+p
+  | หากมีคำถามหรือต้องการความช่วยเหลือ กรุณาติดต่อเรา
+
+p
+  | ขอบคุณที่ใช้บริการ
+  br
+  | ทีมงาน Daily News

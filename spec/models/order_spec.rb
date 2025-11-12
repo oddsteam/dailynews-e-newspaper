@@ -130,4 +130,95 @@ RSpec.describe Order, type: :model do
       end
     end
   end
+
+  describe '#generate_receipt_number' do
+    let!(:product) { create(:monthly_subscription_product) }
+
+    context 'when order has no receipt number' do
+      it 'generates receipt number in DNT-YYYYMMDD-XXXXX format' do
+        order = create(:order, receipt_number: nil, paid_at: Time.current)
+        create(:order_item, order: order, product: product)
+
+        order.generate_receipt_number
+
+        expect(order.receipt_number).to match(/^DNT-\d{8}-\d{5}$/)
+      end
+
+      it 'uses current date in the receipt number' do
+        order = create(:order, receipt_number: nil, paid_at: Time.current)
+        create(:order_item, order: order, product: product)
+
+        order.generate_receipt_number
+
+        date_prefix = Time.current.strftime("%Y%m%d")
+        expect(order.receipt_number).to start_with("DNT-#{date_prefix}")
+      end
+
+      it 'generates first receipt of the day with sequence 00001' do
+        order = create(:order, receipt_number: nil, paid_at: Time.current)
+        create(:order_item, order: order, product: product)
+
+        order.generate_receipt_number
+
+        expect(order.receipt_number).to match(/^DNT-\d{8}-00001$/)
+      end
+    end
+
+    context 'when order already has receipt number' do
+      it 'does not regenerate receipt number' do
+        order = create(:order, receipt_number: 'DNT-20251112-00001', paid_at: Time.current)
+        create(:order_item, order: order, product: product)
+
+        original_number = order.receipt_number
+        order.generate_receipt_number
+
+        expect(order.receipt_number).to eq(original_number)
+      end
+    end
+
+    context 'when multiple orders are paid on the same day' do
+      it 'generates sequential receipt numbers' do
+        member1 = create(:member, email: "customer1@example.com")
+        member2 = create(:member, email: "customer2@example.com")
+
+        order1 = create(:order, member: member1, state: :paid, paid_at: Time.current)
+        create(:order_item, order: order1, product: product)
+
+        order2 = create(:order, member: member2, state: :paid, paid_at: Time.current)
+        create(:order_item, order: order2, product: product)
+
+        # Generate receipt numbers
+        order1.generate_receipt_number
+        order1.save!
+
+        order2.generate_receipt_number
+        order2.save!
+
+        # Verify sequential numbering
+        expect(order1.receipt_number).to match(/^DNT-\d{8}-00001$/)
+        expect(order2.receipt_number).to match(/^DNT-\d{8}-00002$/)
+
+        # Verify same date prefix
+        date_prefix = Time.current.strftime("%Y%m%d")
+        expect(order1.receipt_number).to start_with("DNT-#{date_prefix}")
+        expect(order2.receipt_number).to start_with("DNT-#{date_prefix}")
+      end
+
+      it 'continues sequence from last receipt number' do
+        member = create(:member)
+
+        # Create first order with receipt
+        order1 = create(:order, member: member, receipt_number: "DNT-20251112-00005", paid_at: Time.current)
+        create(:order_item, order: order1, product: product)
+
+        # Create second order without receipt
+        order2 = create(:order, member: member, receipt_number: nil, paid_at: Time.current)
+        create(:order_item, order: order2, product: product)
+
+        order2.generate_receipt_number
+
+        expect(order2.receipt_number).to match(/^DNT-\d{8}-00006$/)
+      end
+    end
+  end
 end

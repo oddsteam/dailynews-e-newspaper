@@ -22,6 +22,11 @@
                   span.badge.badge-error CANCELLED
             .text-right
               .text-2xl.font-bold = order.total.format
+              - if order.paid? && order.receipt_number.present?
+                .mt-3
+                  = link_to receipt_order_path(order), class: "btn btn-outline btn-sm gap-2" do
+                    span.iconify.lucide--download
+                    span Download Receipt
   - else
     .py-8
       .text-center

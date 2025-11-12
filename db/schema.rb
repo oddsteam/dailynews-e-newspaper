@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_03_023514) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_12_130842) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -111,6 +111,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_03_023514) do
     t.string "postal_code", null: false
     t.string "province", null: false
     t.string "sub_district", null: false
+    t.string "tax_id"
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_companies_on_name", unique: true
   end
@@ -137,6 +138,9 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_03_023514) do
   create_table "orders", force: :cascade do |t|
     t.string "charge_id"
     t.datetime "created_at", null: false
+    t.datetime "paid_at"
+    t.string "receipt_number"
+    t.datetime "receipt_sent_at"
     t.integer "state", default: 0, null: false
     t.integer "sub_total_cents", default: 0, null: false
     t.string "sub_total_currency", default: "THB", null: false

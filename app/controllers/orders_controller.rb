@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: %i[ verify complete ]
+  before_action :set_order, only: %i[ verify complete receipt ]
 
   # POST /orders or /orders.json
   def create
@@ -53,9 +53,18 @@ class OrdersController < ApplicationController
 
     if charge.paid
       @order.paid!
+      @order.update!(paid_at: Time.current)
 
       # Create subscription for the user
       if CreateSubscriptionForOrder.new(@order).perform
+        # Generate receipt number and send email
+        @order.generate_receipt_number
+        @order.save!
+
+        # Send receipt email with PDF attachment
+        OrderMailer.receipt_email(@order).deliver_later
+        @order.update!(receipt_sent_at: Time.current)
+
         # Clear the user's cart after successful order
         ClearCurrentUserCart.new(@order.member).perform
         redirect_to complete_order_path(@order)
@@ -77,6 +86,27 @@ class OrdersController < ApplicationController
   end
 
   def complete
+  end
+
+  def receipt
+    # Check if order belongs to current user
+    unless @order.member == current_user
+      redirect_to root_path, alert: "Unauthorized access" and return
+    end
+
+    # Check if receipt number exists (order is paid)
+    unless @order.receipt_number.present?
+      redirect_to root_path, alert: "Receipt not available" and return
+    end
+
+    # Generate PDF
+    pdf = Receipts::SimplifiedReceiptPdf.new(@order)
+
+    # Send PDF as download
+    send_data pdf.render,
+              filename: "receipt-#{@order.receipt_number}.pdf",
+              type: "application/pdf",
+              disposition: "attachment"
   end
 
   private
