@@ -33,6 +33,8 @@ services:
       - APP_ENV=uat
       - SCRIPT_NAME=/e-newspaper
       - SOLID_QUEUE_IN_PUMA=true
+      - WEB_CONCURRENCY=auto
+      - RAILS_MAX_THREADS=8
     networks:
       - rails_network
       - kamal
