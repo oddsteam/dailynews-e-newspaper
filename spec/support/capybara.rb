@@ -4,7 +4,7 @@ require "capybara/cuprite"
 
 # Register Cuprite driver with mobile configuration
 Capybara.register_driver :cuprite do |app|
-  Capybara::Cuprite::Driver.new(
+  driver = Capybara::Cuprite::Driver.new(
     app,
     window_size: [ 1400, 1400 ],
     browser_options: {
@@ -18,6 +18,13 @@ Capybara.register_driver :cuprite do |app|
     timeout: 10,                                # Timeout for commands
     js_errors: true                             # Raise errors on JavaScript errors
   )
+
+  # Block external CDN requests in tests to prevent real API calls
+  driver.browser.url_blacklist = [
+    'https://cdn.omise.co/*'  # Block Omise payment gateway script
+  ]
+
+  driver
 end
 
 # Use Cuprite as the JavaScript driver

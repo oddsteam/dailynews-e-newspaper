@@ -207,8 +207,9 @@ RSpec.describe Order, type: :model do
       it 'continues sequence from last receipt number' do
         member = create(:member)
 
-        # Create first order with receipt
-        order1 = create(:order, member: member, receipt_number: "DNT-20251112-00005", paid_at: Time.current)
+        # Create first order with receipt using current date
+        date_prefix = Time.current.strftime("%Y%m%d")
+        order1 = create(:order, member: member, receipt_number: "DNT-#{date_prefix}-00005", paid_at: Time.current)
         create(:order_item, order: order1, product: product)
 
         # Create second order without receipt
