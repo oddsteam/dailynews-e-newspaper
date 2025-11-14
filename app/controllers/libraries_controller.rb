@@ -1,10 +1,10 @@
 class LibrariesController < ApplicationController
+  include Pagy::Backend
+
   before_action :authenticate_member!, only: %i[ show ]
   before_action :required_subscription
 
   def show
-    @newspapers = []
-
     @months = (1..12).map { |month| month.to_s.rjust(2, "0") }
 
     @years = current_user.subscriptions.map do |subscription|
@@ -15,7 +15,9 @@ class LibrariesController < ApplicationController
       "(published_at >= '#{subscription.start_date}' and published_at <= '#{subscription.end_date}')"
     end
 
-    @newspapers = Newspaper.where(conditions.join(" OR ")).filter_by_month(params[:month], params[:year]).order_by_created_at.distinct
+    scope = Newspaper.where(conditions.join(" OR ")).filter_by_month(params[:month], params[:year]).order_by_created_at.distinct
+
+    @pagy, @newspapers = pagy(scope, limit: 10, page: params[:page])
   end
 
   def required_subscription

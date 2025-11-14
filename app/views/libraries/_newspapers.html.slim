@@ -41,22 +41,16 @@ div.mt-8 class ="mx-4 min-lg:mr-12"
 section(class="py-8")
   div(class="wrapper max-w-[1200px] mx-auto px-4")
     = turbo_frame_tag "library_newspapers" do
-      - if newspapers&.any?
+      - if @newspapers&.any?
         div.grid.grid-cols-2.md:grid-cols-3.lg:grid-cols-4.gap-4.md:gap-5.lg:gap-6
-          - newspapers.each do |newspaper|
+          - @newspapers.each do |newspaper|
             = render partial: 'newspaper_card', locals: { newspaper: newspaper }
 
-        / Pagination (if needed in future)
+        / Pagination
         div(class="text-center mt-[60px] md:text-left md:mt-[40px] clear-both")
-          ul(class="inline-block overflow-hidden text-center")
-            li(class="float-left mr-[10px] sm:mr-[5px] group")
-              a(href="#" aria-label="Previous" class="bg-[#f5f5f5] w-[50px] h-[50px] leading-[50px] text-[16px] font-semibold text-[#0a272c] block md:w-[40px] md:h-[40px] md:leading-[40px] md:text-[15px] transition-all duration-300 group-hover:bg-secondary group-hover:text-white")
-                i(class="ti-angle-left")
-            li(class="float-left mr-[10px] sm:mr-[5px] group")
-              a(href="#" class="bg-primary w-[50px] h-[50px] leading-[50px] text-[16px] font-semibold text-white block md:w-[40px] md:h-[40px] md:leading-[40px] md:text-[15px] transition-all duration-300 group-hover:bg-secondary group-hover:text-white") 1
-            li(class="float-left group")
-              a(href="#" aria-label="Next" class="bg-[#f5f5f5] w-[50px] h-[50px] leading-[50px] text-[16px] font-semibold text-[#0a272c] block md:w-[40px] md:h-[40px] md:leading-[40px] md:text-[15px] transition-all duration-300 group-hover:bg-secondary group-hover:text-white")
-                i(class="ti-angle-right")
+          .inline-flex.items-center.gap-1
+            = render 'admin/shared/pagy_nav', pagy: @pagy
+
       - else
         div(class="text-center py-20")
           h3(class="text-2xl text-gray-600 mb-4") No newspapers available
