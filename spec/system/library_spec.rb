@@ -178,41 +178,155 @@ describe "Library access", js: true do
     let!(:subscription) do
       create(:subscription,
         member: member,
-        start_date: Date.new(2025, 1, 1),
+        start_date: Date.new(2023, 1, 1),
         end_date: Date.new(2025, 3, 31))
     end
 
     before do
       # Create newspapers in different months
       create(:newspaper,
-        title: "January News",
+        title: "January 2023 News",
+        published_at: Date.new(2023, 1, 15))
+      create(:newspaper,
+        title: "July 2024 News",
+        published_at: Date.new(2024, 7, 15))
+      create(:newspaper,
+        title: "January 2025 News",
         published_at: Date.new(2025, 1, 15))
       create(:newspaper,
-        title: "February News",
+        title: "February 2025 News",
         published_at: Date.new(2025, 2, 15))
       create(:newspaper,
-        title: "March News",
+        title: "March 2025 News",
         published_at: Date.new(2025, 3, 15))
     end
 
     it "shows all newspapers when no month filter is selected" do
       visit library_path
 
-      expect(page).to have_content("January News")
-      expect(page).to have_content("February News")
-      expect(page).to have_content("March News")
+      expect(page).to have_content("All Months")
+      expect(page).to have_content("All Years")
+      expect(page).to have_content("January 2023 News")
+      expect(page).to have_content("July 2024 News")
+      expect(page).to have_content("January 2025 News")
+      expect(page).to have_content("February 2025 News")
+      expect(page).to have_content("March 2025 News")
     end
 
-    it "filters newspapers by selected month" do
+    it "filters newspapers by selected month February" do
       visit library_path
 
       # Select February from dropdown
       select "February", from: "month"
 
       # Should only see February newspaper
-      expect(page).to have_content("February News")
-      expect(page).not_to have_content("January News")
-      expect(page).not_to have_content("March News")
+      expect(page).to have_content("February 2025 News")
+      expect(page).not_to have_content("January 2025 News")
+      expect(page).not_to have_content("March 2025 News")
+      expect(page).not_to have_content("January 2023 News")
+      expect(page).not_to have_content("July 2024 News")
+    end
+
+    it "filters newspapers by selected month January" do
+      visit library_path
+
+      # Select January from dropdown
+      select "January", from: "month"
+
+      # Should only see January newspaper
+      expect(page).to have_content("January 2025 News")
+      expect(page).not_to have_content("February 2025 News")
+      expect(page).not_to have_content("March 2025 News")
+      expect(page).to have_content("January 2023 News")
+      expect(page).not_to have_content("July 2024 News")
+    end
+
+    it "filters newspapers by selected year 2023" do
+      visit library_path
+
+      # Select 2023 from dropdown
+      select "2023", from: "year"
+
+      # Should only see January newspaper
+      expect(page).not_to have_content("January 2025 News")
+      expect(page).not_to have_content("February 2025 News")
+      expect(page).not_to have_content("March 2025 News")
+      expect(page).to have_content("January 2023 News")
+      expect(page).not_to have_content("July 2024 News")
+    end
+
+    it "filters newspapers by selected year 2025" do
+      visit library_path
+
+      # Select 2025 from dropdown
+      select "2025", from: "year"
+
+      # Should only see January newspaper
+      expect(page).to have_content("January 2025 News")
+      expect(page).to have_content("February 2025 News")
+      expect(page).to have_content("March 2025 News")
+      expect(page).not_to have_content("January 2023 News")
+      expect(page).not_to have_content("July 2024 News")
+    end
+
+    it "filters newspapers by selected year 2025 and January" do
+      visit library_path
+
+      # Select January from dropdown
+      select "January", from: "month"
+      select "2025", from: "year"
+
+      # Should only see January newspaper
+      expect(page).to have_content("January 2025 News")
+      expect(page).not_to have_content("February 2025 News")
+      expect(page).not_to have_content("March 2025 News")
+      expect(page).not_to have_content("January 2023 News")
+      expect(page).not_to have_content("July 2024 News")
+    end
+
+    it "find option all months in dropdown" do
+      visit library_path
+
+      # find month dropdown
+      month_select = find("select[name='month']")
+      month_options = month_select.all("option").map(&:text)
+
+      # expect all month appear in dropdown
+      expect(month_options).to include(
+        "All Months",
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      )
+    end
+
+    it "find option all year subscription in dropdown" do
+      visit library_path
+
+      # find year dropdown
+      year_select = find("select[name='year']")
+      year_options = year_select.all("option").map(&:text)
+
+      # expect all year appear in dropdown
+      expect(year_options).to include(
+        "All Years",
+        "2023",
+        "2024",
+        "2025",
+      )
+      expect(year_options).not_to include(
+        "2022",
+        "2026",
+      )
     end
   end
 

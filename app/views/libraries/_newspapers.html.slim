@@ -13,13 +13,19 @@ div(class="bg-white relative flex justify-center flex-col z-10 min-h-[80px] max-
                 span My Library
   hr.mt-2.border-primary.border-1.rounded.mx-auto.w-1/4
 
-div.text-right.mt-8.mr-8
+div.mt-8 class ="mx-4 min-lg:mr-12"
   = form_with url: library_path, method: :get, data: { turbo_frame: "library_newspapers" } do |f|
-    select.select.select-bordered.w-full name="month" onchange="this.form.requestSubmit()" class="max-w-[300px]"
-      option value="" All
-      - @months.each do |val, text|
-        - month_name = Date::MONTHNAMES[val.to_i]
-        option value=val selected=(params[:month] == val) = month_name
+    div.flex.flex-row.justify-end
+      select.select.select-bordered.w-full name="month" onchange="this.form.requestSubmit()" class="max-w-[300px]"
+        option value="" All Months
+        - @months.each do |val|
+          - month_name = Date::MONTHNAMES[val.to_i]
+          option value=val selected=(params[:month] == val) = month_name
+
+      select.select.select-bordered.w-full name="year" onchange="this.form.requestSubmit()" class="max-w-[300px] ml-4"
+        option value="" All Years
+        - @years.each do |year|
+          option value=year selected=(params[:year].to_s == year.to_s) = year
 
 / Flash messages
 - if flash[:notice].present?

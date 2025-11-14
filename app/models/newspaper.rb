@@ -4,14 +4,26 @@ class Newspaper < ApplicationRecord
 
   scope :order_by_created_at, -> { order(created_at: :asc) }
 
-  scope :filter_by_month, ->(month, year = Time.zone.today.year) {
-    if month.present?
-      start_date = Time.zone.local(year, month.to_i, 1)
-      end_date   = start_date.end_of_month.end_of_day
-      where(published_at: start_date..end_date)
-    else
-      all
+  scope :filter_by_month, ->(month, year) {
+    return all if month.blank? && year.blank?
+
+    if year.present? && month.blank?
+      start_date = Time.zone.local(year.to_i, 1, 1)
+      end_date   = start_date.end_of_year.end_of_day
+      return where(published_at: start_date..end_date)
     end
+
+    if month.present? && year.blank?
+      return where("EXTRACT(MONTH FROM published_at) = ?", month.to_i)
+    end
+
+    if month.present? && year.present?
+      start_date = Time.zone.local(year.to_i, month.to_i, 1)
+      end_date   = start_date.end_of_month.end_of_day
+      return where(published_at: start_date..end_date)
+    end
+
+    all
   }
 
   scope :search, ->(query) {

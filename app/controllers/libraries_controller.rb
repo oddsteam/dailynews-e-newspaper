@@ -5,15 +5,17 @@ class LibrariesController < ApplicationController
   def show
     @newspapers = []
 
-    @months = current_user.subscriptions.map do |subscription|
-      (subscription.start_date..subscription.end_date).map { |day| day.strftime("%m") }
+    @months = (1..12).map { |month| month.to_s.rjust(2, "0") }
+
+    @years = current_user.subscriptions.map do |subscription|
+      (subscription.start_date..subscription.end_date).map { |day| day.strftime("%Y") }
     end.flatten.uniq.sort
 
     conditions = current_user.subscriptions.map do |subscription|
       "(published_at >= '#{subscription.start_date}' and published_at <= '#{subscription.end_date}')"
     end
 
-    @newspapers = Newspaper.where(conditions.join(" OR ")).filter_by_month(params[:month]).order_by_created_at.distinct
+    @newspapers = Newspaper.where(conditions.join(" OR ")).filter_by_month(params[:month], params[:year]).order_by_created_at.distinct
   end
 
   def required_subscription

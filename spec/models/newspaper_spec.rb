@@ -9,12 +9,12 @@ RSpec.describe Newspaper, type: :model do
   end
 
   it "filter newspapers by month" do
-    newspaper_jan = create(:newspaper, published_at: Date.new(Time.zone.today.year, 1, 1))
-    newspaper_feb = create(:newspaper, published_at: Date.new(Time.zone.today.year, 2, 1))
+    newspaper_jan = create(:newspaper, published_at: Date.new(2025, 1, 1))
+    newspaper_feb = create(:newspaper, published_at: Date.new(2025, 2, 1))
 
-    january_newspapers = Newspaper.filter_by_month("1", Time.zone.today.year)
-    february_newspapers = Newspaper.filter_by_month("2", Time.zone.today.year)
-    all_newspapers = Newspaper.filter_by_month(nil)
+    january_newspapers = Newspaper.filter_by_month("1", nil)
+    february_newspapers = Newspaper.filter_by_month("2", nil)
+    all_newspapers = Newspaper.filter_by_month(nil, nil)
 
     expect(january_newspapers).to eq([ newspaper_jan ])
     expect(january_newspapers).not_to eq([ newspaper_feb ])
@@ -23,5 +23,27 @@ RSpec.describe Newspaper, type: :model do
     expect(february_newspapers).not_to eq([ newspaper_jan ])
 
     expect(all_newspapers).to eq [ newspaper_jan, newspaper_feb ]
+  end
+
+  it "filter newspapers by year" do
+    newspaper_jan2023 = create(:newspaper, published_at: Date.new(2023, 1, 1))
+    newspaper_jan2024 = create(:newspaper, published_at: Date.new(2024, 1, 1))
+    newspaper_jan2025 = create(:newspaper, published_at: Date.new(2025, 1, 1))
+
+    newspapers_2023 = Newspaper.filter_by_month(nil, 2023)
+    newspapers_2024 = Newspaper.filter_by_month(nil, 2024)
+    newspapers_2025 = Newspaper.filter_by_month(nil, 2025)
+    all_newspapers = Newspaper.filter_by_month(nil, nil)
+
+    expect(newspapers_2023).to eq([ newspaper_jan2023 ])
+    expect(newspapers_2023).not_to eq([ newspaper_jan2024, newspaper_jan2025 ])
+
+    expect(newspapers_2024).to eq([ newspaper_jan2024 ])
+    expect(newspapers_2024).not_to eq([ newspaper_jan2023, newspaper_jan2025 ])
+
+    expect(newspapers_2025).to eq([ newspaper_jan2025 ])
+    expect(newspapers_2025).not_to eq([ newspaper_jan2023, newspaper_jan2024 ])
+
+    expect(all_newspapers).to eq [ newspaper_jan2023, newspaper_jan2024, newspaper_jan2025 ]
   end
 end
