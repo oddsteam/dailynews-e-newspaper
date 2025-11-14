@@ -17,7 +17,9 @@ class LibrariesController < ApplicationController
 
     scope = Newspaper.where(conditions.join(" OR ")).filter_by_month(params[:month], params[:year]).order_by_published_date.distinct
 
-    @pagy, @newspapers = pagy(scope, limit: 10, page: params[:page])
+    per_page = params[:per_page].presence || 10
+
+    @pagy, @newspapers = pagy(scope, limit: per_page, page: params[:page])
   end
 
   def required_subscription

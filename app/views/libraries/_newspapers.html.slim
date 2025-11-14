@@ -48,6 +48,20 @@ section(class="py-8")
 
         / Pagination
         div(class="text-center mt-[60px] md:text-left md:mt-[40px] clear-both")
+          .flex.items-center.justify-between.p-6
+
+            / Per page selector
+            .text-base-content/80.hover:text-base-content.flex.gap-2.text-sm
+              span.hidden.sm:inline Per page
+              = form_with url: library_path, method: :get, local: true, class: 'inline' do |form|
+                = form.hidden_field :page, value: params[:page] || 1
+                = form.hidden_field :month, value: params[:month]
+                = form.hidden_field :year, value: params[:year]
+                = form.select :per_page,
+                    options_for_select([8, 12, 16, 20, 24, 28, 32], params[:per_page] || 10),
+                    {},
+                    class: 'select select-xs w-18', aria_label: 'Per page', onchange: 'this.form.submit();'
+
           .inline-flex.items-center.gap-1
             = render 'admin/shared/pagy_nav', pagy: @pagy
 
