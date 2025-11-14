@@ -2,7 +2,7 @@ class Newspaper < ApplicationRecord
   has_one_attached :pdf
   has_one_attached :cover
 
-  scope :order_by_created_at, -> { order(created_at: :asc) }
+  scope :order_by_published_date, -> { order(published_at: :desc) }
 
   scope :filter_by_month, ->(month, year) {
     return all if month.blank? && year.blank?

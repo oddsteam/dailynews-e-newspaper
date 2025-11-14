@@ -5,7 +5,7 @@ RSpec.describe Newspaper, type: :model do
   let(:newspaper2) { create(:newspaper, created_at: Date.tomorrow) }
 
   it "newspaper can order by created_at date" do
-    assert_equal Newspaper.order_by_created_at, [ newspaper1, newspaper2 ]
+    assert_equal Newspaper.order_by_published_date, [ newspaper1, newspaper2 ]
   end
 
   it "filter newspapers by month" do

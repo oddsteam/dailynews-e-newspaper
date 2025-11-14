@@ -15,7 +15,7 @@ class LibrariesController < ApplicationController
       "(published_at >= '#{subscription.start_date}' and published_at <= '#{subscription.end_date}')"
     end
 
-    scope = Newspaper.where(conditions.join(" OR ")).filter_by_month(params[:month], params[:year]).order_by_created_at.distinct
+    scope = Newspaper.where(conditions.join(" OR ")).filter_by_month(params[:month], params[:year]).order_by_published_date.distinct
 
     @pagy, @newspapers = pagy(scope, limit: 10, page: params[:page])
   end
