@@ -48,7 +48,10 @@ section(class="py-8")
 
         / Pagination
         div(class="text-center mt-[60px] md:text-left md:mt-[40px] clear-both")
-          .flex.items-center.justify-between.p-6
+          div.flex.flex-row.flex.items-center.justify-between
+
+            .inline-flex.items-center.gap-1
+              = render 'admin/shared/pagy_nav', pagy: @pagy
 
             / Per page selector
             .text-base-content/80.hover:text-base-content.flex.gap-2.text-sm
@@ -61,9 +64,6 @@ section(class="py-8")
                     options_for_select([8, 12, 16, 20, 24, 28, 32], params[:per_page] || 10),
                     {},
                     class: 'select select-xs w-18', aria_label: 'Per page', onchange: 'this.form.submit();'
-
-          .inline-flex.items-center.gap-1
-            = render 'admin/shared/pagy_nav', pagy: @pagy
 
       - else
         div(class="text-center py-20")
