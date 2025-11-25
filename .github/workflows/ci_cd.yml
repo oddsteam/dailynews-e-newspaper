@@ -4,6 +4,9 @@ on:
   pull_request:
   push:
     branches: [ main ]
+    tags: [ 'v*' ]
+  release:
+    types: [ published ]
 
 jobs:
   scan_ruby:
@@ -129,6 +132,7 @@ jobs:
           images: ghcr.io/${{ github.repository }}
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=production,enable=${{ github.event_name == 'release' || startsWith(github.ref, 'refs/tags/v') }}
             type=ref,event=branch
             type=ref,event=tag
             type=sha
@@ -143,7 +147,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           no-cache: true
 
-  deploy:
+  deploy_uat:
     runs-on: ubuntu-latest
     needs: build_and_push_docker_image
     if: github.ref == 'refs/heads/main'
@@ -160,7 +164,7 @@ jobs:
           source: "docker-compose.yml,nginx.conf"
           target: "/root"
 
-      - name: Deploy to server
+      - name: Deploy to server (UAT)
         uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.SERVER_HOST }}
@@ -168,10 +172,10 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd /root
-            docker compose pull
-            docker compose up -d
+            docker compose -f docker-compose.yml pull
+            docker compose -f docker-compose.yml up -d
             # Clean up old images from ghcr.io registry (keep only the latest)
-            docker images 'ghcr.io/oddsteam/dailynews-e-newspaper' --format '{{.ID}} {{.Tag}}' | grep -v 'latest' | awk '{print $1}' | xargs -r docker rmi -f || true
+            docker images 'ghcr.io/oddsteam/dailynews-e-newspaper' --format '{{.ID}} {{.Tag}}' | grep -v 'latest' | grep -v 'production' | awk '{print $1}' | xargs -r docker rmi -f || true
 
       - name: Health check
         run: |
@@ -181,6 +185,54 @@ jobs:
           echo "Checking application health..."
           for i in {1..5}; do
             if curl -f -s http://${{ secrets.SERVER_HOST }}/e-newspaper/up > /dev/null; then
+              echo "✓ Health check passed!"
+              exit 0
+            fi
+            echo "Attempt $i failed, retrying in 10 seconds..."
+            sleep 10
+          done
+
+          echo "✗ Health check failed after 5 attempts"
+          exit 1
+
+  deploy_production:
+    runs-on: ubuntu-latest
+    needs: build_and_push_docker_image
+    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'release'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Copy docker-compose.prod.yml to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_PRODUCTION_HOST }}
+          username: ${{ secrets.SERVER_PRODUCTION_USER }}
+          key: ${{ secrets.SERVER_PRODUCTION_SSH_KEY }}
+          source: "docker-compose.prod.yml,nginx.conf"
+          target: "/home/${{ secrets.SERVER_PRODUCTION_USER }}"
+
+      - name: Deploy to server (Production)
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.SERVER_PRODUCTION_HOST }}
+          username: ${{ secrets.SERVER_PRODUCTION_USER }}
+          key: ${{ secrets.SERVER_PRODUCTION_SSH_KEY }}
+          script: |
+            cd /home/${{ secrets.SERVER_PRODUCTION_USER }}
+            docker compose -f docker-compose.prod.yml pull
+            docker compose -f docker-compose.prod.yml up -d
+            # Clean up old images from ghcr.io registry (keep only the latest and production)
+            docker images 'ghcr.io/oddsteam/dailynews-e-newspaper' --format '{{.ID}} {{.Tag}}' | grep -v 'latest' | grep -v 'production' | awk '{print $1}' | xargs -r docker rmi -f || true
+
+      - name: Health check
+        run: |
+          echo "Waiting for services to start..."
+          sleep 15
+
+          echo "Checking application health..."
+          for i in {1..5}; do
+            if curl -f -s http://${{ secrets.SERVER_PRODUCTION_HOST }}/e-newspaper/up > /dev/null; then
               echo "✓ Health check passed!"
               exit 0
             fi
