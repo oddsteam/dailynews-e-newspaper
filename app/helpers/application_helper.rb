@@ -22,13 +22,4 @@ module ApplicationHelper
 
     current_user.subscriptions.any?(&:active?)
   end
-
-  # Use test public key in test environment
-  def omise_public_key
-    if Rails.env.test?
-      "pkey_test_no_network"
-    else
-      Rails.application.credentials.dig(:omise, :public_key)
-    end
-  end
 end

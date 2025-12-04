@@ -5,7 +5,7 @@
   h2.text-xl.font-semibold.mb-4 Your saved payment method
 
   - if @cards.present? && @cards.data.any?
-    div data-controller="omise" data-omise-omise-key-value=omise_public_key
+    div data-controller="omise" data-omise-omise-key-value=Rails.application.credentials.dig(:omise, :public_key)
       - @cards.data.each do |card|
         .py-8
           .flex.items-start.gap-4
