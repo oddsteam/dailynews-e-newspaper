@@ -10,10 +10,11 @@ div class="bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cov
             
           / ====== column: image section (left) ======
           .flex.flex-col.items-center.justify-center.self-start class="max-xl:order-1 max-xl:mb-4 max-xl:w-full row-span-2 max-xl:mt-0"
-            - if @latest_newspaper&.cover&.attached?
-              = image_tag @latest_newspaper.cover, alt: "the latest dailynews cover", class: "aspect-[3/4] max-md:w-[280px] max-lg:w-[400px] lg:w-[500px] min-xl:w-auto min-xl:max-w-md h-auto bg-gray-200 flex items-center justify-center object-cover"
-            - else
-              = image_tag "auth/dailynews-default-cover.jpg", alt: "default dailynews cover", class: "aspect-[3/4] max-md:w-[280px] max-lg:w-[400px] lg:w-[500px] min-xl:w-auto min-xl:max-w-md h-auto bg-gray-200 flex items-center justify-center object-cover"
+            .bg-base-100.py-3.px-1.rounded-lg.shadow-lg
+              - if @latest_newspaper&.cover&.attached?
+                = image_tag @latest_newspaper.cover, alt: "the latest dailynews cover", class: "aspect-[3/4] max-md:w-[280px] max-lg:w-[400px] lg:w-[500px] min-xl:w-auto min-xl:max-w-md h-auto object-cover rounded-lg"
+              - else
+                = image_tag "auth/dailynews-default-cover.jpg", alt: "default dailynews cover", class: "aspect-[3/4] max-md:w-[280px] max-lg:w-[400px] lg:w-[500px] min-xl:w-auto min-xl:max-w-md h-auto object-cover rounded-lg"
 
           / ====== column: subscription form (right top) ======
           .card.drop-shadow-lg.rounded-lg.py-4.px-8 class="max-xl:order-2 max-xl:mb-4 max-xl:mt-0 max-xl:w-full max-xl:max-w-md"
