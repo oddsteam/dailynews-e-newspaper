@@ -13,6 +13,8 @@ describe "User can checkout", js: true do
     click_link_or_button "subscribe"
     expect(page).not_to have_content "subscribe"
 
+    accept_terms
+
     # Guest continues to payment and is prompted to sign up
     click_link_or_button "ดำเนินการต่อ"
 
@@ -21,6 +23,9 @@ describe "User can checkout", js: true do
     fill_in 'password', with: 'password123'
     fill_in 'confirm_password', with: 'password123'
     click_link_or_button 'SIGN UP'
+
+    # After signup, accept terms again
+    accept_terms
 
     # Guest completes payment with credit card
     user_pays_with_omise(token: 'tokn_test_5mokdpoelz84n3ai99l')
@@ -62,6 +67,8 @@ describe "User can checkout", js: true do
 
     # Should be on checkout page
     expect(page).to have_current_path(checkout_path)
+
+    accept_terms
 
     # Click ดำเนินการต่อ should show auth modal, not process payment
     click_link_or_button "ดำเนินการต่อ"
@@ -128,6 +135,8 @@ describe "User can checkout", js: true do
 
     # Should be on checkout page
     expect(page).to have_current_path(checkout_path)
+
+    accept_terms
 
     # Click ดำเนินการต่อ
     click_link_or_button "ดำเนินการต่อ"
@@ -202,8 +211,10 @@ describe "User can checkout", js: true do
       # Should be on checkout page
       expect(page).to have_current_path(checkout_path)
 
+      accept_terms
+
       # Should see ดำเนินการต่อ button
-      expect(page).to have_button("ดำเนินการต่อ")
+      expect(page).to have_button("ดำเนินการต่อ", disabled: false)
 
       # Should NOT trigger auth modal (member already logged in)
       # The button should be set up to trigger Omise payment
@@ -266,6 +277,8 @@ describe "User can checkout", js: true do
       click_button "subscribe"
       expect(page).to have_content("Product added to cart")
 
+      accept_terms
+
       # ดำเนินการต่อ, should show signup modal
       click_link_or_button "ดำเนินการต่อ"
       expect(page).to have_content("Sign Up")
@@ -281,6 +294,8 @@ describe "User can checkout", js: true do
 
       # Should be logged in successfully
       expect(page).to have_content('Signed in successfully.')
+
+      accept_terms
 
       # Continue with payment using Omise
       user_pays_with_omise(token: 'tokn_test_5mokdpoelz84n3ai99l')
@@ -322,8 +337,10 @@ describe "User can checkout", js: true do
         expect(page).to have_content("ภาษีมูลค่าเพิ่ม (7%)")
         expect(page).to have_content("ราคาสุทธิ")
 
+        accept_terms
+
         # Should see ดำเนินการต่อ button (not auth modal trigger)
-        expect(page).to have_button("ดำเนินการต่อ")
+        expect(page).to have_button("ดำเนินการต่อ", disabled: false)
       end
     end
 
@@ -334,6 +351,8 @@ describe "User can checkout", js: true do
       # Add product to cart
       click_button "subscribe"
       expect(page).to have_content("Product added to cart")
+
+      accept_terms
 
       # Trigger auth modal
       click_link_or_button "ดำเนินการต่อ"
@@ -363,6 +382,8 @@ describe "User can checkout", js: true do
         visit root_path
         click_button "subscribe"
 
+        accept_terms
+
         # Attempt payment but it fails
         user_pays_with_omise_but_fails
 
@@ -380,12 +401,16 @@ describe "User can checkout", js: true do
         visit root_path
         click_button "subscribe"
 
+        accept_terms
+
         # First attempt - payment fails
         user_pays_with_omise_but_fails
 
         # Should be back on checkout page
         expect(page).to have_current_path(checkout_path)
         expect(page).to have_content("Payment failed. Please try again.")
+
+        accept_terms
 
         # Second attempt - payment succeeds
         user_pays_with_omise(token: 'tokn_test_5mokdpoelz84n3ai99l')

@@ -15,7 +15,7 @@ module OmiseHelpers
     JS
 
     # Click the payment button to trigger the mocked Omise flow
-    click_button "ดำเนินการต่อ"
+    find_button("ดำเนินการต่อ").trigger("click")
   end
 
   def user_pays_with_omise_but_fails(overrides = {})
@@ -35,6 +35,6 @@ module OmiseHelpers
     JS
 
     # Click the payment button to trigger the mocked Omise flow
-    click_button "ดำเนินการต่อ"
+    find_button("ดำเนินการต่อ").trigger("click")
   end
 end
