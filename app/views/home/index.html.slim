@@ -4,7 +4,7 @@ div class="bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cov
 
         .flex.flex-col.items-center.justify-center.w-full.text-center class="pt-[50px]"
           .font-bold.text-primary class="mt-[-10px] text-4xl max-xl:text-xl" = t("home.hero_title")
-          .text-secondary.mb-2 class="mt-[2px] text-base max-xl:text-sm" = t("home.hero_subtitle")
+          .text-secondary.mb-2 class="mt-[2px] text-base max-xl:text-sm max-xl:whitespace-pre-line" = t("home.hero_subtitle")
 
         .container class="max-xl:flex max-xl:flex-col max-xl:items-center max-xl:gap-0 max-xl:pb-8 grid items-start grid-cols-2 grid-rows-2 max-lg:mt-4 lg:mt-8 min-xl:mt-6 min-xl:gap-6 min-xl:pb-12"
             
@@ -12,9 +12,9 @@ div class="bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cov
           .flex.flex-col.items-center.justify-center.self-start class="max-xl:order-1 max-xl:mb-4 max-xl:w-full row-span-2 max-xl:mt-0"
             .bg-base-100.py-3.px-1.shadow-lg
               - if @latest_newspaper&.cover&.attached?
-                = image_tag @latest_newspaper.cover, alt: "the latest dailynews cover", class: "aspect-[3/4] max-md:w-[220px] max-lg:w-[320px] lg:w-[400px] min-xl:w-auto min-xl:max-w-sm h-auto object-cover "
+                = image_tag @latest_newspaper.cover, alt: "the latest dailynews cover", class: "aspect-[3/4]  max-lg:w-[320px] lg:w-[400px]  h-auto object-cover "
               - else
-                = image_tag "auth/dailynews-default-cover.jpg", alt: "default dailynews cover", class: "aspect-[3/4] max-md:w-[220px] max-lg:w-[320px] lg:w-[400px] min-xl:w-auto min-xl:max-w-sm h-auto object-cover "
+                = image_tag "auth/dailynews-default-cover.jpg", alt: "default dailynews cover", class: "aspect-[3/4]  max-lg:w-[320px] lg:w-[400px]  h-auto object-cover "
 
           / ====== column: subscription form (right top) ======
           .card.drop-shadow-lg.rounded-lg.py-4.px-8 class="max-xl:order-2 max-xl:mb-4 max-xl:mt-0 max-xl:w-full max-xl:max-w-md"
@@ -28,7 +28,7 @@ div class="bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cov
                 class: "btn btn-primary inline-block text-white mt-8 mb-4 px-8 py-2 rounded-3xl font-semibold shadow-lg cursor-pointer w-full"
             - else
               .card.bg-base-100.drop-shadow-xl.rounded-3xl.py-7.px-8
-                .text-secondary.font-normal.text-center class="text-2xl" = "รายเดือน"
+                .text-secondary.font-normal.text-center class="text-2xl" = "#{@monthly_product&.title}"
                 hr.mt-4.border-primary.border-2.rounded
                 .flex.justify-center.items-end
                   .font-bold.mt-4.text-primary.text-center class="text-4xl max-xl:text-xl" = "#{@monthly_product&.amount} บาท/เดือน"
