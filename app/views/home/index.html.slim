@@ -26,7 +26,7 @@ div class="bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cov
                 class: "btn btn-primary inline-block text-white mt-8 mb-4 px-8 py-2 rounded-3xl font-semibold shadow-lg cursor-pointer w-full"
             - else
               .card.bg-base-100.drop-shadow-xl class="rounded-[24px] py-[28px] px-[32px]"
-                .text-lg.text-secondary.font-semibold.text-center = @monthly_product&.title
+                .text-secondary.font-normal.text-center class="text-[24px]" = "รายเดือน"
                 hr.mt-4.border-primary.border-2.rounded
                 .flex.justify-center.items-end
                   .text-4xl.font-bold.mt-4.text-primary.text-center = "#{@monthly_product&.amount} บาท/เดือน"
