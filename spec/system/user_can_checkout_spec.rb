@@ -14,7 +14,7 @@ describe "User can checkout", js: true do
     expect(page).not_to have_content "subscribe"
 
     # Guest continues to payment and is prompted to sign up
-    click_link_or_button "Continue to Payment"
+    click_link_or_button "ดำเนินการต่อ"
 
     # Guest fills in signup form
     fill_in 'email', with: "newguest@example.com"
@@ -63,8 +63,8 @@ describe "User can checkout", js: true do
     # Should be on checkout page
     expect(page).to have_current_path(checkout_path)
 
-    # Click Continue to Payment should show auth modal, not process payment
-    click_link_or_button "Continue to Payment"
+    # Click ดำเนินการต่อ should show auth modal, not process payment
+    click_link_or_button "ดำเนินการต่อ"
 
     # Should see signup form
     expect(page).to have_content("Sign Up")
@@ -129,8 +129,8 @@ describe "User can checkout", js: true do
     # Should be on checkout page
     expect(page).to have_current_path(checkout_path)
 
-    # Click Continue to Payment
-    click_link_or_button "Continue to Payment"
+    # Click ดำเนินการต่อ
+    click_link_or_button "ดำเนินการต่อ"
 
     # Should see auth modal (not payment processing)
     expect(page).to have_content("Sign Up")
@@ -205,8 +205,8 @@ describe "User can checkout", js: true do
       # Should be on checkout page
       expect(page).to have_current_path(checkout_path)
 
-      # Should see Continue to Payment button
-      expect(page).to have_button("Continue to Payment")
+      # Should see ดำเนินการต่อ button
+      expect(page).to have_button("ดำเนินการต่อ")
 
       # Should NOT trigger auth modal (member already logged in)
       # The button should be set up to trigger Omise payment
@@ -272,8 +272,8 @@ describe "User can checkout", js: true do
       click_button "subscribe"
       expect(page).to have_content("Product added to cart")
 
-      # Continue to payment, should show signup modal
-      click_link_or_button "Continue to Payment"
+      # ดำเนินการต่อ, should show signup modal
+      click_link_or_button "ดำเนินการต่อ"
       expect(page).to have_content("Sign Up")
 
       # Switch to login form
@@ -328,8 +328,8 @@ describe "User can checkout", js: true do
         expect(page).to have_content("VAT (7%)")
         expect(page).to have_content("Total")
 
-        # Should see payment button (not auth modal trigger)
-        expect(page).to have_button("Continue to Payment")
+        # Should see ดำเนินการต่อ button (not auth modal trigger)
+        expect(page).to have_button("ดำเนินการต่อ")
       end
     end
 
@@ -342,7 +342,7 @@ describe "User can checkout", js: true do
       expect(page).to have_content("Product added to cart")
 
       # Trigger auth modal
-      click_link_or_button "Continue to Payment"
+      click_link_or_button "ดำเนินการต่อ"
 
       # Switch to login and sign in
       click_link "Sign in here"

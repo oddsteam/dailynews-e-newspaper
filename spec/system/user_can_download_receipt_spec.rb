@@ -161,7 +161,7 @@ describe "User can download receipt" do
         visit root_path
         click_button "subscribe"
 
-        click_link_or_button "Continue to Payment"
+        click_link_or_button "ดำเนินการต่อ"
         user_pays_with_omise(token: "tokn_test_5mokdpoelz84n3ai99l")
 
         # User sees success page with download link
@@ -188,7 +188,7 @@ describe "User can download receipt" do
         visit root_path
         click_button "subscribe"
 
-        click_link_or_button "Continue to Payment"
+        click_link_or_button "ดำเนินการต่อ"
         user_pays_with_omise_but_fails
 
         expect(page).to have_current_path(checkout_path)
