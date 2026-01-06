@@ -3,8 +3,8 @@ div class="bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cov
       .wrapper.mx-auto class="max-w-[1400px]"
 
         .flex.flex-col.items-center.justify-center.w-full.text-center class="pt-[50px]"
-          .font-bold.text-primary class="mt-[-10px] text-[40px] max-xl:text-[20px]" = t("home.hero_title")
-          .text-secondary.mb-2 class="mt-[2px] text-[16px] max-xl:text-[14px]" = t("home.hero_subtitle")
+          .font-bold.text-primary class="mt-[-10px] text-4xl max-xl:text-xl" = t("home.hero_title")
+          .text-secondary.mb-2 class="mt-[2px] text-base max-xl:text-sm" = t("home.hero_subtitle")
 
         .container class="max-xl:flex max-xl:flex-col max-xl:items-center max-xl:gap-0 max-xl:pb-8 grid items-start grid-cols-2 grid-rows-2 max-lg:mt-4 lg:mt-8 min-xl:mt-6 min-xl:gap-6 min-xl:pb-12"
             
@@ -19,21 +19,22 @@ div class="bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cov
           / ====== column: subscription form (right top) ======
           .card.drop-shadow-lg.rounded-lg.py-4.px-8 class="max-xl:order-2 max-xl:mb-4 max-xl:mt-0 max-xl:w-full max-xl:max-w-md"
             - if has_active_subscription?
-              .card.bg-base-100.drop-shadow-xl class="rounded-[24px] py-[28px] px-[32px]"
+              .card.bg-base-100.drop-shadow-xl.rounded-3xl.py-7.px-8
+                .text-2xl.text-primary.font-bold.text-center.mb-3 = t("home.active_subscription_title")
                 .text-lg.text-secondary.font-semibold.text-center.mb-4 = t("home.active_subscription_message")
                 .flex.items-center.justify-center.mb-2
                   span.iconify.lucide--check-circle.text-success.size-16
               = link_to t("home.go_to_library"), library_path,
                 class: "btn btn-primary inline-block text-white mt-8 mb-4 px-8 py-2 rounded-3xl font-semibold shadow-lg cursor-pointer w-full"
             - else
-              .card.bg-base-100.drop-shadow-xl class="rounded-[24px] py-[28px] px-[32px]"
-                .text-secondary.font-normal.text-center class="text-[24px]" = "รายเดือน"
+              .card.bg-base-100.drop-shadow-xl.rounded-3xl.py-7.px-8
+                .text-secondary.font-normal.text-center class="text-2xl" = "รายเดือน"
                 hr.mt-4.border-primary.border-2.rounded
                 .flex.justify-center.items-end
-                  .font-bold.mt-4.text-primary.text-center class="text-[40px] max-xl:text-[20px]" = "#{@monthly_product&.amount} บาท/เดือน"
-              .flex.justify-center.mb-4 class="mt-[20px]"
+                  .font-bold.mt-4.text-primary.text-center class="text-4xl max-xl:text-xl" = "#{@monthly_product&.amount} บาท/เดือน"
+              .flex.justify-center.mb-4.mt-5
                 = button_to t("subscribe"), cart_items_path(sku: "MEMBERSHIP_MONTHLY_SUBSCRIPTION"), method: :post,
-                  class: "btn btn-primary inline-block text-white px-[68px] py-[2px] rounded-3xl font-semibold text-[24px] shadow-lg cursor-pointer"
+                  class: "btn btn-primary inline-block text-white px-16 py-1 rounded-3xl font-semibold text-2xl shadow-lg cursor-pointer"
 
           / ====== column: benefits section (right bottom) ======
           .py-4.px-8 class="max-xl:order-3 max-xl:mt-0 max-xl:w-full max-xl:max-w-md max-xl:mb-0"
