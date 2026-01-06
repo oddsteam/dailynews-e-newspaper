@@ -1,13 +1,15 @@
 <!-- start of breadcumb-section -->
 div class="bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cover w-full min-h-screen relative flex flex-col z-10 before:absolute before:left-0 before:top-0 before:w-full before:h-full before:-z-10 before:opacity-10 overflow-hidden"
-  .wrapper.mx-auto class="max-w-[1400px]"
+      .wrapper.mx-auto class="max-w-[1400px]"
+
+        .flex.flex-col.items-center.justify-center.w-full.text-center class="pt-[50px]"
+          .font-bold.text-primary class="mt-[-10px] text-[40px] max-md:text-xl" = t("home.hero_title")
+          .text-secondary.mb-2 class="mt-[2px] text-[16px] max-md:text-sm" = t("home.hero_subtitle")
 
         .container.grid.items-center class="max-xl:grid-cols-1 grid-cols-2 max-lg:mt-10 lg:mt-18 min-xl:mt-6 min-xl:gap-24"
             
           / ====== column: image section ======
           .flex.flex-col.items-center.mb-16 class="max-xl:order-2 order-1 max-xl:mt-14"
-            .font-bold.text-primary.pt-4.text-center class="mt-[-10px] text-3xl max-md:text-xl" = t("home.hero_title")
-            .text-secondary.text-center.mb-2.pt-2 class="mt-[-10px] text-xl max-md:text-sm" = t("home.hero_subtitle")
             - if @latest_newspaper&.cover&.attached?
               = image_tag @latest_newspaper.cover, alt: "the latest dailynews cover", class: "aspect-[3/4] max-lg:w-[600px] lg:w-[600px] min-xl:w-[300px] bg-gray-200 flex items-center justify-center"
             - else
