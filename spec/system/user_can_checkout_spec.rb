@@ -13,14 +13,19 @@ describe "User can checkout", js: true do
     click_link_or_button "subscribe"
     expect(page).not_to have_content "subscribe"
 
+    accept_terms
+
     # Guest continues to payment and is prompted to sign up
-    click_link_or_button "Continue to Payment"
+    click_link_or_button "ดำเนินการต่อ"
 
     # Guest fills in signup form
     fill_in 'email', with: "newguest@example.com"
     fill_in 'password', with: 'password123'
     fill_in 'confirm_password', with: 'password123'
     click_link_or_button 'SIGN UP'
+
+    # After signup, accept terms again
+    accept_terms
 
     # Guest completes payment with credit card
     user_pays_with_omise(token: 'tokn_test_5mokdpoelz84n3ai99l')
@@ -46,13 +51,13 @@ describe "User can checkout", js: true do
     click_link_or_button "subscribe"
 
     # Should see product details on checkout page
-    expect(page).to have_content("Order Summary")
+    expect(page).to have_content("สรุปรายการสมัครสมาชิก")
     expect(page).to have_content(product.title)
 
     # Should see tax breakdown
-    expect(page).to have_content("Subtotal")
-    expect(page).to have_content("VAT (7%)")
-    expect(page).to have_content("Total")
+    expect(page).to have_content("ยอดรวม")
+    expect(page).to have_content("ภาษีมูลค่าเพิ่ม (7%)")
+    expect(page).to have_content("ราคาสุทธิ")
   end
 
   it "requires authentication before payment" do
@@ -63,8 +68,10 @@ describe "User can checkout", js: true do
     # Should be on checkout page
     expect(page).to have_current_path(checkout_path)
 
-    # Click Continue to Payment should show auth modal, not process payment
-    click_link_or_button "Continue to Payment"
+    accept_terms
+
+    # Click ดำเนินการต่อ should show auth modal, not process payment
+    click_link_or_button "ดำเนินการต่อ"
 
     # Should see signup form
     expect(page).to have_content("Sign Up")
@@ -101,7 +108,7 @@ describe "User can checkout", js: true do
     expect(page).to have_current_path(checkout_path)
 
     # Checkout page should be visible
-    expect(page).to have_content("Order Summary")
+    expect(page).to have_content("สรุปรายการสมัครสมาชิก")
   end
 
   it "can add product to cart and reach checkout page" do
@@ -118,7 +125,7 @@ describe "User can checkout", js: true do
     expect(page).to have_current_path(checkout_path)
 
     # Checkout page should be visible
-    expect(page).to have_content("Order Summary")
+    expect(page).to have_content("สรุปรายการสมัครสมาชิก")
   end
 
   it "sees authentication modal when clicking payment button" do
@@ -129,8 +136,10 @@ describe "User can checkout", js: true do
     # Should be on checkout page
     expect(page).to have_current_path(checkout_path)
 
-    # Click Continue to Payment
-    click_link_or_button "Continue to Payment"
+    accept_terms
+
+    # Click ดำเนินการต่อ
+    click_link_or_button "ดำเนินการต่อ"
 
     # Should see auth modal (not payment processing)
     expect(page).to have_content("Sign Up")
@@ -145,10 +154,7 @@ describe "User can checkout", js: true do
 
     # Should see product details
     expect(page).to have_content(product.title)
-    expect(page).to have_content("Order Summary")
-
-    # Should see selected plan section
-    expect(page).to have_content("Selected Plan")
+    expect(page).to have_content("สรุปรายการสมัครสมาชิก")
   end
 
   it "sees tax breakdown on checkout page" do
@@ -157,9 +163,9 @@ describe "User can checkout", js: true do
     click_button "subscribe"
 
     # Should see tax information
-    expect(page).to have_content("Subtotal")
-    expect(page).to have_content("VAT (7%)")
-    expect(page).to have_content("Total")
+    expect(page).to have_content("ยอดรวม")
+    expect(page).to have_content("ภาษีมูลค่าเพิ่ม (7%)")
+    expect(page).to have_content("ราคาสุทธิ")
   end
 
   context "when member is signed in without subscription" do
@@ -194,7 +200,7 @@ describe "User can checkout", js: true do
       expect(page).to have_current_path(checkout_path)
 
       # Checkout page should be visible
-      expect(page).to have_content("Order Summary")
+      expect(page).to have_content("สรุปรายการสมัครสมาชิก")
     end
 
     it "sees payment button instead of auth modal" do
@@ -205,8 +211,10 @@ describe "User can checkout", js: true do
       # Should be on checkout page
       expect(page).to have_current_path(checkout_path)
 
-      # Should see Continue to Payment button
-      expect(page).to have_button("Continue to Payment")
+      accept_terms
+
+      # Should see ดำเนินการต่อ button
+      expect(page).to have_button("ดำเนินการต่อ", disabled: false)
 
       # Should NOT trigger auth modal (member already logged in)
       # The button should be set up to trigger Omise payment
@@ -219,10 +227,7 @@ describe "User can checkout", js: true do
 
       # Should see product details
       expect(page).to have_content(product.title)
-      expect(page).to have_content("Order Summary")
-
-      # Should see selected plan section
-      expect(page).to have_content("Selected Plan")
+      expect(page).to have_content("สรุปรายการสมัครสมาชิก")
     end
 
     it "can access checkout page directly if cart exists" do
@@ -236,7 +241,7 @@ describe "User can checkout", js: true do
       # Can access checkout directly
       visit checkout_path
       expect(page).to have_current_path(checkout_path)
-      expect(page).to have_content("Order Summary")
+      expect(page).to have_content("สรุปรายการสมัครสมาชิก")
       expect(page).to have_content(product.title)
     end
   end
@@ -272,8 +277,10 @@ describe "User can checkout", js: true do
       click_button "subscribe"
       expect(page).to have_content("Product added to cart")
 
-      # Continue to payment, should show signup modal
-      click_link_or_button "Continue to Payment"
+      accept_terms
+
+      # ดำเนินการต่อ, should show signup modal
+      click_link_or_button "ดำเนินการต่อ"
       expect(page).to have_content("Sign Up")
 
       # Switch to login form
@@ -287,6 +294,8 @@ describe "User can checkout", js: true do
 
       # Should be logged in successfully
       expect(page).to have_content('Signed in successfully.')
+
+      accept_terms
 
       # Continue with payment using Omise
       user_pays_with_omise(token: 'tokn_test_5mokdpoelz84n3ai99l')
@@ -320,16 +329,18 @@ describe "User can checkout", js: true do
         expect(page).to have_current_path(checkout_path)
 
         # Should see product details
-        expect(page).to have_content("Order Summary")
+        expect(page).to have_content("สรุปรายการสมัครสมาชิก")
         expect(page).to have_content(product.title)
 
         # Should see tax breakdown
-        expect(page).to have_content("Subtotal")
-        expect(page).to have_content("VAT (7%)")
-        expect(page).to have_content("Total")
+        expect(page).to have_content("ยอดรวม")
+        expect(page).to have_content("ภาษีมูลค่าเพิ่ม (7%)")
+        expect(page).to have_content("ราคาสุทธิ")
 
-        # Should see payment button (not auth modal trigger)
-        expect(page).to have_button("Continue to Payment")
+        accept_terms
+
+        # Should see ดำเนินการต่อ button (not auth modal trigger)
+        expect(page).to have_button("ดำเนินการต่อ", disabled: false)
       end
     end
 
@@ -341,8 +352,10 @@ describe "User can checkout", js: true do
       click_button "subscribe"
       expect(page).to have_content("Product added to cart")
 
+      accept_terms
+
       # Trigger auth modal
-      click_link_or_button "Continue to Payment"
+      click_link_or_button "ดำเนินการต่อ"
 
       # Switch to login and sign in
       click_link "Sign in here"
@@ -352,7 +365,7 @@ describe "User can checkout", js: true do
 
       # Cart should still contain the product
       expect(page).to have_content(product.title)
-      expect(page).to have_content("Order Summary")
+      expect(page).to have_content("สรุปรายการสมัครสมาชิก")
     end
   end
 
@@ -369,6 +382,8 @@ describe "User can checkout", js: true do
         visit root_path
         click_button "subscribe"
 
+        accept_terms
+
         # Attempt payment but it fails
         user_pays_with_omise_but_fails
 
@@ -378,7 +393,7 @@ describe "User can checkout", js: true do
 
         # User can see the product in cart to retry
         expect(page).to have_content(product.title)
-        expect(page).to have_content("Order Summary")
+        expect(page).to have_content("สรุปรายการสมัครสมาชิก")
       end
 
       it "allows user to retry payment and succeed after initial failure" do
@@ -386,12 +401,16 @@ describe "User can checkout", js: true do
         visit root_path
         click_button "subscribe"
 
+        accept_terms
+
         # First attempt - payment fails
         user_pays_with_omise_but_fails
 
         # Should be back on checkout page
         expect(page).to have_current_path(checkout_path)
         expect(page).to have_content("Payment failed. Please try again.")
+
+        accept_terms
 
         # Second attempt - payment succeeds
         user_pays_with_omise(token: 'tokn_test_5mokdpoelz84n3ai99l')
@@ -475,7 +494,7 @@ describe "User can checkout", js: true do
 
         # Should be able to access checkout
         expect(page).to have_current_path(checkout_path)
-        expect(page).to have_content("Order Summary")
+        expect(page).to have_content("สรุปรายการสมัครสมาชิก")
       end
     end
 
@@ -504,7 +523,7 @@ describe "User can checkout", js: true do
 
         # Should be able to access checkout (subscription is expired)
         expect(page).to have_current_path(checkout_path)
-        expect(page).to have_content("Order Summary")
+        expect(page).to have_content("สรุปรายการสมัครสมาชิก")
       end
     end
   end

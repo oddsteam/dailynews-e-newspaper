@@ -1,79 +1,100 @@
-.container.mx-auto.px-4.py-8
+div class="flex flex-col px-10 py-8 h-screen"
   = render "application/alert"
 
-  .flex.lg:flex-row.flex-col.gap-8
+  h2 class="text-xl lg:text-4xl font-bold mb-6 text-primary" รายการสมัครสมาชิก
+  .flex.lg:flex-row.flex-col.gap-4.lg:gap-8
     
     .subscription-section.flex-grow.lg:w-2/3
-      h2.text-2xl.font-bold.mb-6 Your Subscription
 
-      .bg-white.rounded-lg.shadow-lg.p-6
+      .bg-white.flex.flex-col.gap-2.lg:gap-4.rounded-3xl.shadow-lg.p-6.lg:px-9.lg:py-14
+        dialog#my_modal.modal oncancel="event.preventDefault()"
+            .modal-box.relative.max-w-full.max-h-full.m-5.p-0[style="width: calc(100vw - 40px); height: calc(100vh - 40px);"]
+              .sticky.top-0.bg-white.z-10.border-b.border-gray-200.px-6.py-2
+                button.btn.btn-sm.btn-ghost.absolute.right-2.top-2[
+                  onclick="my_modal.close()"
+                  aria-label="Close"
+                ]
+                  | ✕
+
+                h1.font-bold.text-lg.lg:text-xl.text-center ข้อกำหนดและเงื่อนไขการให้บริการ
+              
+              .overflow-y-auto.px-6[style="height: calc(100% - 80px);"]
+                .prose.prose-neutral.max-w-none[style=""]
+                  == render_markdown(File.read(Rails.root.join("app/content/terms.md")))
+              
+              style
+                |
+                  .prose h2 { font-size: 1.125rem; font-weight: 700; margin-top: 1rem; margin-bottom: 0.5rem; }
+                  .prose h3 { font-size: 1rem; font-weight: 600; margin-top: 0.5rem; margin-bottom: 0.25rem; }
+                  .prose ul { list-style-type: disc; margin-left: 1.5rem; margin-top: 0.25rem; margin-bottom: 0.13rem; }
+                  .prose li { margin-left: 0.5rem; margin-bottom: 0.25rem; padding-left: 0.5rem; }
+
         .flex.justify-between.items-center
-          h4.text-xl.font-semibold.mb-4 แพ็คเกจของคุณ
+          h4 class="text-xl lg:text-3xl font-bold" รายการ
 
-        .flex.justify-between.item-center
-          h4.font-medium.mb-4.mt-4 = @product.title
-          h4.font-medium.mb-4.mt-4 = "฿#{@product.amount}"
-
-        .prose = @product.description
+        .flex.justify-between.item-center.gap-2
+          h4 class="text-sm lg:text-2xl w-2/3" = @product.title
+          h4 class="text-sm lg:text-2xl" = "฿ #{@product.amount}"
       
       .subscription-options
-        
-    .divider.w-px.bg-gray-300.hidden.lg:block.h-auto
       
-    .summary-section.lg:w-1/3
-      .sticky.top-4
-        = content_tag :div, class: "bg-white rounded-lg shadow-lg p-6", data: { controller: "omise", omise_omise_key_value: Rails.application.credentials.dig(:omise, :public_key), omise_amount_value: @cart.total_cents } do
-          h4.text-xl.font-semibold.mb-6 Order Summary
+    = content_tag :div, class: "summary-section lg:w-1/3", data: { controller: "omise checkbox", omise_omise_key_value: Rails.application.credentials.dig(:omise, :public_key), omise_amount_value: @cart.total_cents } do
+      .sticky.top-4.flex.flex-col.gap-5
+        = content_tag :div, class: "bg-white rounded-3xl shadow-lg p-6 lg:p-9" do
+          h4 class="text-xl lg:text-3xl font-semibold mb-6" สรุปรายการสมัครสมาชิก
 
           / Product details
           .mb-6
-            .text-sm.text-gray-500.mb-1 Selected Plan
-            .font-medium.text-gray-900 = @product.title
+            .text-gray-900.text-sm.lg:text-2xl = @product.title
 
-          .border-t.border-gray-200.my-4
+          .border-t.border-primary.my-4
 
           / Price breakdown
-          .space-y-3.mb-4
-            .flex.justify-between.items-center
-              span.text-gray-600 Subtotal
-              span.font-medium.text-gray-900 = number_to_currency(@product.base_price, unit: "฿", precision: 2)
+          .space-y-3.mb-4 
+            .flex.justify-between.items-center.gap-4
+              span.text-sm.lg:text-2xl.text-gray-600 ยอดรวม
+              span.text-sm.lg:text-2xl.text-gray-900 = number_to_currency(@product.base_price, unit: "฿", precision: 2)
 
-            .flex.justify-between.items-center
-              span.text-gray-600 = "VAT (#{@product.tax_rate_percentage}%)"
-              span.font-medium.text-gray-900 = number_to_currency(@product.tax_amount, unit: "฿", precision: 2)
+            .flex.justify-between.items-center.gap-4
+              span.text-sm.lg:text-2xl.text-gray-600 = "ภาษีมูลค่าเพิ่ม (#{@product.tax_rate_percentage}%)"
+              span.text-sm.lg:text-2xl.text-gray-900 = number_to_currency(@product.tax_amount, unit: "฿", precision: 2)
 
-          .border-t.border-gray-200.my-4
+          .border-t.border-primary.my-4
 
           / Total
           .flex.justify-between.items-center.mb-2
-            span.text-lg.font-semibold.text-gray-900 Total
-            span.text-lg.font-bold.text-green-600 = number_to_currency(@product.amount, unit: "฿", precision: 2)
+            span.text-sm.lg:text-2xl.font-semibold.text-primary ราคาสุทธิ
+            span.text-sm.lg:text-2xl.font-bold.text-primary = number_to_currency(@product.amount, unit: "฿", precision: 2)
 
           .text-xs.text-gray-500.text-right.mb-4 (Tax included)
+        / ===== Checkbox (OUTSIDE summary card) =====
+        .flex.items-center.gap-3.w-full 
+            input.checkbox.scale-120 type="checkbox" data-action="change->checkbox#toggle" data-checkbox-target="checkbox" name="terms-checkbox" id="terms-checkbox" data-testid="terms-checkbox"
+            label.text-sm.text-gray-700 name="terms-checkbox" for="terms-checkbox"
+              | ยอมรับเงื่อนไขข้อตกลงการใช้งานหนังสือพิมพ์รูปแบบดิจิทัล 
+              = link_to "เงื่อนไขการใช้บริการ", "#", class: "underline", onclick: "my_modal.showModal(); return false;"
 
+        / if user is logged as a member yet, the button will trigger the auth model
+
+        - if member_signed_in?
+          = button_tag "ดำเนินการต่อ", id: "pay-button", class: "w-full btn btn-primary p-4 lg:p-6 rounded-full transition cursor-pointer lg:text-2xl disabled:bg-gray-300 disabled:cursor-not-allowed", type: "button", data: { "action": "click->omise#payButtonClicked", "checkbox-target": "button"}
+
+          = form_with model: @order, data: { omise_target: "form" } do |form|
+            = form.hidden_field :token, data: { omise_target: "token" }
+            = form.hidden_field :total_cents, value: @cart.total_cents
+        - else 
+          = button_tag "ดำเนินการต่อ", id: "pay-button", class: "w-full btn btn-primary p-4 lg:p-6 rounded-full transition cursor-pointer lg:text-2xl disabled:bg-gray-300 disabled:cursor-not-allowed", type: "button", onclick: "auth_modal.showModal()", data: {"checkbox-target": "button"}
+        / - if check_newspaper_memberships(@newspaper, current_user) || current_user.member?
           .border-t.border-gray-200.my-4
+          = form_with model: @order, data: { payment_target: "form" } do |form|
+            = form.hidden_field :token, data: { payment_target: "token" }
+          = button_tag "Continue to Payment", id: "pay-button", class: "w-full btn btn-primary py-3 px-6 rounded-lg transition cursor-pointer", type: "button", data: { "action": "click->payment#payButtonClicked" }
+          
+          .border-t.border-gray-200.my-4
+          = button_to "Grant Free Subscription (Testing)", orders_path, method: :post, params: { order: { token: "testing_only" } }, class: "w-full btn btn-accent py-3 px-6 rounded-lg transition cursor-pointer", data: { turbo_confirm: "Skip payment and grant free subscription?" }
+        / - else 
+          = button_tag "Continue to Payment", id: "pay-button", class: "w-full btn btn-primary py-3 px-6 rounded-lg transition cursor-pointer", type: "button", onclick: "auth_modal.showModal()"
 
-          / if user is logged as a member yet, the button will trigger the auth model
-
-          - if member_signed_in?
-            = button_tag "Continue to Payment", id: "pay-button", class: "w-full btn btn-primary py-3 px-6 rounded-lg transition cursor-pointer", type: "button", data: { "action": "click->omise#payButtonClicked" }
-
-            = form_with model: @order, data: { omise_target: "form" } do |form|
-              = form.hidden_field :token, data: { omise_target: "token" }
-              = form.hidden_field :total_cents, value: @cart.total_cents
-          - else 
-            = button_tag "Continue to Payment", id: "pay-button", class: "w-full btn btn-primary py-3 px-6 rounded-lg transition cursor-pointer", type: "button", onclick: "auth_modal.showModal()"
-          / - if check_newspaper_memberships(@newspaper, current_user) || current_user.member?
-            .border-t.border-gray-200.my-4
-            = form_with model: @order, data: { payment_target: "form" } do |form|
-              = form.hidden_field :token, data: { payment_target: "token" }
-            = button_tag "Continue to Payment", id: "pay-button", class: "w-full btn btn-primary py-3 px-6 rounded-lg transition cursor-pointer", type: "button", data: { "action": "click->payment#payButtonClicked" }
-            
-            .border-t.border-gray-200.my-4
-            = button_to "Grant Free Subscription (Testing)", orders_path, method: :post, params: { order: { token: "testing_only" } }, class: "w-full btn btn-accent py-3 px-6 rounded-lg transition cursor-pointer", data: { turbo_confirm: "Skip payment and grant free subscription?" }
-          / - else 
-            = button_tag "Continue to Payment", id: "pay-button", class: "w-full btn btn-primary py-3 px-6 rounded-lg transition cursor-pointer", type: "button", onclick: "auth_modal.showModal()"
-
-            / .border-t.border-gray-200.my-4
-            / = button_tag "Grant Free Membership (Testing)", class: "w-full btn btn-accent py-3 px-6 rounded-lg transition cursor-pointer", type: "button", onclick: "auth_modal.showModal()"
-            
+          / .border-t.border-gray-200.my-4
+          / = button_tag "Grant Free Membership (Testing)", class: "w-full btn btn-accent py-3 px-6 rounded-lg transition cursor-pointer", type: "button", onclick: "auth_modal.showModal()"
+          
