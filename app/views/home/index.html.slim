@@ -10,11 +10,11 @@ div class="bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cov
             
           / ====== column: image section (left) ======
           .flex.flex-col.items-center.justify-center.self-start class="max-xl:order-1 max-xl:mb-4 max-xl:w-full row-span-2 max-xl:mt-0"
-            .bg-base-100.py-3.px-1.rounded-lg.shadow-lg
+            .bg-base-100.py-3.px-1.shadow-lg
               - if @latest_newspaper&.cover&.attached?
-                = image_tag @latest_newspaper.cover, alt: "the latest dailynews cover", class: "aspect-[3/4] max-md:w-[280px] max-lg:w-[400px] lg:w-[500px] min-xl:w-auto min-xl:max-w-md h-auto object-cover rounded-lg"
+                = image_tag @latest_newspaper.cover, alt: "the latest dailynews cover", class: "aspect-[3/4] max-md:w-[220px] max-lg:w-[320px] lg:w-[400px] min-xl:w-auto min-xl:max-w-sm h-auto object-cover "
               - else
-                = image_tag "auth/dailynews-default-cover.jpg", alt: "default dailynews cover", class: "aspect-[3/4] max-md:w-[280px] max-lg:w-[400px] lg:w-[500px] min-xl:w-auto min-xl:max-w-md h-auto object-cover rounded-lg"
+                = image_tag "auth/dailynews-default-cover.jpg", alt: "default dailynews cover", class: "aspect-[3/4] max-md:w-[220px] max-lg:w-[320px] lg:w-[400px] min-xl:w-auto min-xl:max-w-sm h-auto object-cover "
 
           / ====== column: subscription form (right top) ======
           .card.drop-shadow-lg.rounded-lg.py-4.px-8 class="max-xl:order-2 max-xl:mb-4 max-xl:mt-0 max-xl:w-full max-xl:max-w-md"
@@ -32,13 +32,13 @@ div class="bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cov
                 hr.mt-4.border-primary.border-2.rounded
                 .flex.justify-center.items-end
                   .font-bold.mt-4.text-primary.text-center class="text-4xl max-xl:text-xl" = "#{@monthly_product&.amount} บาท/เดือน"
-              .flex.justify-center.mb-4.mt-5
+              .flex.justify-center.mb-2.mt-5
                 = button_to t("subscribe"), cart_items_path(sku: "MEMBERSHIP_MONTHLY_SUBSCRIPTION"), method: :post,
                   class: "btn btn-primary inline-block text-white px-16 py-1 rounded-3xl font-semibold text-2xl shadow-lg cursor-pointer"
 
           / ====== column: benefits section (right bottom) ======
-          .py-4.px-8 class="max-xl:order-3 max-xl:mt-0 max-xl:w-full max-xl:max-w-md max-xl:mb-0"
-            .min-sm:text-xl.font-bold.mt-1 = t("home.member_benefits_title")
+          .pt-2.pb-4.px-8 class="max-xl:order-3 max-xl:mt-0 max-xl:w-full max-xl:max-w-md max-xl:mb-0"
+            .min-sm:text-xl.font-bold = t("home.member_benefits_title")
             hr.mt-3.mb-3.border-primary.border-1
               .flex.items-center.gap-3.mb-3
                 = image_tag "icons/check-fill.svg", alt: "check", class: "size-6"
