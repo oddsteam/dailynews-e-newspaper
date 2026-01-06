@@ -31,8 +31,6 @@
 
         .flex.justify-between.items-center
           h4 class="text-xl lg:text-3xl font-bold" รายการ
-          button.btn onclick="my_modal.showModal()"
-            | Open Modal
 
         .flex.justify-between.item-center.gap-2
           h4 class="text-sm lg:text-2xl w-2/3" = @product.title
@@ -79,9 +77,8 @@
               br.hidden.lg:block
               = link_to "เงื่อนไขการใช้บริการ",
                 "#",
-                class: "underline"
-
-
+                class: "underline",
+                onclick: "my_modal.showModal(); return false;"
 
         / if user is logged as a member yet, the button will trigger the auth model
 
