@@ -6,17 +6,17 @@ div class="bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cov
           .font-bold.text-primary class="mt-[-10px] text-[40px] max-md:text-xl" = t("home.hero_title")
           .text-secondary.mb-2 class="mt-[2px] text-[16px] max-md:text-sm" = t("home.hero_subtitle")
 
-        .container.grid.items-start class="max-xl:grid-cols-1 max-xl:grid-rows-3 grid-cols-2 grid-rows-2 max-lg:mt-10 lg:mt-18 min-xl:mt-6 min-xl:gap-6"
+        .container class="max-xl:flex max-xl:flex-col max-xl:items-center max-xl:gap-0 grid items-start grid-cols-2 grid-rows-2 max-lg:mt-4 lg:mt-8 min-xl:mt-6 min-xl:gap-6"
             
           / ====== column: image section (left) ======
-          .flex.flex-col.items-center.justify-start.self-start class="max-xl:order-2 max-xl:row-span-1 row-span-2 max-xl:mt-14"
+          .flex.flex-col.items-center.justify-start.self-start class="max-xl:order-1 max-xl:mb-4 row-span-2 max-xl:mt-0"
             - if @latest_newspaper&.cover&.attached?
               = image_tag @latest_newspaper.cover, alt: "the latest dailynews cover", class: "aspect-[3/4] max-lg:w-[600px] lg:w-[600px] min-xl:w-auto min-xl:max-w-md h-auto bg-gray-200 flex items-center justify-center object-cover rounded-lg"
             - else
               = image_tag "auth/dailynews-default-cover.jpg", alt: "default dailynews cover", class: "aspect-[3/4] max-lg:w-[600px] lg:w-[600px] min-xl:w-auto min-xl:max-w-md h-auto bg-gray-200 flex items-center justify-center object-cover rounded-lg"
 
           / ====== column: subscription form (right top) ======
-          .card.drop-shadow-lg.rounded-lg.py-4.px-8 class="max-xl:order-1 max-xl:row-span-1"
+          .card.drop-shadow-lg.rounded-lg.py-4.px-8 class="max-xl:order-2 max-xl:mb-4 max-xl:mt-0 max-xl:w-full max-xl:max-w-md"
             - if has_active_subscription?
               .card.bg-base-100.drop-shadow-xl class="rounded-[24px] py-[28px] px-[32px]"
                 .text-lg.text-secondary.font-semibold.text-center.mb-4 = t("home.active_subscription_message")
@@ -35,7 +35,7 @@ div class="bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cov
                   class: "btn btn-primary inline-block text-white px-[68px] py-[2px] rounded-3xl font-semibold text-[24px] shadow-lg cursor-pointer"
 
           / ====== column: benefits section (right bottom) ======
-          .py-4.px-8 class="max-xl:order-3 max-xl:row-span-1"
+          .py-4.px-8 class="max-xl:order-3 max-xl:mt-0 max-xl:w-full max-xl:max-w-md"
             .min-sm:text-xl.font-bold.mt-1 = t("home.member_benefits_title")
             hr.mt-3.mb-3.border-primary.border-1
               .flex.items-center.gap-3.mb-3
