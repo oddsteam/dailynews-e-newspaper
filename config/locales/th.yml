@@ -22,7 +22,7 @@ th:
     member_benefits_title: "สิทธิประโยชน์สำหรับสมาชิก"
     benefit_unlimited: "เนื้อหาครบทุกข่าว ได้ไม่จำกัด"
     benefit_archive: "อ่านเนื้อหาย้อนหลัง"
-    benefit_email: "ได้รับข่าวสารทางอีเมลทุกวัน"
+    benefit_email: "ได้รับข่าวสารทุกวัน"
     benefit_cancel: "ยกเลิกได้ทุกเมื่อ ไม่มีเงื่อนไขผูกมัด"
   errors:
     messages: 
