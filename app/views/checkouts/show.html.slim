@@ -41,7 +41,7 @@
       .subscription-options
       
     .summary-section.lg:w-1/3
-      .sticky.top-4.flex.flex-col.gap-6
+      .sticky.top-4.flex.flex-col.gap-5
         = content_tag :div, class: "bg-white rounded-3xl shadow-lg p-6 lg:p-9", data: { controller: "omise", omise_omise_key_value: Rails.application.credentials.dig(:omise, :public_key), omise_amount_value: @cart.total_cents } do
           h4 class="text-xl lg:text-3xl font-semibold mb-6" สรุปรายการสมัครสมาชิก
 
@@ -70,16 +70,29 @@
 
           .text-xs.text-gray-500.text-right.mb-4 (Tax included)
 
-          / if user is logged as a member yet, the button will trigger the auth model
+
+        / ===== Checkbox (OUTSIDE summary card) =====
+        .mt-4.flex.items-center.gap-3.lg:w-1/3 data-controller="checkbox"
+            input.checkbox.scale-120 type="checkbox" data-action="change->checkbox#toggle" data-checkbox-target="checkbox"
+            label.text-sm.text-gray-700.whitespace-normal.xl:whitespace-nowrap
+              | ยอมรับเงื่อนไขข้อตกลงการใช้งานหนังสือพิมพ์รูปแบบดิจิทัล 
+              br.hidden.lg:block
+              = link_to "เงื่อนไขการใช้บริการ",
+                "#",
+                class: "underline"
+
+
+
+        / if user is logged as a member yet, the button will trigger the auth model
 
         - if member_signed_in?
-          = button_tag "ดำเนินการต่อ", id: "pay-button", class: "w-full btn btn-primary p-4 lg:p-6 rounded-full transition cursor-pointer lg:text-2xl", type: "button", data: { "action": "click->omise#payButtonClicked" }
+          = button_tag "ดำเนินการต่อ", id: "pay-button", disabled: true, class: "w-full btn btn-primary p-4 lg:p-6 rounded-full transition cursor-pointer lg:text-2xl disabled:bg-gray-300 disabled:cursor-not-allowed", type: "button", data: { "action": "click->omise#payButtonClicked", "checkbox-target": "button"}
 
           = form_with model: @order, data: { omise_target: "form" } do |form|
             = form.hidden_field :token, data: { omise_target: "token" }
             = form.hidden_field :total_cents, value: @cart.total_cents
         - else 
-          = button_tag "ดำเนินการต่อ", id: "pay-button", class: "w-full btn btn-primary p-4 lg:p-6 rounded-full transition cursor-pointer lg:text-2xl", type: "button", onclick: "auth_modal.showModal()"
+          = button_tag "ดำเนินการต่อ", id: "pay-button", disabled: true, class: "w-full btn btn-primary p-4 lg:p-6 rounded-full transition cursor-pointer lg:text-2xl disabled:bg-gray-300 disabled:cursor-not-allowed", type: "button", onclick: "auth_modal.showModal()", data: {"checkbox-target": "button"}
         / - if check_newspaper_memberships(@newspaper, current_user) || current_user.member?
           .border-t.border-gray-200.my-4
           = form_with model: @order, data: { payment_target: "form" } do |form|
@@ -91,5 +104,6 @@
         / - else 
           = button_tag "Continue to Payment", id: "pay-button", class: "w-full btn btn-primary py-3 px-6 rounded-lg transition cursor-pointer", type: "button", onclick: "auth_modal.showModal()"
 
-            / .border-t.border-gray-200.my-4
-            / = button_tag "Grant Free Membership (Testing)", class: "w-full btn btn-accent py-3 px-6 rounded-lg transition cursor-pointer", type: "button", onclick: "auth_modal.showModal()"
+          / .border-t.border-gray-200.my-4
+          / = button_tag "Grant Free Membership (Testing)", class: "w-full btn btn-accent py-3 px-6 rounded-lg transition cursor-pointer", type: "button", onclick: "auth_modal.showModal()"
+          
