@@ -18,22 +18,19 @@ div class="bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cov
           / ====== column: subscription form (right top) ======
           .card.drop-shadow-lg.rounded-lg.py-4.px-8 class="max-xl:order-1 max-xl:row-span-1"
             - if has_active_subscription?
-              .text-xl.min-sm:text-2xl.text-center.font-bold.text-primary.mt-1 = t("home.active_subscription_title")
-              .card.bg-base-100.drop-shadow-xl.rounded-lg.py-6.px-16 class="mt-8"
+              .card.bg-base-100.drop-shadow-xl class="rounded-[24px] py-[28px] px-[32px]"
                 .text-lg.text-secondary.font-semibold.text-center.mb-4 = t("home.active_subscription_message")
                 .flex.items-center.justify-center.mb-2
                   span.iconify.lucide--check-circle.text-success.size-16
               = link_to t("home.go_to_library"), library_path,
                 class: "btn btn-primary inline-block text-white mt-8 mb-4 px-8 py-2 rounded-3xl font-semibold shadow-lg cursor-pointer w-full"
             - else
-              .text-xl.min-sm:text-2xl.text-center.font-bold.text-primary.mt-1 = t("home.subscription_package_title")
-              .card.bg-base-100.drop-shadow-xl.rounded-lg.py-6.px-16 class="mt-8"
+              .card.bg-base-100.drop-shadow-xl class="rounded-[24px] py-[28px] px-[32px]"
                 .text-lg.text-secondary.font-semibold.text-center = @monthly_product&.title
                 hr.mt-4.border-primary.border-2.rounded
                 .flex.justify-center.items-end
-                  .text-4xl.font-bold.mt-4.text-primary.text-center = "#{@monthly_product&.amount}"
-                  .text-md.font-bold.mt-4.text-primary.text-center.ml-1 = "Baht"
-              .flex.justify-center.mt-8.mb-4
+                  .text-4xl.font-bold.mt-4.text-primary.text-center = "#{@monthly_product&.amount} บาท/เดือน"
+              .flex.justify-center.mb-4 class="mt-[20px]"
                 = button_to t("subscribe"), cart_items_path(sku: "MEMBERSHIP_MONTHLY_SUBSCRIPTION"), method: :post,
                   class: "btn btn-primary inline-block text-white px-[68px] py-[2px] rounded-3xl font-semibold text-[24px] shadow-lg cursor-pointer"
 
