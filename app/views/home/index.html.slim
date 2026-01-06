@@ -6,7 +6,7 @@ div class="bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cov
           .font-bold.text-primary class="mt-[-10px] text-[40px] max-md:text-xl" = t("home.hero_title")
           .text-secondary.mb-2 class="mt-[2px] text-[16px] max-md:text-sm" = t("home.hero_subtitle")
 
-        .container.grid class="max-xl:grid-cols-1 max-xl:grid-rows-3 grid-cols-2 grid-rows-2 max-lg:mt-10 lg:mt-18 min-xl:mt-6 min-xl:gap-6"
+        .container.grid.items-start class="max-xl:grid-cols-1 max-xl:grid-rows-3 grid-cols-2 grid-rows-2 max-lg:mt-10 lg:mt-18 min-xl:mt-6 min-xl:gap-6"
             
           / ====== column: image section (left, spans 2 rows) ======
           .flex.flex-col.items-center.justify-center class="max-xl:order-2 max-xl:row-span-1 row-span-2 max-xl:mt-14"
@@ -38,21 +38,21 @@ div class="bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cov
                   class: "btn btn-primary inline-block text-white px-[68px] py-[2px] rounded-3xl font-semibold text-[24px] shadow-lg cursor-pointer"
 
           / ====== column: benefits section (right bottom) ======
-          .card.bg-base-100.drop-shadow-lg.rounded-lg.py-4.px-8 class="max-xl:order-3 max-xl:row-span-1"
-            .text-xl.min-sm:text-2xl.text-center.font-bold.text-primary.mt-1 สิทธิประโยชน์สำหรับสมาชิก
+          .py-4.px-8 class="max-xl:order-3 max-xl:row-span-1"
+            .min-sm:text-2xl.font-bold.mt-1 = t("home.member_benefits_title")
             .mt-6.space-y-4
               .flex.items-center.gap-3
-                span.iconify.lucide--check-circle.text-primary.size-6
-                .text-secondary.text-sm เนื้อหาครบทุกข่าว ได้ไม่จำกัด
+                = image_tag "icons/check-fill.svg", alt: "check", class: "size-6"
+                .text-secondary.text-base = t("home.benefit_unlimited")
               .flex.items-center.gap-3
-                span.iconify.lucide--check-circle.text-primary.size-6
-                .text-secondary.text-sm อ่านเนื้อหาย้อนหลัง
+                = image_tag "icons/check-fill.svg", alt: "check", class: "size-6"
+                .text-secondary.text-base = t("home.benefit_archive")
               .flex.items-center.gap-3
-                span.iconify.lucide--check-circle.text-primary.size-6
-                .text-secondary.text-sm ได้รับข่าวสารทางอีเมลทุกวัน
+                = image_tag "icons/check-fill.svg", alt: "check", class: "size-6"
+                .text-secondary.text-base = t("home.benefit_email")
               .flex.items-center.gap-3
-                span.iconify.lucide--check-circle.text-primary.size-6
-                .text-secondary.text-sm ยกเลิกได้ทุกเมื่อ ไม่มีเงื่อนไขผูกมัด
+                = image_tag "icons/check-fill.svg", alt: "check", class: "size-6"
+                .text-secondary.text-base = t("home.benefit_cancel")
         
 
 

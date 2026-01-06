@@ -19,6 +19,11 @@ th:
     active_subscription_message: "เข้าสู่ห้องสมุดของคุณเพื่ออ่านหนังสือพิมพ์ทั้งหมด"
     go_to_library: "เข้าสู่ห้องสมุดของฉัน"
     subscription_package_title: "แพ็คเกจหนังสือพิมพ์เดลินิวส์ฉบับดิจิทัล"
+    member_benefits_title: "สิทธิประโยชน์สำหรับสมาชิก"
+    benefit_unlimited: "เนื้อหาครบทุกข่าว ได้ไม่จำกัด"
+    benefit_archive: "อ่านเนื้อหาย้อนหลัง"
+    benefit_email: "ได้รับข่าวสารทางอีเมลทุกวัน"
+    benefit_cancel: "ยกเลิกได้ทุกเมื่อ ไม่มีเงื่อนไขผูกมัด"
   errors:
     messages: 
       blank: "ไม่สามารถว่างได้"

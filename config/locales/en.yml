@@ -36,6 +36,11 @@ en:
     active_subscription_message: "Access your library to read all newspapers"
     go_to_library: "Go to My Library"
     subscription_package_title: "Daily News Digital Newspaper Package"
+    member_benefits_title: "Member Benefits"
+    benefit_unlimited: "Complete content, all news, all columns"
+    benefit_archive: "Read all news archives"
+    benefit_email: "Receive news and information by email every day"
+    benefit_cancel: "Cancel anytime, no binding conditions"
   errors:
     messages: 
       blank: "Can't be blank"
