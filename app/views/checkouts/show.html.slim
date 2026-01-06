@@ -1,4 +1,4 @@
-div class="flex flex-col px-10 py-8"
+div class="flex flex-col px-10 py-8 h-screen"
   = render "application/alert"
 
   h2 class="text-xl lg:text-4xl font-bold mb-6 text-primary" รายการสมัครสมาชิก
@@ -69,8 +69,8 @@ div class="flex flex-col px-10 py-8"
           .text-xs.text-gray-500.text-right.mb-4 (Tax included)
         / ===== Checkbox (OUTSIDE summary card) =====
         .flex.items-center.gap-3.w-full 
-            input.checkbox.scale-120 type="checkbox" data-action="change->checkbox#toggle" data-checkbox-target="checkbox" name="terms_checkbox" id="terms_checkbox"
-            label.text-sm.text-gray-700 name="terms_checkbox" for="terms_checkbox"
+            input.checkbox.scale-120 type="checkbox" data-action="change->checkbox#toggle" data-checkbox-target="checkbox" name="terms-checkbox" id="terms-checkbox" data-testid="terms-checkbox"
+            label.text-sm.text-gray-700 name="terms-checkbox" for="terms-checkbox"
               | ยอมรับเงื่อนไขข้อตกลงการใช้งานหนังสือพิมพ์รูปแบบดิจิทัล 
               = link_to "เงื่อนไขการใช้บริการ", "#", class: "underline", onclick: "my_modal.showModal(); return false;"
 
