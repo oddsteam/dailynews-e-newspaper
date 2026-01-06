@@ -3,8 +3,8 @@ div class="bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cov
       .wrapper.mx-auto class="max-w-[1400px]"
 
         .flex.flex-col.items-center.justify-center.w-full.text-center class="pt-[50px]"
-          .font-bold.text-primary class="mt-[-10px] text-[40px] max-md:text-xl" = t("home.hero_title")
-          .text-secondary.mb-2 class="mt-[2px] text-[16px] max-md:text-sm" = t("home.hero_subtitle")
+          .font-bold.text-primary class="mt-[-10px] text-[40px] max-xl:text-[20px]" = t("home.hero_title")
+          .text-secondary.mb-2 class="mt-[2px] text-[16px] max-xl:text-[14px]" = t("home.hero_subtitle")
 
         .container class="max-xl:flex max-xl:flex-col max-xl:items-center max-xl:gap-0 grid items-start grid-cols-2 grid-rows-2 max-lg:mt-4 lg:mt-8 min-xl:mt-6 min-xl:gap-6"
             
@@ -29,7 +29,7 @@ div class="bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cov
                 .text-secondary.font-normal.text-center class="text-[24px]" = "รายเดือน"
                 hr.mt-4.border-primary.border-2.rounded
                 .flex.justify-center.items-end
-                  .text-4xl.font-bold.mt-4.text-primary.text-center = "#{@monthly_product&.amount} บาท/เดือน"
+                  .font-bold.mt-4.text-primary.text-center class="text-[40px] max-xl:text-[20px]" = "#{@monthly_product&.amount} บาท/เดือน"
               .flex.justify-center.mb-4 class="mt-[20px]"
                 = button_to t("subscribe"), cart_items_path(sku: "MEMBERSHIP_MONTHLY_SUBSCRIPTION"), method: :post,
                   class: "btn btn-primary inline-block text-white px-[68px] py-[2px] rounded-3xl font-semibold text-[24px] shadow-lg cursor-pointer"
