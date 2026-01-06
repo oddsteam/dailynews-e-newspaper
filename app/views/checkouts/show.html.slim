@@ -1,4 +1,4 @@
-.container.mx-auto.px-10.py-8
+.flex.flex-col.px-10.py-8
   = render "application/alert"
 
   h2 class="text-xl lg:text-4xl font-bold mb-6 text-primary" รายการสมัครสมาชิก
@@ -29,11 +29,11 @@
 
           / Price breakdown
           .space-y-3.mb-4
-            .flex.justify-between.items-center
+            .flex.justify-between.items-center.gap-4
               span.text-sm.lg:text-2xl.text-gray-600 ยอดรวม
               span.text-sm.lg:text-2xl.text-gray-900 = number_to_currency(@product.base_price, unit: "฿", precision: 2)
 
-            .flex.justify-between.items-center
+            .flex.justify-between.items-center.gap-4
               span.text-sm.lg:text-2xl.text-gray-600 = "ภาษีมูลค่าเพิ่ม (#{@product.tax_rate_percentage}%)"
               span.text-sm.lg:text-2xl.text-gray-900 = number_to_currency(@product.tax_amount, unit: "฿", precision: 2)
 
