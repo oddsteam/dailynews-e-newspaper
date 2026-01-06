@@ -7,8 +7,32 @@
     .subscription-section.flex-grow.lg:w-2/3
 
       .bg-white.flex.flex-col.gap-2.lg:gap-4.rounded-3xl.shadow-lg.p-6.lg:px-9.lg:py-14
+        dialog#my_modal.modal oncancel="event.preventDefault()"
+            .modal-box.relative.max-w-full.max-h-full.m-5.p-0[style="width: calc(100vw - 40px); height: calc(100vh - 40px);"]
+              .sticky.top-0.bg-white.z-10.border-b.border-gray-200.px-6.py-2
+                button.btn.btn-sm.btn-ghost.absolute.right-2.top-2[
+                  onclick="my_modal.close()"
+                  aria-label="Close"
+                ]
+                  | ✕
+
+                h1.font-bold.text-lg.lg:text-xl.text-center ข้อกำหนดและเงื่อนไขการให้บริการ
+              
+              .overflow-y-auto.px-6[style="height: calc(100% - 80px);"]
+                .prose.prose-neutral.max-w-none[style=""]
+                  == render_markdown(File.read(Rails.root.join("app/content/terms.md")))
+              
+              style
+                |
+                  .prose h2 { font-size: 1.125rem; font-weight: 700; margin-top: 1rem; margin-bottom: 0.5rem; }
+                  .prose h3 { font-size: 1rem; font-weight: 600; margin-top: 0.5rem; margin-bottom: 0.25rem; }
+                  .prose ul { list-style-type: disc; margin-left: 1.5rem; margin-top: 0.25rem; margin-bottom: 0.13rem; }
+                  .prose li { margin-left: 0.5rem; margin-bottom: 0.25rem; padding-left: 0.5rem; }
+
         .flex.justify-between.items-center
           h4 class="text-xl lg:text-3xl font-bold" รายการ
+          button.btn onclick="my_modal.showModal()"
+            | Open Modal
 
         .flex.justify-between.item-center.gap-2
           h4 class="text-sm lg:text-2xl w-2/3" = @product.title
@@ -69,28 +93,3 @@
 
             / .border-t.border-gray-200.my-4
             / = button_tag "Grant Free Membership (Testing)", class: "w-full btn btn-accent py-3 px-6 rounded-lg transition cursor-pointer", type: "button", onclick: "auth_modal.showModal()"
-          dialog#my_modal.modal oncancel="event.preventDefault()"
-            .modal-box.relative.max-w-full.max-h-full.m-5.p-0[style="width: calc(100vw - 40px); height: calc(100vh - 40px);"]
-              .sticky.top-0.bg-white.z-10.border-b.border-gray-200.px-6.py-2
-                button.btn.btn-sm.btn-ghost.absolute.right-2.top-2[
-                  onclick="my_modal.close()"
-                  aria-label="Close"
-                ]
-                  | ✕
-
-                h1.font-bold.text-lg.lg:text-xl.text-center ข้อกำหนดและเงื่อนไขการให้บริการ
-              
-              .overflow-y-auto.px-6[style="height: calc(100% - 80px);"]
-                .prose.prose-neutral.max-w-none[style=""]
-                  == render_markdown(File.read(Rails.root.join("app/content/terms.md")))
-              
-              style
-                |
-                  .prose h2 { font-size: 1.125rem; font-weight: 700; margin-top: 1rem; margin-bottom: 0.5rem; }
-                  .prose h3 { font-size: 1rem; font-weight: 600; margin-top: 0.5rem; margin-bottom: 0.25rem; }
-                  .prose ul { list-style-type: disc; margin-left: 1.5rem; margin-top: 0.25rem; margin-bottom: 0.13rem; }
-                  .prose li { margin-left: 0.5rem; margin-bottom: 0.25rem; padding-left: 0.5rem; }
-
-          button.btn onclick="my_modal.showModal()"
-            | Open Modal
-            
