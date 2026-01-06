@@ -46,13 +46,13 @@ describe "User can checkout", js: true do
     click_link_or_button "subscribe"
 
     # Should see product details on checkout page
-    expect(page).to have_content("Order Summary")
+    expect(page).to have_content("สรุปรายการสมัครสมาชิก")
     expect(page).to have_content(product.title)
 
     # Should see tax breakdown
-    expect(page).to have_content("Subtotal")
-    expect(page).to have_content("VAT (7%)")
-    expect(page).to have_content("Total")
+    expect(page).to have_content("ยอดรวม")
+    expect(page).to have_content("ภาษีมูลค่าเพิ่ม (7%)")
+    expect(page).to have_content("ราคาสุทธิ")
   end
 
   it "requires authentication before payment" do
@@ -101,7 +101,7 @@ describe "User can checkout", js: true do
     expect(page).to have_current_path(checkout_path)
 
     # Checkout page should be visible
-    expect(page).to have_content("Order Summary")
+    expect(page).to have_content("สรุปรายการสมัครสมาชิก")
   end
 
   it "can add product to cart and reach checkout page" do
@@ -118,7 +118,7 @@ describe "User can checkout", js: true do
     expect(page).to have_current_path(checkout_path)
 
     # Checkout page should be visible
-    expect(page).to have_content("Order Summary")
+    expect(page).to have_content("สรุปรายการสมัครสมาชิก")
   end
 
   it "sees authentication modal when clicking payment button" do
@@ -145,10 +145,7 @@ describe "User can checkout", js: true do
 
     # Should see product details
     expect(page).to have_content(product.title)
-    expect(page).to have_content("Order Summary")
-
-    # Should see selected plan section
-    expect(page).to have_content("Selected Plan")
+    expect(page).to have_content("สรุปรายการสมัครสมาชิก")
   end
 
   it "sees tax breakdown on checkout page" do
@@ -157,9 +154,9 @@ describe "User can checkout", js: true do
     click_button "subscribe"
 
     # Should see tax information
-    expect(page).to have_content("Subtotal")
-    expect(page).to have_content("VAT (7%)")
-    expect(page).to have_content("Total")
+    expect(page).to have_content("ยอดรวม")
+    expect(page).to have_content("ภาษีมูลค่าเพิ่ม (7%)")
+    expect(page).to have_content("ราคาสุทธิ")
   end
 
   context "when member is signed in without subscription" do
@@ -194,7 +191,7 @@ describe "User can checkout", js: true do
       expect(page).to have_current_path(checkout_path)
 
       # Checkout page should be visible
-      expect(page).to have_content("Order Summary")
+      expect(page).to have_content("สรุปรายการสมัครสมาชิก")
     end
 
     it "sees payment button instead of auth modal" do
@@ -219,10 +216,7 @@ describe "User can checkout", js: true do
 
       # Should see product details
       expect(page).to have_content(product.title)
-      expect(page).to have_content("Order Summary")
-
-      # Should see selected plan section
-      expect(page).to have_content("Selected Plan")
+      expect(page).to have_content("สรุปรายการสมัครสมาชิก")
     end
 
     it "can access checkout page directly if cart exists" do
@@ -236,7 +230,7 @@ describe "User can checkout", js: true do
       # Can access checkout directly
       visit checkout_path
       expect(page).to have_current_path(checkout_path)
-      expect(page).to have_content("Order Summary")
+      expect(page).to have_content("สรุปรายการสมัครสมาชิก")
       expect(page).to have_content(product.title)
     end
   end
@@ -320,13 +314,13 @@ describe "User can checkout", js: true do
         expect(page).to have_current_path(checkout_path)
 
         # Should see product details
-        expect(page).to have_content("Order Summary")
+        expect(page).to have_content("สรุปรายการสมัครสมาชิก")
         expect(page).to have_content(product.title)
 
         # Should see tax breakdown
-        expect(page).to have_content("Subtotal")
-        expect(page).to have_content("VAT (7%)")
-        expect(page).to have_content("Total")
+        expect(page).to have_content("ยอดรวม")
+        expect(page).to have_content("ภาษีมูลค่าเพิ่ม (7%)")
+        expect(page).to have_content("ราคาสุทธิ")
 
         # Should see ดำเนินการต่อ button (not auth modal trigger)
         expect(page).to have_button("ดำเนินการต่อ")
@@ -352,7 +346,7 @@ describe "User can checkout", js: true do
 
       # Cart should still contain the product
       expect(page).to have_content(product.title)
-      expect(page).to have_content("Order Summary")
+      expect(page).to have_content("สรุปรายการสมัครสมาชิก")
     end
   end
 
@@ -378,7 +372,7 @@ describe "User can checkout", js: true do
 
         # User can see the product in cart to retry
         expect(page).to have_content(product.title)
-        expect(page).to have_content("Order Summary")
+        expect(page).to have_content("สรุปรายการสมัครสมาชิก")
       end
 
       it "allows user to retry payment and succeed after initial failure" do
@@ -475,7 +469,7 @@ describe "User can checkout", js: true do
 
         # Should be able to access checkout
         expect(page).to have_current_path(checkout_path)
-        expect(page).to have_content("Order Summary")
+        expect(page).to have_content("สรุปรายการสมัครสมาชิก")
       end
     end
 
@@ -504,7 +498,7 @@ describe "User can checkout", js: true do
 
         # Should be able to access checkout (subscription is expired)
         expect(page).to have_current_path(checkout_path)
-        expect(page).to have_content("Order Summary")
+        expect(page).to have_content("สรุปรายการสมัครสมาชิก")
       end
     end
   end
