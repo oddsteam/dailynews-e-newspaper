@@ -35,6 +35,7 @@
   --color-warning-content: #150a00;
   --color-error: #f31260;
   --color-error-content: #ffffff;
+  --color-footer-bg: #ffeff7;
 
   /* == Sizes == */
   --radius-field: 0.25rem;

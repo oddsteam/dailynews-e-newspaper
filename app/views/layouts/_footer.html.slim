@@ -1,0 +1,107 @@
+footer.site-footer style="background-color: var(--color-footer-bg);"
+  .footer-wrapper.flex.flex-col.md:flex-row.justify-between.items-center.max-w-7xl.mx-auto.px-4.md:px-10.py-6.md:py-8
+
+    .footer-left.flex.flex-col.items-center.md:items-start.text-center.md:text-left
+      .brand
+      = link_to "https://www.dailynews.co.th/",
+          target: "_blank",
+          rel: "noopener"
+        = image_tag "footerlogo.png",
+          class: "h-14 md:h-16 w-auto mb-4",
+          alt: "DailyNews Logo"
+
+      p.tagline.text-primary.text-center.md:text-left อ่านความจริง อ่านเดลินิวส์
+
+    .footer-right.flex.flex-col.items-center.md:items-end.gap-3.mt-4.md:mt-0
+
+      p.tagline.font-sarabun.text-secondary.flex.flex-wrap.justify-center.md:justify-end.gap-3
+        = link_to "ติดต่อโฆษณา",
+          "https://www.dailynews.co.th/contact-us/",
+          target: "_blank",
+          rel: "noopener",
+          class: "hover:text-primary transition-colors"
+
+        = link_to "ร่วมงานกับเรา",
+          "https://www.dailynews.co.th/contact-us/",
+          target: "_blank",
+          rel: "noopener",
+          class: "hover:text-primary transition-colors"
+
+        = link_to "ติดต่อเรา",
+          "https://www.dailynews.co.th/contact-us/",
+          target: "_blank",
+          rel: "noopener",
+          class: "hover:text-primary transition-colors"
+
+      .social.flex.gap-3.mt-2.justify-center.md:justify-end
+
+        = link_to "https://www.facebook.com/dailynewsonlinefan",
+          target: "_blank",
+          rel: "noopener",
+          class: "group relative w-10 h-10" do
+
+          = image_tag "facebook.svg",
+            class: "absolute inset-0 h-10 w-auto opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out",
+            alt: "facebook"
+
+          = image_tag "facebook_hover.svg",
+            class: "absolute inset-0 h-10 w-auto opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out",
+            alt: "facebook hover"
+
+        = link_to "https://x.com/DailynewsTwit",
+          target: "_blank",
+          rel: "noopener",
+          class: "group relative w-10 h-10" do
+
+          = image_tag "x.svg",
+            class: "absolute inset-0 h-10 w-auto opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out",
+            alt: "x"
+
+          = image_tag "x_hover.svg",
+            class: "absolute inset-0 h-10 w-auto opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out",
+            alt: "x hover"
+
+        = link_to "https://www.youtube.com/@DailynewsOnlineOfficial",
+          target: "_blank",
+          rel: "noopener",
+          class: "group relative w-10 h-10" do
+
+          = image_tag "youtube.svg",
+            class: "absolute inset-0 h-10 w-auto opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out",
+            alt: "youtube"
+
+          = image_tag "youtube_hover.svg",
+            class: "absolute inset-0 h-10 w-auto opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out",
+            alt: "youtube hover"
+
+        = link_to "https://line.me/R/ti/p/@dailynews",
+          target: "_blank",
+          rel: "noopener",
+          class: "group relative w-10 h-10" do
+
+          = image_tag "line.svg",
+            class: "absolute inset-0 h-10 w-auto opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out",
+            alt: "line"
+
+          = image_tag "line_hover.svg",
+            class: "absolute inset-0 h-10 w-auto opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out",
+            alt: "line hover"
+
+        = link_to "https://www.instagram.com/dailynews_ig",
+          target: "_blank",
+          rel: "noopener",
+          class: "group relative w-10 h-10" do
+
+          = image_tag "instagram.svg",
+            class: "absolute inset-0 h-10 w-auto opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out",
+            alt: "instagram"
+
+          = image_tag "instagram_hover.svg",
+            class: "absolute inset-0 h-10 w-auto opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out",
+            alt: "instagram hover"
+
+      .footer-copy.flex.items-center.gap-2.mt-4
+        p(style="color:#bdbdbd") © 2026 บริษัท สี่พระยาการพิมพ์ จำกัด
+        = image_tag "cr.svg",
+          class: "h-4 w-auto",
+          alt: "copyright"

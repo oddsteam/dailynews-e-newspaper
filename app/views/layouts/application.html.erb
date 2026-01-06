@@ -42,5 +42,8 @@
   <body>
     <%= render "layouts/header" %>
     <%= yield %>
+    <% if controller_name.in?(%w[home checkouts]) %>
+      <%= render "layouts/footer" %>
+    <% end %>
   </body>
 </html>
