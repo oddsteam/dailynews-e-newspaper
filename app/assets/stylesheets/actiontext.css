@@ -438,3 +438,7 @@ trix-editor .attachment__metadata {
   padding: 0 !important;
   max-width: 100% !important;
 }
+
+.font-sarabun {
+  font-family: 'TH Sarabun PSK', 'Sarabun', sans-serif;
+}
