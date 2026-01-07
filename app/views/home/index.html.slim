@@ -9,7 +9,7 @@ div class="bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cov
         .container class="max-xl:flex max-xl:flex-col max-xl:items-center max-xl:gap-0 max-xl:pb-8 grid items-start grid-cols-2 grid-rows-2 max-lg:mt-4 lg:mt-8 min-xl:mt-6 min-xl:gap-6 min-xl:pb-12"
             
           / ====== column: image section (left) ======
-          .flex.flex-col.items-center.justify-center.self-start class="max-xl:order-1 max-xl:mb-4 max-xl:w-full row-span-2 max-xl:mt-0"
+          .flex.flex-col.items-center.justify-center.self-start class="max-xl:order-3 max-xl:mb-4 max-xl:w-full row-span-2 max-xl:mt-0"
             .bg-base-100.py-3.px-1.shadow-lg
               - if @latest_newspaper&.cover&.attached?
                 = image_tag @latest_newspaper.cover, alt: "the latest dailynews cover", class: "aspect-[3/4]  max-lg:w-[320px] lg:w-[400px]  h-auto object-cover "
@@ -17,7 +17,7 @@ div class="bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cov
                 = image_tag "auth/dailynews-default-cover.jpg", alt: "default dailynews cover", class: "aspect-[3/4]  max-lg:w-[320px] lg:w-[400px]  h-auto object-cover "
 
           / ====== column: subscription form (right top) ======
-          .card.drop-shadow-lg.rounded-lg.py-4.px-8 class="max-xl:order-2 max-xl:mb-4 max-xl:mt-0 max-xl:w-full max-xl:max-w-md"
+          .card.drop-shadow-lg.rounded-lg.py-4.px-8 class="max-xl:order-1 max-xl:mb-4 max-xl:mt-0 max-xl:w-full max-xl:max-w-md"
             - if has_active_subscription?
               .card.bg-base-100.drop-shadow-xl.rounded-3xl.py-7.px-8
                 .text-2xl.text-primary.font-bold.text-center.mb-3 = t("home.active_subscription_title")
@@ -37,7 +37,7 @@ div class="bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cov
                   class: "btn btn-primary inline-block text-white px-16 py-1 rounded-3xl font-semibold text-2xl shadow-lg cursor-pointer"
 
           / ====== column: benefits section (right bottom) ======
-          .pt-2.pb-4.px-8 class="max-xl:order-3 max-xl:mt-0 max-xl:w-full max-xl:max-w-md max-xl:mb-0"
+          .pt-2.pb-4.px-8 class="max-xl:order-2 max-xl:mt-0 max-xl:w-full max-xl:max-w-md max-xl:mb-0"
             .min-sm:text-xl.font-bold = t("home.member_benefits_title")
             hr.mt-3.mb-3.border-primary.border-1
               .flex.items-center.gap-3.mb-3
