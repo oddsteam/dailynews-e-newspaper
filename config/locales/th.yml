@@ -20,9 +20,9 @@ th:
     go_to_library: "เข้าสู่ห้องสมุดของฉัน"
     subscription_package_title: "แพ็คเกจหนังสือพิมพ์เดลินิวส์ฉบับดิจิทัล"
     member_benefits_title: "สิทธิประโยชน์สำหรับสมาชิก"
-    benefit_unlimited: "เนื้อหาครบทุกข่าว ได้ไม่จำกัด"
-    benefit_archive: "อ่านเนื้อหาย้อนหลัง"
-    benefit_email: "ได้รับข่าวสารทุกวัน"
+    benefit_email: "ได้รับหนังสือพิมพ์ดิจิทัล อ่านได้ทุกที่ทุกเวลา"
+    benefit_unlimited: "เปิดโลกข่าวสารแบบไม่จำกัด อ่านได้ทุกหมวด"
+    benefit_archive: "ย้อนอ่านข่าวเด็ด บทวิเคราะห์คุณภาพ"
     benefit_cancel: "ยกเลิกได้ทุกเมื่อ ไม่มีเงื่อนไขผูกมัด"
   errors:
     messages: 
