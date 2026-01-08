@@ -27,6 +27,7 @@ th:
   errors:
     messages: 
       blank: "ไม่สามารถว่างได้"
+      too_short: "รหัสผ่านของคุณสั้นเกินไป (ต้องมีอย่างน้อย %{count} ตัวอักษร)"
   alerts:
     messages:
       require_subscription: "กรุณาสมัครสมาชิกก่อนเข้าชมเนื้อหานี้"

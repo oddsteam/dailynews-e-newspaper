@@ -44,6 +44,7 @@ en:
   errors:
     messages: 
       blank: "Can't be blank"
+      too_short: "Your password is too short (minimum is %{count} characters)"
   alerts:
     messages:
       require_subscription: "Please subscribe first."
