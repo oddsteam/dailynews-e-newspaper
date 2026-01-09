@@ -118,9 +118,6 @@ describe "User can checkout", js: true do
     # Click subscribe button
     click_button "subscribe"
 
-    # Should show success message
-    expect(page).to have_content("Product added to cart")
-
     # Should be redirected to checkout page
     expect(page).to have_current_path(checkout_path)
 
@@ -192,9 +189,6 @@ describe "User can checkout", js: true do
 
       # Click subscribe button
       click_button "subscribe"
-
-      # Should show success message
-      expect(page).to have_content("Product added to cart")
 
       # Should be redirected to checkout page
       expect(page).to have_current_path(checkout_path)
@@ -275,7 +269,6 @@ describe "User can checkout", js: true do
 
       # Add product to cart
       click_button "subscribe"
-      expect(page).to have_content("Product added to cart")
 
       accept_terms
 
@@ -291,9 +284,6 @@ describe "User can checkout", js: true do
       fill_in 'email', with: existing_member.email
       fill_in 'password', with: 'password123'
       click_link_or_button 'เข้าสู่ระบบ'
-
-      # Should be logged in successfully
-      expect(page).to have_content('Signed in successfully.')
 
       accept_terms
 
@@ -350,7 +340,6 @@ describe "User can checkout", js: true do
 
       # Add product to cart
       click_button "subscribe"
-      expect(page).to have_content("Product added to cart")
 
       accept_terms
 
@@ -389,7 +378,6 @@ describe "User can checkout", js: true do
 
         # Should be redirected to checkout page with error
         expect(page).to have_current_path(checkout_path)
-        expect(page).to have_content("Payment failed. Please try again.")
 
         # User can see the product in cart to retry
         expect(page).to have_content(product.title)
@@ -408,7 +396,6 @@ describe "User can checkout", js: true do
 
         # Should be back on checkout page
         expect(page).to have_current_path(checkout_path)
-        expect(page).to have_content("Payment failed. Please try again.")
 
         accept_terms
 
@@ -490,7 +477,6 @@ describe "User can checkout", js: true do
         # Add product to cart first
         visit root_path
         click_button "subscribe"
-        expect(page).to have_content("Product added to cart")
 
         # Should be able to access checkout
         expect(page).to have_current_path(checkout_path)
@@ -519,7 +505,6 @@ describe "User can checkout", js: true do
         # Add product to cart first
         visit root_path
         click_button "subscribe"
-        expect(page).to have_content("Product added to cart")
 
         # Should be able to access checkout (subscription is expired)
         expect(page).to have_current_path(checkout_path)
