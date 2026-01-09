@@ -37,6 +37,8 @@ end
 RSpec.configure do |config|
   config.include CheckoutHelpers, type: :system
 
+  config.include ActiveSupport::Testing::TimeHelpers
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')

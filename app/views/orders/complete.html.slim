@@ -1,56 +1,48 @@
-.min-h-screen.bg-gradient-to-br.from-base-100.to-base-200.flex.items-center.justify-center.py-12.px-4
+.min-h-screen.justify-center.py-8.px-4.bg-linear-to-t.from-info/60.to-base-100.bg-no-repeat.bg-center.bg-cover
   .container.max-w-3xl
     .text-center.mb-8
-      / Success Icon
-      .inline-flex.items-center.justify-center.w-24.h-24.rounded-full.mb-6
-        span.iconify.lucide--check-circle.text-primary style="font-size: 10rem;"
-
       / Heading
-      h1.text-4xl.md:text-5xl.font-bold.text-primary.mb-4 ขอบคุณสำหรับการสั่งซื้อ
-      p.text-xl.text-base-content.opacity-70 แพ็กเกจสมาชิกของคุณเริ่มใช้งานได้แล้ว
+      h1.text-3xl.md:text-4xl.font-bold.text-primary.mb-4 ขอบคุณสำหรับการสมัครสมาชิก
+      p.text-xl.text-base-content.opacity-70 คุณสามารถเริ่มใช้งานแพ็กเกตสมาชิกได้แล้ว
 
     / Order Summary Card
-    .card.bg-base-100.shadow-xl.mb-8
-      .card-body
-        h2.card-title.text-2xl.mb-6.justify-center ทำรายการสำเร็จ
+    .card.bg-base-100.shadow-xl.p-9.rounded-3xl
+      .flex.flex-col
+        .text-center
+          / Success Icon
+          .inline-flex.items-center.justify-center.rounded-full
+            span.iconify.lucide--check-circle.text-primary style="font-size: 4rem;"
 
-        .divider.my-2
+        h2.card-title.text-3xl.mb-2.justify-center ทำรายการเสร็จสมบูรณ์
+
+
+        .my-4.border-primary.border-t-1
 
         / Order Details
-        .space-y-4.mb-6
+        .space-y-4
           .flex.justify-between.items-center
-            span.text-base-content.opacity-70 หมายเลขคำสั่งซื้อ
-            span.font-semibold.text-primary = "##{@order.id}"
+            span.text-2xl.opacity-70 หมายเลขคำสั่งซื้อ
+            span.text-2xl = order_number(@order)
 
           .flex.justify-between.items-center
-            span.text-base-content.opacity-70 ยอดชำระรวม
-            span.font-bold.text-2xl.text-primary = number_to_currency(@order.total, unit: "฿", precision: 0)
+            span.text-2xl.opacity-70 ยอดชำระรวม
+            span.text-2xl = number_to_currency(@order.total, unit: "฿", precision: 0)
 
           .flex.justify-between.items-center
-            span.text-base-content.opacity-70 สถานะ
-            .badge.badge-primary.badge-lg.gap-2
-              span.iconify.lucide--check
+            span.text-2xl.opacity-70 สถานะ
+            div class="flex text-[#008638] text-2xl gap-1 items-center"
+              = image_tag "icons/check-fill-green.svg", alt: "check", class: "size-6"
               span ชำระเงินแล้ว
 
-        .divider.my-2
-
-        / Subscription Info
-        .bg-primary.bg-opacity-10.border.border-primary.border-opacity-20.rounded-lg.p-6.text-center
-          span.iconify.lucide--sparkles.mb-2.text-white style="font-size: 2rem;"
-          h3.text-lg.font-bold.mb-2.text-white เปิดใช้งานแพ็กเกจแล้ว
-          p.text-base-content.text-sm.text-white แพ็กเกจของคุณพร้อมใช้งานแล้ว เริ่มต้นอ่านหนังสือพิมพ์จากคลังข้อมูลของเราได้เลยวันนี้!
-
     / Actions
-    .text-center.space-y-4
-      = link_to library_path, class: "btn btn-primary btn-lg gap-2 w-full sm:w-auto min-w-64" do
-        span.iconify.lucide--book-open
+    .flex.justify-center.items-center.mt-4.gap-4.max-w-3xl.w-full
+      - if @order.receipt_number.present?
+        = link_to receipt_order_path(@order), class: "btn bg-white border-1 border-primary rounded-full btn-lg gap-2 flex-1 text-primary" do
+          span ดาวน์โหลดใบเสร็จ
+
+      = link_to library_path, class: "btn btn-primary btn-lg gap-2 flex-1 rounded-full" do
         span ไปที่ห้องสมุดของฉัน
 
-      .flex.flex-col.sm:flex-row.gap-4.justify-center.mt-4
-        - if @order.receipt_number.present?
-          = link_to receipt_order_path(@order), class: "btn btn-outline btn-sm gap-2" do
-            span.iconify.lucide--download
-            span ดาวน์โหลดใบเสร็จ
 
         / = link_to "#", class: "btn btn-ghost btn-sm gap-2" do
         /   span.iconify.lucide--help-circle
