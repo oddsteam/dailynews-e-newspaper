@@ -28,6 +28,16 @@ th:
     messages: 
       blank: "ไม่สามารถว่างได้"
       too_short: "รหัสผ่านของคุณสั้นเกินไป (ต้องมีอย่างน้อย %{count} ตัวอักษร)"
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "กรุณากรอกอีเมล"
+              invalid: "อีเมลไม่ถูกต้อง"
+            password:
+              blank: "กรุณากรอกรหัสผ่าน"
   alerts:
     messages:
       require_subscription: "กรุณาสมัครสมาชิกก่อนเข้าชมเนื้อหานี้"
