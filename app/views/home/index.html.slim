@@ -1,12 +1,12 @@
 <!-- start of breadcumb-section -->
 div class="bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cover w-full min-h-screen relative flex flex-col z-10 before:absolute before:left-0 before:top-0 before:w-full before:h-full before:-z-10 before:opacity-10 overflow-hidden"
-      .wrapper.mx-auto class="max-w-[1400px]"
+      .wrapper.mx-auto class="max-w-350"
 
-        .flex.flex-col.items-center.justify-center.w-full.text-center class="pt-[50px]"
-          .font-bold.text-primary class="mt-[-10px] text-4xl max-xl:text-xl" = t("home.hero_title")
-          .text-secondary.mb-2 class="mt-[2px] text-base max-xl:text-sm max-xl:whitespace-pre-line" = t("home.hero_subtitle")
+        .flex.flex-col.items-center.justify-center.w-full.text-center class="pt-12.5"
+          .font-bold.text-primary class="-mt-2.5 text-4xl max-xl:text-xl" = t("home.hero_title")
+          .text-secondary.mb-2 class="mt-0.5 text-base max-xl:text-sm max-xl:whitespace-pre-line" = t("home.hero_subtitle")
 
-        .container class="max-xl:flex max-xl:flex-col max-xl:items-center max-xl:gap-0 max-xl:pb-8 grid items-start grid-cols-2 grid-rows-2 max-lg:mt-4 lg:mt-8 min-xl:mt-6 min-xl:gap-6 min-xl:pb-12"
+        .container class="max-xl:flex max-xl:flex-col max-xl:items-center max-xl:gap-0 max-xl:pb-8 grid items-start grid-cols-2 grid-rows-2 max-lg:mt-4 lg:mt-8 xl:mt-6 xl:gap-6 xl:pb-12"
             
           / ====== column: image section (left) ======
           .flex.flex-col.items-center.justify-center.self-start class="max-xl:order-3 max-xl:mb-4 max-xl:w-full row-span-2 max-xl:mt-0"
@@ -20,12 +20,13 @@ div class="bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cov
           .card.drop-shadow-lg.rounded-lg.py-4.px-8 class="max-xl:order-1 max-xl:mb-4 max-xl:mt-0 max-xl:w-full max-xl:max-w-md"
             - if has_active_subscription?
               .card.bg-base-100.drop-shadow-xl.rounded-3xl.py-7.px-8
-                .text-2xl.text-primary.font-bold.text-center.mb-3 = t("home.active_subscription_title")
-                .text-lg.text-secondary.font-semibold.text-center.mb-4 = t("home.active_subscription_message")
                 .flex.items-center.justify-center.mb-2
-                  span.iconify.lucide--check-circle.text-success.size-16
-              = link_to t("home.go_to_library"), library_path,
-                class: "btn btn-primary inline-block text-white mt-8 mb-4 px-8 py-2 rounded-3xl font-semibold shadow-lg cursor-pointer w-full"
+                  span.iconify.lucide--check-circle.text-primary.size-16
+                .text-2xl.text-primary.font-bold.text-center.mb-3 = t("home.active_subscription_title")
+                .text-lg.text-secondary.font-semibold.text-center = t("home.active_subscription_message")
+              .flex.justify-center.mb-2.mt-5
+                = link_to t("home.go_to_library"), library_path,
+                  class: "btn btn-primary inline-block text-white px-16 py-1 rounded-3xl font-semibold text-2xl shadow-lg cursor-pointer"
             - else
               .card.bg-base-100.drop-shadow-xl.rounded-3xl.py-7.px-8
                 .text-secondary.font-normal.text-center class="text-2xl" = "#{@monthly_product&.title}"

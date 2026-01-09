@@ -32,9 +32,9 @@ en:
   home:
     hero_title: "Daily News Digital Newspaper"
     hero_subtitle: "Complete content, all news, all columns. Easy subscription, convenient reading, anytime, anywhere"
-    active_subscription_title: "You have an active subscription"
-    active_subscription_message: "Access your library to read all newspapers"
-    go_to_library: "Go to My Library"
+    active_subscription_title: "Subscription Active"
+    active_subscription_message: "Access the library to read all newspapers"
+    go_to_library: "Go to Library"
     subscription_package_title: "Daily News Digital Newspaper Package"
     member_benefits_title: "Member Benefits"
     benefit_email: "Receive digital newspaper, readable anywhere, anytime"
