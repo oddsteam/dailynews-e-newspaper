@@ -1,21 +1,21 @@
 = turbo_frame_tag "devise" do
-  h3.text-center.text-lg.font-medium.mt-5 Sign In
+  h3.text-center.text-lg.font-medium.mt-5 เข้าสู่ระบบ
   / h3.mt-8.text-center.text-xl.font-semibold.md:mt-12.lg:mt-12 Welcome to Dailynews Online Edit
   / h3.text-base-content/70.mt-2.text-center.text-sm Enter your email.
 
   .mt-6
     = render "alert", flash: flash
     = simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo_frame: "_top" }, html: { class: "contents space-y-2" }) do |form|
-      = form.input :email, label: "Email Address", icon: "lucide--mail", placeholder: "Enter your email", required: false, autofocus: true, input_html: { id: "email", autocomplete: "email", class: "border border-gray-300 rounded-lg p-3 text-md focus:outline-none focus:ring-2 focus:ring-primary w-full" }
-      = form.input :password, label: "Password", icon: "lucide--key-round", placeholder: "Enter your password", required: false, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), input_html: { id: "password", autocomplete: "new-password", class: "border border-gray-300 rounded-lg p-3 text-md focus:outline-none focus:ring-2 focus:ring-primary w-full" }
+      = form.input :email, label: "อีเมล", icon: "lucide--mail", placeholder: "กรอกอีเมล", required: false, autofocus: true, input_html: { id: "email", autocomplete: "email", class: "border border-gray-300 rounded-lg p-3 text-md focus:outline-none focus:ring-2 focus:ring-primary w-full" }
+      = form.input :password, label: "รหัสผ่าน", icon: "lucide--key-round", placeholder: "กรอกรหัสผ่าน", required: false, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), input_html: { id: "password", autocomplete: "new-password", class: "border border-gray-300 rounded-lg p-3 text-md focus:outline-none focus:ring-2 focus:ring-primary w-full" }
 
       .flex.justify-end
-        = link_to "Forgot Password", new_member_password_path, class: "text-sm mt-4 font-extralight text-primary"
+        = link_to "ลืมรหัสผ่าน", new_member_password_path, class: "text-sm mt-4 font-extralight text-primary"
 
-      = form.submit "SIGN IN", class: "btn btn-primary btn-wide mt-4 max-w-full"
+      = form.submit "เข้าสู่ระบบ", class: "btn btn-primary btn-wide mt-4 max-w-full"
 
   .flex.justify-center.font-extralight.mt-6.gap-1
-    p = "Don't have an account?"
-    = link_to "Register here", new_registration_path(resource_name), data: { turbo_frame: "devise" }, class: "text-primary"
+    p = "ยังไม่มีบัญชีใช่ไหม?"
+    = link_to "สมัครสมาชิก", new_registration_path(resource_name), data: { turbo_frame: "devise" }, class: "text-primary"
 
   / = render "devise/shared/links"

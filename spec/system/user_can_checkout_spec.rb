@@ -285,12 +285,12 @@ describe "User can checkout", js: true do
 
       # Switch to login form
       click_link "Sign in here"
-      expect(page).to have_content("Sign In")
+      expect(page).to have_content("เข้าสู่ระบบ")
 
       # Fill in existing member credentials
       fill_in 'email', with: existing_member.email
       fill_in 'password', with: 'password123'
-      click_link_or_button 'SIGN IN'
+      click_link_or_button 'เข้าสู่ระบบ'
 
       # Should be logged in successfully
       expect(page).to have_content('Signed in successfully.')
@@ -361,7 +361,7 @@ describe "User can checkout", js: true do
       click_link "Sign in here"
       fill_in 'email', with: existing_member.email
       fill_in 'password', with: 'password123'
-      click_link_or_button 'SIGN IN'
+      click_link_or_button 'เข้าสู่ระบบ'
 
       # Cart should still contain the product
       expect(page).to have_content(product.title)

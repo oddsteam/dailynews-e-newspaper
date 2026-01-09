@@ -34,7 +34,7 @@ describe "User can authenticate", js: true do
 
       fill_in 'email', with: @user.email
       fill_in 'password', with: 'password123'
-      click_link_or_button 'SIGN IN'
+      click_link_or_button 'เข้าสู่ระบบ'
 
       expect(page).to have_content('Signed in successfully.')
     end
@@ -44,7 +44,7 @@ describe "User can authenticate", js: true do
 
       fill_in 'email', with: @user.email
       fill_in 'password', with: 'password123'
-      click_button 'SIGN IN'
+      click_button 'เข้าสู่ระบบ'
 
       expect(page).to have_content('Signed in successfully.')
     end
@@ -54,7 +54,7 @@ describe "User can authenticate", js: true do
       find('.user-avatar').trigger("click")
       click_link 'Sign in here'
 
-      click_link 'Register here'
+      click_link 'สมัครสมาชิก'
 
       expect(page).to have_content('Sign Up')
     end
@@ -64,7 +64,7 @@ describe "User can authenticate", js: true do
       find('.user-avatar').trigger("click")
       click_link 'Sign in here'
 
-      click_link 'Forgot Password'
+      click_link 'ลืมรหัสผ่าน'
 
       expect(page).to have_content('Reset your password')
     end

@@ -10,7 +10,7 @@ module AuthHelper
     # user fills in email and password, and sign in
     fill_in 'email', with: user.email
     fill_in 'password', with: 'password123'
-    click_link_or_button 'SIGN IN'
+    click_link_or_button 'เข้าสู่ระบบ'
 
     # Wait for and verify successful login
     expect(page).to have_content('Signed in successfully.', wait: 5)
