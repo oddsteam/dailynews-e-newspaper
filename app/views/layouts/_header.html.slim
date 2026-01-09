@@ -17,23 +17,25 @@ header.w-full.flex.items-center.justify-between.top-0.z-10.h-16.px-10.shadow-md 
           input#dropdown-toggle(type="checkbox" class="hidden peer")
           label.user-profile.iconify.lucide--circle-user-round.size-6.bg-accent.cursor-pointer.hover:bg-secondary.p-1.transition for="dropdown-toggle"
           .absolute.right-0.z-50.mt-12.p-4.w-64.bg-white.border.rounded-lg.shadow-lg.hidden.peer-checked:block.max-md:w-56.max-md:p-3
-            h3.text-lg.font-semibold.mb-3.text-gray-800 Profile
+            h3.text-lg.font-semibold.mb-3.text-gray-800 ข้อมูลส่วนตัว
             ul.space-y-1
               li
                 = link_to account_information_path, class: "w-full m-0 p-0 cursor-pointer" do
                   span.flex.items-center.gap-3.w-full.py-2.px-3.text-left.rounded-md.text-gray-700.hover:bg-gray-100.transition
                     span.iconify.lucide--user.size-5
-                    | Account
+                    | จัดการบัญชี
               li
-                = link_to account_subscriptions_path, class: "w-full m-0 p-0 cursor-pointer" do
+                = link_to account_subscriptions_path, class: "w-full m-0 p-0 cursor-pointer", data: { testid: "subscriptions-payment-btn" } do
                   span.flex.items-center.gap-3.w-full.py-2.px-3.text-left.rounded-md.text-gray-700.hover:bg-gray-100.transition
                     span.iconify.lucide--wallet.size-5
-                    | Subscriptions & Payments
+                    | การสมัครสมาชิก
+                    br
+                    | และการชำระเงิน
               li.border-t.border-gray-200.pt-2.mt-2
                 = button_to destroy_member_session_path, method: :delete, class: "w-full m-0 p-0 cursor-pointer" do
                   span.flex.items-center.gap-3.w-full.py-2.px-3.text-left.rounded-md.text-gray-700.hover:bg-red-50.hover:text-red-600.transition
                     span.iconify.lucide--log-out.size-5
-                    | Sign Out
+                    | ออกจากระบบ
     - else
       - unless devise_controller?
         .flex.items-center

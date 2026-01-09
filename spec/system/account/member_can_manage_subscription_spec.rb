@@ -23,7 +23,7 @@ describe "Subscription management", js: true do
     it "can view subscription details" do
       # Navigate to subscriptions page
       find('.user-profile').trigger("click")
-      click_link_or_button "Subscriptions & Payments"
+      find('[data-testid="subscriptions-payment-btn"]').click
 
       # Should see subscription details page
       expect(page).to have_content("Subscription Details")
@@ -39,7 +39,7 @@ describe "Subscription management", js: true do
     it "shows 'Renews on' when auto-renew is enabled" do
       # Navigate to subscriptions page
       find('.user-profile').trigger("click")
-      click_link_or_button "Subscriptions & Payments"
+      find('[data-testid="subscriptions-payment-btn"]').click
 
       # Should show renewal text
       within("#my-subscriptions") do
@@ -50,7 +50,7 @@ describe "Subscription management", js: true do
     it "can disable auto-renew" do
       # Navigate to subscriptions page
       find('.user-profile').trigger("click")
-      click_link_or_button "Subscriptions & Payments"
+      find('[data-testid="subscriptions-payment-btn"]').click
 
       # Open manage modal
       click_button "MANAGE"
@@ -104,7 +104,7 @@ describe "Subscription management", js: true do
     it "can enable auto-renew" do
       # Navigate to subscriptions page
       find('.user-profile').trigger("click")
-      click_link_or_button "Subscriptions & Payments"
+      find('[data-testid="subscriptions-payment-btn"]').click
 
       # Open manage modal
       click_button "MANAGE"
@@ -145,7 +145,7 @@ describe "Subscription management", js: true do
     it "shows subscription as INACTIVE" do
       # Navigate to subscriptions page
       find('.user-profile').trigger("click")
-      click_link_or_button "Subscriptions & Payments"
+      find('[data-testid="subscriptions-payment-btn"]').click
 
       # Should see subscription with INACTIVE status
       within("#my-subscriptions") do
@@ -163,7 +163,7 @@ describe "Subscription management", js: true do
     it "shows no subscriptions available message" do
       # Navigate to subscriptions page
       find('.user-profile').trigger("click")
-      click_link_or_button "Subscriptions & Payments"
+      find('[data-testid="subscriptions-payment-btn"]').click
 
       # Should see no subscriptions message
       expect(page).to have_content("No subscriptions available")

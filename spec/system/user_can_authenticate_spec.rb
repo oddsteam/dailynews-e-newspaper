@@ -80,7 +80,7 @@ describe "User can authenticate", js: true do
       visit root_path
 
       find('.user-profile').trigger("click")
-      click_link_or_button "Sign Out"
+      click_link_or_button "ออกจากระบบ"
 
       find('.user-avatar').trigger("click")
       expect(page).to have_content('Signed out successfully.')

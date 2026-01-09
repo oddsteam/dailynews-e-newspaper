@@ -11,7 +11,7 @@ describe "User profile management", js: true do
     it "displays all profile information" do
       # Navigate to account information page via dropdown
       find('.user-profile').trigger("click")
-      click_link_or_button "Account"
+      click_link_or_button "จัดการบัญชี"
 
       # Should see account information page
       expect(page).to have_content("Information")

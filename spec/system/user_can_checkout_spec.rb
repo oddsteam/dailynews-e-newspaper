@@ -35,7 +35,7 @@ describe "User can checkout", js: true do
 
     # Verify subscription was created - navigate to subscription page
     find('.user-profile').trigger("click")
-    click_link_or_button "Subscriptions & Payments"
+    find('[data-testid="subscriptions-payment-btn"]').click
     expect(page).to have_content "Subscription Details"
 
     # Verify subscription is active
@@ -295,7 +295,7 @@ describe "User can checkout", js: true do
 
       # Verify subscription was created - navigate to subscription page
       find('.user-profile').trigger("click")
-      click_link_or_button "Subscriptions & Payments"
+      find('[data-testid="subscriptions-payment-btn"]').click
       expect(page).to have_content "Subscription Details"
 
       # Verify subscription is active
@@ -407,7 +407,7 @@ describe "User can checkout", js: true do
 
         # Verify subscription was created after retry
         find('.user-profile').trigger("click")
-        click_link_or_button "Subscriptions & Payments"
+        find('[data-testid="subscriptions-payment-btn"]').click
 
         within("#my-subscriptions") do
           expect(page).to have_content("ACTIVE")
