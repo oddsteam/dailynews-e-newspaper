@@ -107,8 +107,8 @@ describe "User can download receipt", type: :system do
       it "shows download receipt link on order complete page" do
         visit complete_order_path(paid_order)
 
-        expect(page).to have_content("Thank You for Your Purchase")
-        expect(page).to have_link("Download Receipt", href: receipt_order_path(paid_order))
+        expect(page).to have_content("ขอบคุณสำหรับการสั่งซื้อ")
+        expect(page).to have_link("ดาวน์โหลดใบเสร็จ", href: receipt_order_path(paid_order))
       end
 
       it "shows download receipt link in purchase history" do
@@ -124,7 +124,7 @@ describe "User can download receipt", type: :system do
         visit complete_order_path(paid_order)
 
         # Verify link exists and points to correct path
-        receipt_link = find_link("Download Receipt")
+        receipt_link = find_link("ดาวน์โหลดใบเสร็จ")
         expect(receipt_link[:href]).to include(receipt_order_path(paid_order))
 
         # Visit receipt path directly (clicking would trigger download)
@@ -166,8 +166,8 @@ describe "User can download receipt", type: :system do
         user_pays_with_omise(token: "tokn_test_5mokdpoelz84n3ai99l")
 
         # User sees success page with download link
-        expect(page).to have_content("Thank You for Your Purchase")
-        expect(page).to have_link("Download Receipt")
+        expect(page).to have_content("ขอบคุณสำหรับการสั่งซื้อ")
+        expect(page).to have_link("ดาวน์โหลดใบเสร็จ")
 
         # User navigates to purchase history
         visit account_purchases_path
@@ -201,7 +201,7 @@ describe "User can download receipt", type: :system do
 
         expect(page).to have_content("Purchase history")
         expect(page).to have_content("CANCELLED")
-        expect(page).not_to have_link("Download Receipt")
+        expect(page).not_to have_link("ดาวน์โหลดใบเสร็จ")
       end
     end
   end

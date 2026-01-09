@@ -31,7 +31,7 @@ describe "User can checkout", js: true do
     user_pays_with_omise(token: 'tokn_test_5mokdpoelz84n3ai99l')
 
     # Should be redirected to success page after payment
-    expect(page).to have_content "Thank You for Your Purchase"
+    expect(page).to have_content "ขอบคุณสำหรับการสั่งซื้อ"
 
     # Verify subscription was created - navigate to subscription page
     find('.user-profile').trigger("click")
@@ -301,7 +301,7 @@ describe "User can checkout", js: true do
       user_pays_with_omise(token: 'tokn_test_5mokdpoelz84n3ai99l')
 
       # Should be redirected to success page after payment
-      expect(page).to have_content "Thank You for Your Purchase"
+      expect(page).to have_content "ขอบคุณสำหรับการสั่งซื้อ"
 
       # Verify subscription was created - navigate to subscription page
       find('.user-profile').trigger("click")
@@ -416,7 +416,7 @@ describe "User can checkout", js: true do
         user_pays_with_omise(token: 'tokn_test_5mokdpoelz84n3ai99l')
 
         # Should complete successfully
-        expect(page).to have_content "Thank You for Your Purchase"
+        expect(page).to have_content "ขอบคุณสำหรับการสั่งซื้อ"
 
         # Verify subscription was created after retry
         find('.user-profile').trigger("click")
