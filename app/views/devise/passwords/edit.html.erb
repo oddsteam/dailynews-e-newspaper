@@ -1,6 +1,6 @@
 <div class="flex justify-center mt-5">
   <div class="w-95">
-    <h3 class="text-center text-lg font-medium mt-5">Change your password</h3>
+    <h3 class="text-center text-lg font-medium mt-5">เปลี่ยนรหัสผ่าน</h3>
 
     <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "contents space-y-2" }) do |f| %>
       <%= f.input :reset_password_token, as: :hidden %>
@@ -8,25 +8,25 @@
 
       <div class="form-inputs mt-6">
         <%= f.input :password,
-                    label: "New password",
+                    label: "รหัสผ่านใหม่",
                     required: false,
                     autofocus: true,
-                    hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                    hint: ("รหัสผ่านต้องมีความยาวอย่างน้อย #{@minimum_password_length} ตัวอักษร" if @minimum_password_length),
                     input_html: { autocomplete: "new-password", class: "border border-gray-300 rounded-lg p-3 text-md focus:outline-none focus:ring-2 focus:ring-primary w-full" } %>
         <%= f.input :password_confirmation,
-                    label: "Confirm your new password",
+                    label: "ยืนยันรหัสผ่านใหม่",
                     required: false,
                     input_html: { autocomplete: "new-password", class: "border border-gray-300 rounded-lg p-3 text-md focus:outline-none focus:ring-2 focus:ring-primary w-full" } %>
       </div>
 
       <div class="form-actions">
-        <%= f.button :submit, "CHANGE MY PASSWORD", class: "btn btn-primary btn-wide mt-4 max-w-full" %>
+        <%= f.button :submit, "เปลี่ยนรหัสผ่าน", class: "btn btn-primary btn-wide mt-4 max-w-full" %>
       </div>
     <% end %>
 
     <div class="flex flex-row justify-center font-extralight gap-6 mt-6">
-      <%= link_to "Sign in", new_session_path(resource_name), data: { turbo_frame: "devise" }, class: "text-primary" %>
-      <%= link_to "Sign up", new_registration_path(resource_name), data: { turbo_frame: "devise" }, class: "text-primary" %>
+      <%= link_to "เข้าสู่ระบบ", new_session_path(resource_name), data: { turbo_frame: "devise" }, class: "text-primary" %>
+      <%= link_to "สร้างบัญชีผู้ใช้", new_registration_path(resource_name), data: { turbo_frame: "devise" }, class: "text-primary" %>
     </div>
   </div>
 </div>

@@ -66,7 +66,7 @@ describe "User can authenticate", js: true do
 
       click_link 'ลืมรหัสผ่าน'
 
-      expect(page).to have_content('Reset your password')
+      expect(page).to have_content('ลืมรหัสผ่าน')
     end
   end
 
