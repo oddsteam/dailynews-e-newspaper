@@ -1,0 +1,10 @@
+div class="w-screen flex flex-col gap-4 justify-center items-center px-4 bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cover" style="height: calc(100vh - 64px);"
+    .bg-white.flex.flex-col.justify-center.items-center.w-fit.gap-8.py-5.rounded-3xl.w-full.max-w-md
+        .flex.flex-col.gap-4.justify-center.items-center
+            = image_tag "icons/warning-icon.svg", alt: "check", class: "size-16 lg:size-20"
+            p.text-2xl.text-primary.font-bold เกิดข้อผิดพลาด
+        .flex.flex-col.gap-2.justify-center.items-center
+            p.text-lg ชำระเงินไม่สำเร็จ 
+            p.text-lg โปรดดำเนินการใหม่อีกครั้ง
+    = link_to checkout_path, class: "btn btn-primary btn-lg rounded-full max-w-md w-full" do
+        span กลับสู่หน้ารายการสมัครสมาชิก

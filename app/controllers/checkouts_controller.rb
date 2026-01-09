@@ -11,6 +11,9 @@ class CheckoutsController < ApplicationController
     @product = @cart_item&.product
   end
 
+  def payment_failed
+  end
+
   private
 
   def required_cart_item

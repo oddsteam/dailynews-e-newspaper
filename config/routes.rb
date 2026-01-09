@@ -16,7 +16,9 @@ Rails.application.routes.draw do
 
   resource :library, only: %i[show]
   resources :cart_items, only: %i[create update]
-  resource :checkout, only: %i[show create]
+  resource :checkout, only: %i[show create] do
+    get :payment_failed
+  end
   resources :newspapers, only: %i[show]
   resources :orders, only: %i[create] do
     member do

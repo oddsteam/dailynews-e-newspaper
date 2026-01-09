@@ -81,7 +81,7 @@ class OrdersController < ApplicationController
       cart_item.product = @order.product
       cart_item.save
 
-      redirect_to checkout_path, alert: "Payment failed. Please try again."
+      redirect_to payment_failed_checkout_path, alert: "Payment failed. Please try again."
     end
   end
 

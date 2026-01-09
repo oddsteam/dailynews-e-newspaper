@@ -377,7 +377,10 @@ describe "User can checkout", js: true do
         user_pays_with_omise_but_fails
 
         # Should be redirected to checkout page with error
-        expect(page).to have_current_path(checkout_path)
+        expect(page).to have_current_path(payment_failed_checkout_path)
+        expect(page).to have_content("ชำระเงินไม่สำเร็จ")
+
+        click_link_or_button "กลับสู่หน้ารายการสมัครสมาชิก"
 
         # User can see the product in cart to retry
         expect(page).to have_content(product.title)
@@ -395,7 +398,10 @@ describe "User can checkout", js: true do
         user_pays_with_omise_but_fails
 
         # Should be back on checkout page
-        expect(page).to have_current_path(checkout_path)
+        expect(page).to have_current_path(payment_failed_checkout_path)
+        expect(page).to have_content("ชำระเงินไม่สำเร็จ")
+
+        click_link_or_button "กลับสู่หน้ารายการสมัครสมาชิก"
 
         accept_terms
 
