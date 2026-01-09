@@ -2,8 +2,8 @@
   .container.max-w-3xl
     .text-center.mb-8
       / Heading
-      h1.text-3xl.md:text-4xl.font-bold.text-primary.mb-4 ขอบคุณสำหรับการสมัครสมาชิก
-      p.text-xl.text-base-content.opacity-70 คุณสามารถเริ่มใช้งานแพ็กเกตสมาชิกได้แล้ว
+      h1.text-2xl.md:text-4xl.font-bold.text-primary.mb-4 ขอบคุณสำหรับการสมัครสมาชิก
+      p.text-lg.lg:text-xl.text-base-content.opacity-70 คุณสามารถเริ่มใช้งานแพ็กเกตสมาชิกได้แล้ว
 
     / Order Summary Card
     .card.bg-base-100.shadow-xl.p-9.rounded-3xl
@@ -13,34 +13,34 @@
           .inline-flex.items-center.justify-center.rounded-full
             span.iconify.lucide--check-circle.text-primary style="font-size: 4rem;"
 
-        h2.card-title.text-3xl.mb-2.justify-center ทำรายการเสร็จสมบูรณ์
+        h2.card-title.text-xl.lg:text-3xl.mb-2.justify-center.text-center ทำรายการเสร็จสมบูรณ์
 
 
         .my-4.border-primary.border-t-1
 
         / Order Details
         .space-y-4
-          .flex.justify-between.items-center
-            span.text-2xl.opacity-70 หมายเลขคำสั่งซื้อ
-            span.text-2xl = order_number(@order)
+          .flex.flex-col.md:flex-row.justify-between.md:items-center
+            span.text-lg.lg:text-2xl.opacity-70 หมายเลขคำสั่งซื้อ
+            span.text-lg.lg:text-2xl = order_number(@order)
 
-          .flex.justify-between.items-center
-            span.text-2xl.opacity-70 ยอดชำระรวม
-            span.text-2xl = number_to_currency(@order.total, unit: "฿", precision: 0)
+          .flex.flex-col.md:flex-row.justify-between.md:items-center
+            span.text-lg.lg:text-2xl.opacity-70 ยอดชำระรวม
+            span.text-lg.lg:text-2xl = number_to_currency(@order.total, unit: "฿", precision: 0)
 
-          .flex.justify-between.items-center
-            span.text-2xl.opacity-70 สถานะ
-            div class="flex text-[#008638] text-2xl gap-1 items-center"
-              = image_tag "icons/check-fill-green.svg", alt: "check", class: "size-6"
+          .flex.flex-col.md:flex-row.justify-between.md:items-center
+            span.text-lg.lg:text-2xl.opacity-70 สถานะ
+            div class="flex text-[#008638] text-lg lg:text-2xl gap-1 items-center"
+              = image_tag "icons/check-fill-green.svg", alt: "check", class: "size-4 lg:size-6"
               span ชำระเงินแล้ว
 
     / Actions
-    .flex.justify-center.items-center.mt-4.gap-4.max-w-3xl.w-full
+    .flex.flex-col.lg:flex-row.justify-center.items-center.mt-4.gap-4.max-w-3xl.w-full
       - if @order.receipt_number.present?
-        = link_to receipt_order_path(@order), class: "btn bg-white border-1 border-primary rounded-full btn-lg gap-2 flex-1 text-primary" do
+        = link_to receipt_order_path(@order), class: "btn bg-white border-1 border-primary rounded-full btn-lg gap-2 flex-1 text-primary max-lg:w-full max-lg:py-2" do
           span ดาวน์โหลดใบเสร็จ
 
-      = link_to library_path, class: "btn btn-primary btn-lg gap-2 flex-1 rounded-full" do
+      = link_to library_path, class: "btn btn-primary btn-lg gap-2 flex-1 rounded-full max-lg:w-full max-lg:py-2" do
         span ไปที่ห้องสมุดของฉัน
 
 
