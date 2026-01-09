@@ -8,7 +8,7 @@ describe "User can authenticate", js: true do
     fill_in 'email', with: "register1@gmail.com"
     fill_in 'password', with: 'password123'
     fill_in 'confirm_password', with: 'password123'
-    click_link_or_button 'SIGN UP'
+    click_link_or_button 'สร้างบัญชีผู้ใช้'
 
     expect(page).to have_content('Welcome! You have signed up successfully.')
   end
@@ -19,7 +19,7 @@ describe "User can authenticate", js: true do
     fill_in 'email', with: "register2@gmail.com"
     fill_in 'password', with: 'password123'
     fill_in 'confirm_password', with: 'password123'
-    click_link_or_button 'SIGN UP'
+    click_link_or_button 'สร้างบัญชีผู้ใช้'
 
     expect(page).to have_content('Welcome! You have signed up successfully.')
   end
@@ -30,7 +30,7 @@ describe "User can authenticate", js: true do
     it "allows user to login via home page" do
       visit root_path
       find('.user-avatar').trigger("click")
-      click_link 'Sign in here'
+      click_link 'เข้าสู่ระบบ'
 
       fill_in 'email', with: @user.email
       fill_in 'password', with: 'password123'
@@ -52,17 +52,17 @@ describe "User can authenticate", js: true do
     it "can switch between registration and sign in forms" do
       visit root_path
       find('.user-avatar').trigger("click")
-      click_link 'Sign in here'
+      click_link 'เข้าสู่ระบบ'
 
-      click_link 'สมัครสมาชิก'
+      click_link 'สร้างบัญชีผู้ใช้'
 
-      expect(page).to have_content('Sign Up')
+      expect(page).to have_content('สร้างบัญชีผู้ใช้')
     end
 
     it "can navigate to forgot password page" do
       visit root_path
       find('.user-avatar').trigger("click")
-      click_link 'Sign in here'
+      click_link 'เข้าสู่ระบบ'
 
       click_link 'ลืมรหัสผ่าน'
 

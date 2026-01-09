@@ -5,7 +5,7 @@ module AuthHelper
     # user clicks on the avatar icon to sign in
     visit root_path
     find('.user-avatar', wait: 5).trigger("click")
-    click_link 'Sign in here'
+    click_link 'เข้าสู่ระบบ'
 
     # user fills in email and password, and sign in
     fill_in 'email', with: user.email

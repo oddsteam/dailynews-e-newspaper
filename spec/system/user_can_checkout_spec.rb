@@ -22,7 +22,7 @@ describe "User can checkout", js: true do
     fill_in 'email', with: "newguest@example.com"
     fill_in 'password', with: 'password123'
     fill_in 'confirm_password', with: 'password123'
-    click_link_or_button 'SIGN UP'
+    click_link_or_button 'สร้างบัญชีผู้ใช้'
 
     # After signup, accept terms again
     accept_terms
@@ -74,7 +74,7 @@ describe "User can checkout", js: true do
     click_link_or_button "ดำเนินการต่อ"
 
     # Should see signup form
-    expect(page).to have_content("Sign Up")
+    expect(page).to have_content("สร้างบัญชีผู้ใช้")
     expect(page).to have_field('email')
     expect(page).to have_field('password')
     expect(page).to have_field('confirm_password')
@@ -139,7 +139,7 @@ describe "User can checkout", js: true do
     click_link_or_button "ดำเนินการต่อ"
 
     # Should see auth modal (not payment processing)
-    expect(page).to have_content("Sign Up")
+    expect(page).to have_content("สร้างบัญชีผู้ใช้")
     expect(page).to have_field('email')
     expect(page).to have_field('password')
   end
@@ -274,10 +274,10 @@ describe "User can checkout", js: true do
 
       # ดำเนินการต่อ, should show signup modal
       click_link_or_button "ดำเนินการต่อ"
-      expect(page).to have_content("Sign Up")
+      expect(page).to have_content("สร้างบัญชีผู้ใช้")
 
       # Switch to login form
-      click_link "Sign in here"
+      click_link "เข้าสู่ระบบ"
       expect(page).to have_content("เข้าสู่ระบบ")
 
       # Fill in existing member credentials
@@ -347,7 +347,7 @@ describe "User can checkout", js: true do
       click_link_or_button "ดำเนินการต่อ"
 
       # Switch to login and sign in
-      click_link "Sign in here"
+      click_link "เข้าสู่ระบบ"
       fill_in 'email', with: existing_member.email
       fill_in 'password', with: 'password123'
       click_link_or_button 'เข้าสู่ระบบ'
