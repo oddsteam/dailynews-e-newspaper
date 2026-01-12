@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "User can authenticate", js: true do
   it "allows a user to register via home page" do
     visit root_path
-    find('[data-testid="user-avatar"]').click
+    find('[data-testid="user-avatar"]').trigger("click")
 
     fill_in 'email', with: "register1@gmail.com"
     fill_in 'password', with: 'password123'
@@ -29,7 +29,7 @@ describe "User can authenticate", js: true do
 
     it "allows user to login via home page" do
       visit root_path
-      find('[data-testid="user-avatar"]').click
+      find('[data-testid="user-avatar"]').trigger("click")
       find('[data-testid="switch-to-login"]').click
 
       fill_in 'email', with: @user.email
@@ -51,7 +51,7 @@ describe "User can authenticate", js: true do
 
     it "can switch between registration and sign in forms" do
       visit root_path
-      find('[data-testid="user-avatar"]').click
+      find('[data-testid="user-avatar"]').trigger("click")
       find('[data-testid="switch-to-login"]').click
 
       find('[data-testid="switch-to-signup"]').click
@@ -61,7 +61,7 @@ describe "User can authenticate", js: true do
 
     it "can navigate to forgot password page" do
       visit root_path
-      find('[data-testid="user-avatar"]').click
+      find('[data-testid="user-avatar"]').trigger("click")
       find('[data-testid="switch-to-login"]').click
 
       click_link 'ลืมรหัสผ่าน'
@@ -82,7 +82,7 @@ describe "User can authenticate", js: true do
       find('.user-profile').trigger("click")
       click_link_or_button "ออกจากระบบ"
 
-      find('[data-testid="user-avatar"]').click
+      find('[data-testid="user-avatar"]').trigger("click")
       expect(page).to have_content('ออกจากระบบเรียบร้อยแล้ว')
     end
   end
