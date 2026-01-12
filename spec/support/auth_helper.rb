@@ -4,7 +4,7 @@ module AuthHelper
 
     # user clicks on the avatar icon to sign in
     visit root_path
-    find('[data-testid="user-avatar"]', wait: 5).click
+    find('[data-testid="user-avatar"]', wait: 5).trigger("click")
 
     # Wait for modal to open and switch to login form
     within('[data-testid="auth-modal"]', wait: 5) do
