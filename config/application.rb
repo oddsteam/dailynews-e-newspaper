@@ -28,6 +28,8 @@ module Dailynews
     credentials_file = credentials_dir.join("#{app_env}.yml.enc")
     key_file = credentials_dir.join("#{app_env}.key")
 
+    config.relative_url_root = Rails.application.credentials.dig(:turbo, :root) || "/"
+
     if credentials_file.exist? && key_file.exist?
       config.credentials.content_path = credentials_file
       config.credentials.key_path = key_file
