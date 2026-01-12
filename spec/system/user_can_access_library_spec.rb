@@ -17,8 +17,8 @@ describe "Library access", js: true do
       visit library_path
 
       expect(page).to have_content("My Library")
-      expect(page).to have_content("Daily News Digital Newspaper")
-      expect(page).to have_content("subscribe")
+      expect(page).to have_content("หนังสือพิมพ์เดลินิวส์ฉบับดิจิทัล")
+      expect(page).to have_content("สมัครสมาชิก")
     end
   end
 

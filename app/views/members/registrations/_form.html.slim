@@ -1,14 +1,14 @@
 = turbo_frame_tag "devise" do
-  h3.text-center.text-lg.font-medium.mt-5 สร้างบัญชีผู้ใช้
+  h3.text-center.text-lg.font-medium.mt-5 data-testid="signup-title" สร้างบัญชีผู้ใช้
   / h3.mt-8.text-center.text-xl.font-semibold.md:mt-12.lg:mt-12 Create your Dailynews Account
   / h3.text-base-content/70.mt-2.text-center.text-sm Join Dailynews to access fresh news and updates.
 
   .mt-6
     = render "alert"
-    = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo_frame: "_top" }, html: { class: "contents space-y-2" }) do |form|
-      = form.input :email, label: "อีเมล", icon: "lucide--mail", placeholder: "กรอกอีเมล", required: false, autofocus: true, input_html: { id: "email", autocomplete: "email", class: "border border-gray-300 rounded-lg p-3 text-md focus:outline-none focus:ring-2 focus:ring-primary w-full" }
-      = form.input :password, label: "รหัสผ่าน", icon: "lucide--key-round", placeholder: "กรอกรหัสผ่าน", required: false, hint: ("รหัสผ่านต้องมีความยาวอย่างน้อย #{@minimum_password_length} ตัวอักษร"  if @minimum_password_length), input_html: { id: "password", autocomplete: "new-password", class: "border border-gray-300 rounded-lg p-3 text-md focus:outline-none focus:ring-2 focus:ring-primary w-full" }
-      = form.input :password_confirmation, label: "ยืนยันรหัสผ่าน", icon: "lucide--key-round", placeholder: "ยืนยันรหัสผ่านของคุณ", required: false, input_html: { id: "confirm_password", autocomplete: "new-password", class: "border border-gray-300 rounded-lg p-3 text-md focus:outline-none focus:ring-2 focus:ring-primary w-full" }
+    = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo_frame: "_top", testid: "signup-form" }, html: { class: "contents space-y-2" }) do |form|
+      = form.input :email, label: "อีเมล", icon: "lucide--mail", placeholder: "กรอกอีเมล", required: false, autofocus: true, input_html: { id: "email", autocomplete: "email", class: "border border-gray-300 rounded-lg p-3 text-md focus:outline-none focus:ring-2 focus:ring-primary w-full", data: { testid: "signup-email" } }
+      = form.input :password, label: "รหัสผ่าน", icon: "lucide--key-round", placeholder: "กรอกรหัสผ่าน", required: false, hint: ("รหัสผ่านต้องมีความยาวอย่างน้อย #{@minimum_password_length} ตัวอักษร"  if @minimum_password_length), input_html: { id: "password", autocomplete: "new-password", class: "border border-gray-300 rounded-lg p-3 text-md focus:outline-none focus:ring-2 focus:ring-primary w-full", data: { testid: "signup-password" } }
+      = form.input :password_confirmation, label: "ยืนยันรหัสผ่าน", icon: "lucide--key-round", placeholder: "ยืนยันรหัสผ่านของคุณ", required: false, input_html: { id: "confirm_password", autocomplete: "new-password", class: "border border-gray-300 rounded-lg p-3 text-md focus:outline-none focus:ring-2 focus:ring-primary w-full", data: { testid: "signup-password-confirmation" } }
 
       p.text-xs.mt-6
         | คุณยอมรับ
@@ -18,10 +18,9 @@
         |  และ
         span.text-primary.ml-1 นโยบายความเป็นส่วนตัว
 
-      = form.submit "สร้างบัญชีผู้ใช้", class: "btn btn-primary btn-wide mt-4 max-w-full"
+      = form.submit "สร้างบัญชีผู้ใช้", class: "btn btn-primary btn-wide mt-4 max-w-full", data: { testid: "signup-submit" }
 
   .flex.justify-center.font-extralight.mt-6.gap-1
     p = "มีบัญชีอยู่แล้วใช่ไหม?"
-    = link_to "เข้าสู่ระบบ", new_session_path(resource_name), data: { turbo_frame: "devise" }, class: "text-primary"
-
+    = link_to "เข้าสู่ระบบ", new_session_path(resource_name), data: { turbo_frame: "devise", testid: "switch-to-login" }, class: "text-primary"
   / = render "devise/shared/links"

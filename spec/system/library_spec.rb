@@ -11,7 +11,7 @@ describe "Library access", js: true do
     it "shows empty library message" do
       visit library_path
 
-      expect(page).to have_content("Please subscribe first.")
+      expect(page).to have_content("กรุณาสมัครสมาชิกก่อนเข้าชมเนื้อหานี้")
       expect(page).to have_current_path(root_path)
     end
   end
@@ -333,6 +333,6 @@ describe "Library access", js: true do
   it "not visit to library when not have any subscription" do
     visit library_path
 
-    expect(page).to have_content("Please subscribe first.")
+    expect(page).to have_content("กรุณาสมัครสมาชิกก่อนเข้าชมเนื้อหานี้")
   end
 end

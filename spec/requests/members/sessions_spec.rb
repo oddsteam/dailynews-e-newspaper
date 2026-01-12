@@ -21,7 +21,7 @@ RSpec.describe "Members::Sessions", type: :request do
     context "with invalid password" do
       it "re-renders the sign in page with error" do
         post member_session_path, params: { member: { email: member.email, password: "wrongpassword" } }
-        expect(response.body).to include("Invalid Email or password")
+        expect(response.body).to include("อีเมลหรือรหัสผ่านไม่ถูกต้อง")
       end
     end
   end

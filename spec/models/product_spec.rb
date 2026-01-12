@@ -9,25 +9,25 @@ RSpec.describe Product, type: :model do
   it "not create then title is nil" do
     product = build(:product, title: nil)
     expect(product).not_to be_valid
-    expect(product.errors[:title]).to include("Can't be blank")
+    expect(product.errors[:title]).to include("ไม่สามารถว่างได้")
   end
 
   it "not create then sku is nil" do
     product = build(:product, sku: nil)
     expect(product).not_to be_valid
-    expect(product.errors[:sku]).to include("Can't be blank")
+    expect(product.errors[:sku]).to include("ไม่สามารถว่างได้")
   end
 
   it "is invalid with a duplicate title" do
     product = build(:product, title: one_month_product.title)
     expect(product).not_to be_valid
-    expect(product.errors[:title]).to include("This username is already taken.")
+    expect(product.errors[:title]).to include("ชื่อผู้ใช้ซ้ำกับบัญชีที่มีอยู่แล้วในระบบ กรุณาเปลี่ยนชื่อ")
   end
 
   it "is invalid with a duplicate sku" do
     product = build(:product, sku: one_month_product.sku)
     expect(product).not_to be_valid
-    expect(product.errors[:sku]).to include("This username is already taken.")
+    expect(product.errors[:sku]).to include("ชื่อผู้ใช้ซ้ำกับบัญชีที่มีอยู่แล้วในระบบ กรุณาเปลี่ยนชื่อ")
   end
 
   it "is valid with all required attributes" do

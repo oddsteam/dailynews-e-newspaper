@@ -3,14 +3,14 @@ require 'rails_helper'
 describe "User can authenticate", js: true do
   it "allows a user to register via home page" do
     visit root_path
-    find('.user-avatar').trigger("click")
+    find('[data-testid="user-avatar"]').click
 
     fill_in 'email', with: "register1@gmail.com"
     fill_in 'password', with: 'password123'
     fill_in 'confirm_password', with: 'password123'
-    click_link_or_button 'สร้างบัญชีผู้ใช้'
+    find('[data-testid="signup-submit"]').click
 
-    expect(page).to have_content('Welcome! You have signed up successfully.')
+    expect(page).to have_content('ยินดีต้อนรับ! คุณสมัครสมาชิกเรียบร้อยแล้ว')
   end
 
   it "allows a user to register via sign up page" do
@@ -19,9 +19,9 @@ describe "User can authenticate", js: true do
     fill_in 'email', with: "register2@gmail.com"
     fill_in 'password', with: 'password123'
     fill_in 'confirm_password', with: 'password123'
-    click_link_or_button 'สร้างบัญชีผู้ใช้'
+    find('[data-testid="signup-submit"]').click
 
-    expect(page).to have_content('Welcome! You have signed up successfully.')
+    expect(page).to have_content('ยินดีต้อนรับ! คุณสมัครสมาชิกเรียบร้อยแล้ว')
   end
 
   context "when user account exists" do
@@ -29,14 +29,14 @@ describe "User can authenticate", js: true do
 
     it "allows user to login via home page" do
       visit root_path
-      find('.user-avatar').trigger("click")
-      click_link 'เข้าสู่ระบบ'
+      find('[data-testid="user-avatar"]').click
+      find('[data-testid="switch-to-login"]').click
 
       fill_in 'email', with: @user.email
       fill_in 'password', with: 'password123'
-      click_link_or_button 'เข้าสู่ระบบ'
+      find('[data-testid="login-submit"]').click
 
-      expect(page).to have_content('Signed in successfully.')
+      expect(page).to have_content('เข้าสู่ระบบเรียบร้อยแล้ว')
     end
 
     it "allows user to login via sign in page" do
@@ -44,25 +44,25 @@ describe "User can authenticate", js: true do
 
       fill_in 'email', with: @user.email
       fill_in 'password', with: 'password123'
-      click_button 'เข้าสู่ระบบ'
+      find('[data-testid="login-submit"]').click
 
-      expect(page).to have_content('Signed in successfully.')
+      expect(page).to have_content('เข้าสู่ระบบเรียบร้อยแล้ว')
     end
 
     it "can switch between registration and sign in forms" do
       visit root_path
-      find('.user-avatar').trigger("click")
-      click_link 'เข้าสู่ระบบ'
+      find('[data-testid="user-avatar"]').click
+      find('[data-testid="switch-to-login"]').click
 
-      click_link 'สร้างบัญชีผู้ใช้'
+      find('[data-testid="switch-to-signup"]').click
 
       expect(page).to have_content('สร้างบัญชีผู้ใช้')
     end
 
     it "can navigate to forgot password page" do
       visit root_path
-      find('.user-avatar').trigger("click")
-      click_link 'เข้าสู่ระบบ'
+      find('[data-testid="user-avatar"]').click
+      find('[data-testid="switch-to-login"]').click
 
       click_link 'ลืมรหัสผ่าน'
 
@@ -82,8 +82,8 @@ describe "User can authenticate", js: true do
       find('.user-profile').trigger("click")
       click_link_or_button "ออกจากระบบ"
 
-      find('.user-avatar').trigger("click")
-      expect(page).to have_content('Signed out successfully.')
+      find('[data-testid="user-avatar"]').click
+      expect(page).to have_content('ออกจากระบบเรียบร้อยแล้ว')
     end
   end
 end

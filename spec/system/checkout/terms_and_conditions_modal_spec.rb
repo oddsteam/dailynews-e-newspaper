@@ -2,12 +2,16 @@ require 'rails_helper'
 
 describe "Terms and Conditions Modal", type: :system, js: true do
   include OmiseHelpers
+  include AuthHelper
 
   let!(:product) { create(:monthly_subscription_product) }
+  let!(:member) { create(:member) }
 
   before do
+    login_as_user(member)
+
     visit root_path
-    click_link_or_button "subscribe"
+    find('[data-testid="subscribe-button"]').click
   end
 
   describe "Modal functionality" do

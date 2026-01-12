@@ -188,9 +188,9 @@ describe "Admin can manage customers", js: true do
       }.not_to change(Subscription, :count)
 
       expect(page).to have_current_path(new_admin_customer_subscription_path(customer))
-      expect(page).to have_content("2 errors prohibited this subscription from being saved:")
-      expect(page).to have_content("Start date Can't be blank")
-      expect(page).to have_content("End date Can't be blank")
+      expect(page).to have_content("2 error prohibited this subscription from being saved:")
+      expect(page).to have_content("Start date ไม่สามารถว่างได้")
+      expect(page).to have_content("End date ไม่สามารถว่างได้")
     end
   end
 

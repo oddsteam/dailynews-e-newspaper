@@ -4,13 +4,13 @@ RSpec.describe Subscription, type: :model do
   it "not create then start_date is nil" do
     subscription = build(:subscription, start_date: nil)
     expect(subscription).not_to be_valid
-    expect(subscription.errors[:start_date]).to include("Can't be blank")
+    expect(subscription.errors[:start_date]).to include("ไม่สามารถว่างได้")
   end
 
   it "not create then end_date is nil" do
     subscription = build(:subscription, end_date: nil)
     expect(subscription).not_to be_valid
-    expect(subscription.errors[:end_date]).to include("Can't be blank")
+    expect(subscription.errors[:end_date]).to include("ไม่สามารถว่างได้")
   end
 
   it "can create subscription with valid data" do

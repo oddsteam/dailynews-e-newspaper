@@ -159,7 +159,7 @@ describe "User can download receipt", type: :system do
 
       it "shows receipt download option after successful payment" do
         visit root_path
-        click_button "subscribe"
+        find('[data-testid="subscribe-button"]').click
 
         accept_terms
         click_link_or_button "ดำเนินการต่อ"
@@ -187,7 +187,7 @@ describe "User can download receipt", type: :system do
 
       it "does not show receipt download option for failed payment" do
         visit root_path
-        click_button "subscribe"
+        find('[data-testid="subscribe-button"]').click
 
         accept_terms
         click_link_or_button "ดำเนินการต่อ"

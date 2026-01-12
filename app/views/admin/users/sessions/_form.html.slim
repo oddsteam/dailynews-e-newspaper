@@ -1,11 +1,11 @@
 .flex.w-full.justify-center.mt-5
   .w-95
-    h3.text-center.text-lg.font-medium.mt-5 Admin Sign In
+    h3.text-center.text-lg.font-medium.mt-5 data-testid="admin-login-title" Admin Sign In
 
     .mt-6
       = render "alert", flash: flash
-      = simple_form_for(resource, as: resource_name, url: admin_user_session_path, data: { turbo: false }, html: { class: "contents space-y-2" }) do |form|
-        = form.input :email, label: "Email Address", icon: "lucide--mail", placeholder: "Enter your email", required: false, autofocus: true, input_html: { id: "email", autocomplete: "email", class: "border border-gray-300 rounded-lg p-3 text-md focus:outline-none focus:ring-2 focus:ring-primary w-full" }
-        = form.input :password, label: "Password", icon: "lucide--key-round", placeholder: "Enter your password", required: false, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), input_html: { id: "password", autocomplete: "new-password", class: "border border-gray-300 rounded-lg p-3 text-md focus:outline-none focus:ring-2 focus:ring-primary w-full" }
+      = simple_form_for(resource, as: resource_name, url: admin_user_session_path, data: { turbo: false, testid: "admin-login-form" }, html: { class: "contents space-y-2" }) do |form|
+        = form.input :email, label: "Email Address", icon: "lucide--mail", placeholder: "Enter your email", required: false, autofocus: true, input_html: { id: "email", autocomplete: "email", class: "border border-gray-300 rounded-lg p-3 text-md focus:outline-none focus:ring-2 focus:ring-primary w-full", data: { testid: "admin-login-email" } }
+        = form.input :password, label: "Password", icon: "lucide--key-round", placeholder: "Enter your password", required: false, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), input_html: { id: "password", autocomplete: "new-password", class: "border border-gray-300 rounded-lg p-3 text-md focus:outline-none focus:ring-2 focus:ring-primary w-full", data: { testid: "admin-login-password" } }
 
-        = form.submit "SIGN IN", class: "btn btn-primary btn-wide mt-4 max-w-full"
+        = form.submit "SIGN IN", class: "btn btn-primary btn-wide mt-4 max-w-full", data: { testid: "admin-login-submit" }
