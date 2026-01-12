@@ -22,5 +22,5 @@
 
   .flex.justify-center.font-extralight.mt-6.gap-1
     p = "มีบัญชีอยู่แล้วใช่ไหม?"
-    = link_to "เข้าสู่ระบบ", new_session_path(resource_name, script_name: Rails.application.credentials.dig(:turbo, :root) || "/"), data: { turbo_frame: "devise", testid: "switch-to-login" }, class: "text-primary"
+    = link_to "เข้าสู่ระบบ", new_session_path(resource_name), data: { turbo_frame: "devise", testid: "switch-to-login" }, class: "text-primary"
   / = render "devise/shared/links"
