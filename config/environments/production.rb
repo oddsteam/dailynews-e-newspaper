@@ -25,7 +25,7 @@ Rails.application.configure do
   config.active_storage.service = :huaweicloud
 
   # Set the relative URL root for apps behind load balancer with path prefix
-  config.relative_url_root = "/e-newspaper"
+  config.relative_url_root = Rails.application.credentials.dig(:turbo, :root) || "/e-newspaper"
 
   # config.assets.prefix = "/e-newspaper/assets"
 
