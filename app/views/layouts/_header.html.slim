@@ -1,52 +1,58 @@
 - if controller_name == "newspapers" && action_name == "show"
-  = link_to library_path, class: "absolute top-4 right-4 flex items-center justify-center bg-gray-800 text-white w-12 h-12 rounded-full shadow-md hover:bg-gray-700 transition z-50" do
-    span.back-to-library.iconify.lucide--x.text-white.size-5
+  = link_to library_path, class: "absolute top-4 right-4 flex items-center justify-center bg-gray-800 text-white w-12 h-12 rounded-full shadow-md hover:bg-accent transition z-50" do
+    span.back-to-library.iconify.lucide--x.text-white.size-6
 
 header.w-full.flex.items-center.justify-between.top-0.z-10.h-16.px-10.shadow-md class="bg-radial-[160%_200%_at_50%_50%] from-primary to-secondary"
-  .flex.items-center.space-x-4
+  .flex.items-center.justify-between.w-full.space-x-4
     = link_to root_path, class: "flex items-center"
       = image_tag "auth/dailynews-logo.webp", class: "h-6 min-sm:h-10 w-auto", alt: "DailyNews Logo"
 
-  .flex.items-center.space-x-4
-    - text_color = current_page?(library_path) ? "text-secondary font-semibold" : "text-accent"
-    = link_to "My Library", library_path, class: "text-sm min-sm:text-lg font-semibold #{text_color} pr-4 hover:text-secondary transition"
 
     - if member_signed_in?
-      .relative.inline-block
-        .flex.flex-cols
-          input#dropdown-toggle(type="checkbox" class="hidden peer")
-          label.user-profile.iconify.lucide--circle-user-round.size-6.bg-accent.cursor-pointer.hover:bg-secondary.p-1.transition for="dropdown-toggle"
-          .absolute.right-0.z-50.mt-12.p-4.w-64.bg-white.border.rounded-lg.shadow-lg.hidden.peer-checked:block.max-md:w-56.max-md:p-3
-            h3.text-lg.font-semibold.mb-3.text-gray-800 ข้อมูลส่วนตัว
-            ul.space-y-1
-              li
-                = link_to account_information_path, class: "w-full m-0 p-0 cursor-pointer" do
-                  span.flex.items-center.gap-3.w-full.py-2.px-3.text-left.rounded-md.text-gray-700.hover:bg-gray-100.transition
-                    span.iconify.lucide--user.size-5
-                    | จัดการบัญชี
-              li
-                = link_to account_subscriptions_path, class: "w-full m-0 p-0 cursor-pointer", data: { testid: "subscriptions-payment-btn" } do
-                  span.flex.items-center.gap-3.w-full.py-2.px-3.text-left.rounded-md.text-gray-700.hover:bg-gray-100.transition
-                    span.iconify.lucide--wallet.size-5
-                    | การสมัครสมาชิก
-                    br
-                    | และการชำระเงิน
-              li.border-t.border-gray-200.pt-2.mt-2
-                = button_to destroy_member_session_path, method: :delete, class: "w-full m-0 p-0 cursor-pointer" do
-                  span.flex.items-center.gap-3.w-full.py-2.px-3.text-left.rounded-md.text-gray-700.hover:bg-red-50.hover:text-red-600.transition
-                    span.iconify.lucide--log-out.size-5
-                    | ออกจากระบบ
+      .flex.items-center.lg:gap-4.gap-2
+        - text_color = current_page?(library_path) ? "text-white hover:text-secondary-content font-semibold" : "text-accent"
+        = link_to library_path, class: "text-sm min-sm:text-lg font-semibold #{text_color} transition-all duration-200 ease-out hover:scale-105 flex gap-2 justify-center items-center", data: { testid: "my-library-link" } do 
+          span.iconify.lucide--book-open.size-8
+          span.hidden.sm:inline
+            | ห้องสมุดของฉัน
+        .relative.inline-block
+          .flex.flex-cols
+            input#dropdown-toggle(type="checkbox" class="hidden peer")
+            label.text-sm.min-sm:text-lg.transition-all.duration-200.ease-out.hover:scale-110.p-1.cursor-pointer.flex.items-center.justify-center.gap-2.text-accent.font-semibold for="dropdown-toggle"
+              span.user-profile.iconify.lucide--circle-user-round.size-8
+              span.hidden.sm:inline
+                | ข้อมูลของฉัน
+            .absolute.right-0.z-50.mt-12.p-4.w-64.bg-white.border.rounded-lg.shadow-lg.hidden.peer-checked:block.max-md:w-56.max-md:p-3
+              h3.text-lg.font-semibold.mb-3.text-gray-800 ข้อมูลส่วนตัว
+              ul.space-y-1
+                li
+                  = link_to account_information_path, class: "w-full m-0 p-0 cursor-pointer" do
+                    span.flex.items-center.gap-3.w-full.py-2.px-3.text-left.rounded-md.text-gray-700.hover:bg-gray-100.transition
+                      span.iconify.lucide--user.size-5
+                      | จัดการบัญชี
+                li
+                  = link_to account_subscriptions_path, class: "w-full m-0 p-0 cursor-pointer", data: { testid: "subscriptions-payment-btn" } do
+                    span.flex.items-center.gap-3.w-full.py-2.px-3.text-left.rounded-md.text-gray-700.hover:bg-gray-100.transition
+                      span.iconify.lucide--wallet.size-5
+                      | การสมัครสมาชิก
+                      br
+                      | และการชำระเงิน
+                li.border-t.border-gray-200.pt-2.mt-2
+                  = button_to destroy_member_session_path, method: :delete, class: "w-full m-0 p-0 cursor-pointer" do
+                    span.flex.items-center.gap-3.w-full.py-2.px-3.text-left.rounded-md.text-gray-700.hover:bg-red-50.hover:text-red-600.transition
+                      span.iconify.lucide--log-out.size-5
+                      | ออกจากระบบ
     - else
       - unless devise_controller?
         .flex.items-center
-          span.user-avatar.iconify.lucide--circle-user-round.size-6.bg-accent.cursor-pointer.hover:bg-secondary.transition onclick="auth_modal.showModal()" data-testid="user-avatar"
+          button.btn.bg-white.rounded-4xl.text-primary.hover:bg-primary.hover:text-white.transition-all.duration-200.ease-out type="button" onclick="auth_modal.showModal()" data-testid="login-btn" เข้าสู่ระบบ
 
           dialog#auth_modal.modal data-testid="auth-modal"
             .modal-box.w-95
               form method="dialog"
                 button.btn.btn-sm.btn-circle.btn-ghost.absolute.right-3.top-3 ✕
 
-              = turbo_frame_tag "devise", src: new_member_registration_path, loading: "lazy"
+              = turbo_frame_tag "devise", src: new_member_session_path, loading: "lazy"
 
             form.modal-backdrop method="dialog"
               button close

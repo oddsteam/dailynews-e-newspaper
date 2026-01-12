@@ -17,7 +17,10 @@ describe "User can checkout", js: true do
 
     # Wait for modal to open and fill in signup form
     within('[data-testid="auth-modal"]', wait: 5) do
-      expect(page).to have_selector('[data-testid="signup-title"]', wait: 5)
+      expect(page).to have_selector('[data-testid="login-form"]', wait: 5)
+      find('[data-testid="switch-to-signup"]').click
+      expect(page).to have_selector('[data-testid="signup-form"]', wait: 5)
+
 
       # Guest fills in signup form
       fill_in 'email', with: "newguest@example.com"
@@ -97,12 +100,11 @@ describe "User can checkout", js: true do
     # Guest clicks subscribe button - should open auth modal immediately
     find('[data-testid="subscribe-button"]').click
 
-    # Should see signup form in modal
+    # Should see sign in form in modal
     within('[data-testid="auth-modal"]', wait: 5) do
-      expect(page).to have_selector('[data-testid="signup-title"]')
-      expect(page).to have_selector('[data-testid="signup-email"]')
-      expect(page).to have_selector('[data-testid="signup-password"]')
-      expect(page).to have_selector('[data-testid="signup-password-confirmation"]')
+      expect(page).to have_selector('[data-testid="login-form"]')
+      expect(page).to have_selector('[data-testid="login-email"]')
+      expect(page).to have_selector('[data-testid="login-password"]')
     end
   end
 
@@ -115,48 +117,6 @@ describe "User can checkout", js: true do
 
     # Should stay on root path
     expect(page).to have_current_path(root_path)
-  end
-
-  it "shows auth modal when guest clicks subscribe" do
-    # Visit home page as guest
-    visit root_path
-
-    # Click subscribe button - should open modal
-    find('[data-testid="subscribe-button"]').click
-
-    # Should see auth modal
-    expect(page).to have_selector('[data-testid="auth-modal"]')
-    expect(page).to have_selector('[data-testid="signup-email"]')
-  end
-
-  it "opens auth modal when guest tries to subscribe" do
-    # Visit home page as guest
-    visit root_path
-
-    # Click subscribe button
-    find('[data-testid="subscribe-button"]').click
-
-    # Should open auth modal instead of adding to cart
-    within('[data-testid="auth-modal"]', wait: 5) do
-      expect(page).to have_selector('[data-testid="signup-title"]')
-      expect(page).to have_selector('[data-testid="signup-email"]')
-      expect(page).to have_selector('[data-testid="signup-password"]')
-    end
-  end
-
-  it "sees authentication modal when clicking subscribe as guest" do
-    # Visit home page
-    visit root_path
-
-    # Click subscribe button
-    find('[data-testid="subscribe-button"]').click
-
-    # Should see auth modal immediately
-    within('[data-testid="auth-modal"]', wait: 5) do
-      expect(page).to have_selector('[data-testid="signup-title"]')
-      expect(page).to have_selector('[data-testid="signup-email"]')
-      expect(page).to have_selector('[data-testid="signup-password"]')
-    end
   end
 
   it "sees product information on checkout page" do
@@ -298,10 +258,10 @@ describe "User can checkout", js: true do
       find('[data-testid="subscribe-button"]').click
 
       within('[data-testid="auth-modal"]', wait: 5) do
-        expect(page).to have_selector('[data-testid="signup-title"]')
+        # expect(page).to have_selector('[data-testid="login-form"]')
 
         # Switch to login form
-        find('[data-testid="switch-to-login"]').click
+        # find('[data-testid="switch-to-login"]').click
         expect(page).to have_selector('[data-testid="login-title"]')
 
         # Fill in existing member credentials
@@ -395,10 +355,9 @@ describe "User can checkout", js: true do
       find('[data-testid="subscribe-button"]').click
 
       within('[data-testid="auth-modal"]', wait: 5) do
-        expect(page).to have_selector('[data-testid="signup-title"]')
+        expect(page).to have_selector('[data-testid="login-form"]')
 
         # Switch to login and sign in
-        find('[data-testid="switch-to-login"]').click
         fill_in 'email', with: existing_member.email
         fill_in 'password', with: 'password123'
         find('[data-testid="login-submit"]').click

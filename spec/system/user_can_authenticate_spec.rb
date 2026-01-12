@@ -3,7 +3,9 @@ require 'rails_helper'
 describe "User can authenticate", js: true do
   it "allows a user to register via home page" do
     visit root_path
-    find('[data-testid="user-avatar"]').trigger("click")
+    find('[data-testid="login-btn"]').click
+    expect(page).to have_selector('[data-testid="login-form"]', wait: 5)
+    find('[data-testid="switch-to-signup"]').click
 
     fill_in 'email', with: "register1@gmail.com"
     fill_in 'password', with: 'password123'
@@ -29,8 +31,8 @@ describe "User can authenticate", js: true do
 
     it "allows user to login via home page" do
       visit root_path
-      find('[data-testid="user-avatar"]').trigger("click")
-      find('[data-testid="switch-to-login"]').click
+      find('[data-testid="login-btn"]').click
+      expect(page).to have_selector('[data-testid="login-form"]', wait: 5)
 
       fill_in 'email', with: @user.email
       fill_in 'password', with: 'password123'
@@ -49,24 +51,22 @@ describe "User can authenticate", js: true do
       expect(page).to have_content('เข้าสู่ระบบเรียบร้อยแล้ว')
     end
 
-    it "can switch between registration and sign in forms" do
+    it "can switch between sign in forms to registration form" do
       visit root_path
-      find('[data-testid="user-avatar"]').trigger("click")
-      find('[data-testid="switch-to-login"]').click
-
+      find('[data-testid="login-btn"]').click
+      expect(page).to have_selector('[data-testid="login-form"]', wait: 5)
       find('[data-testid="switch-to-signup"]').click
-
-      expect(page).to have_content('สร้างบัญชีผู้ใช้')
+      expect(page).to have_selector('[data-testid="signup-form"]', wait: 5)
     end
 
     it "can navigate to forgot password page" do
       visit root_path
-      find('[data-testid="user-avatar"]').trigger("click")
-      find('[data-testid="switch-to-login"]').click
+      find('[data-testid="login-btn"]').click
+      expect(page).to have_selector('[data-testid="login-form"]', wait: 5)
 
-      click_link 'ลืมรหัสผ่าน'
+      find('[data-testid="forgot-password-link"]').click
 
-      expect(page).to have_content('ลืมรหัสผ่าน')
+      expect(page).to have_selector('[data-testid="forgot-password-modal"]', wait: 5)
     end
   end
 
@@ -82,7 +82,7 @@ describe "User can authenticate", js: true do
       find('.user-profile').trigger("click")
       click_link_or_button "ออกจากระบบ"
 
-      find('[data-testid="user-avatar"]').trigger("click")
+      find('[data-testid="login-btn"]').click
       expect(page).to have_content('ออกจากระบบเรียบร้อยแล้ว')
     end
   end
