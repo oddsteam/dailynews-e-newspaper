@@ -2,7 +2,7 @@
   <div class="w-95">
     <h3 class="text-center text-lg font-medium mt-5">เปลี่ยนรหัสผ่าน</h3>
 
-    <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "contents space-y-2" }) do |f| %>
+    <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name, script_name: Rails.application.credentials.dig(:turbo, :root) || "/"), html: { method: :put, class: "contents space-y-2" }) do |f| %>
       <%= f.input :reset_password_token, as: :hidden %>
       <%= f.full_error :reset_password_token, class: "mt-6 -mb-3" %>
 

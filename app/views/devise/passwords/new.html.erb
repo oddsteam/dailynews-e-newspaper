@@ -6,7 +6,7 @@
 
         <p class="mt-10">กรุณากรอกอีเมลเพื่อรับลิงก์ตั้งรหัสผ่านใหม่</p>
         
-        <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "contents space-y-2" }) do |f| %>
+        <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name, script_name: Rails.application.credentials.dig(:turbo, :root) || "/"), html: { method: :post, class: "contents space-y-2" }) do |f| %>
 
           <div class="form-inputs">
             <%= f.input :email,
