@@ -15,7 +15,9 @@ export default class extends Controller {
 
   async addToCartAndRedirect(sku) {
     try {
-      const response = await fetch('/cart_items', {
+      const cartItemsUrl = this.element.dataset.cartItemsUrl || '/cart_items'
+      
+      const response = await fetch(cartItemsUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
