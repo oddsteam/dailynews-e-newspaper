@@ -1,60 +1,66 @@
-# Privacy Policy
+# นโยบายความเป็นส่วนตัว (Privacy Policy)
 
-**Effective Date:** January 13, 2026
-
-## Introduction
-
-Welcome to Daily News E-Newspaper. We are committed to protecting your personal information and your right to privacy.
-
-## Information We Collect
-
-We collect personal information that you voluntarily provide to us when you:
-
-- Register on the website
-- Subscribe to our services
-- Make a purchase
-- Contact us
-
-### Personal Information
-
-- Name
-- Email address
-- Phone number
-- Payment information
-- Address
-
-## How We Use Your Information
-
-We use your personal information to:
-
-- Provide and maintain our services
-- Process your transactions
-- Send you newsletters and updates
-- Respond to your inquiries
-- Improve our website and services
-
-## Data Security
-
-We implement appropriate technical and organizational security measures to protect your personal information.
-
-## Your Rights
-
-You have the right to:
-
-- Access your personal data
-- Correct inaccurate data
-- Request deletion of your data
-- Object to processing of your data
-- Data portability
-
-## Contact Us
-
-If you have any questions about this Privacy Policy, please contact us at:
-
-- Email: privacy@dailynews.com
-- Phone: [Your Phone Number]
-- Address: [Your Address]
+ผู้ให้บริการให้ความสำคัญอย่างยิ่งต่อการคุ้มครองข้อมูลส่วนบุคคลของผู้ใช้งาน  
+และดำเนินการเก็บรวบรวม ใช้ และเปิดเผยข้อมูลส่วนบุคคล  
+ตามกฎหมายคุ้มครองข้อมูลส่วนบุคคลที่เกี่ยวข้อง
 
 ---
 
-*Last updated: January 13, 2026*
+## 1. การเก็บรวบรวมข้อมูลส่วนบุคคล
+
+เว็บไซต์อาจมีการเก็บรวบรวมข้อมูลส่วนบุคคลของผู้ใช้งาน ได้แก่
+
+- ข้อมูลการติดต่อ เช่น ที่อยู่อีเมล
+- ข้อมูลการใช้งานเว็บไซต์ เช่น หมายเลข IP Address, ประเภทเบราว์เซอร์, ระบบปฏิบัติการ, วันที่และเวลาที่เข้าชมเว็บไซต์
+- ข้อมูลอื่นใดที่ผู้ใช้งานให้ไว้โดยสมัครใจผ่านการใช้งานเว็บไซต์หรือบริการที่เกี่ยวข้อง
+
+---
+
+## 2. วัตถุประสงค์ในการใช้ข้อมูลส่วนบุคคล
+
+ผู้ให้บริการจะใช้ข้อมูลส่วนบุคคลของผู้ใช้งานเพื่อวัตถุประสงค์ดังต่อไปนี้
+
+- ให้บริการและบริหารจัดการการใช้งานเว็บไซต์
+- พัฒนา ปรับปรุง และเพิ่มประสิทธิภาพของเว็บไซต์และเนื้อหา
+- วิเคราะห์พฤติกรรมการใช้งานเพื่อยกระดับประสบการณ์ของผู้ใช้งาน
+- ติดต่อสื่อสาร แจ้งข่าวสาร หรือข้อมูลที่เกี่ยวข้องกับบริการของเว็บไซต์
+
+---
+
+## 3. การเปิดเผยข้อมูลส่วนบุคคล
+
+ผู้ให้บริการจะไม่เปิดเผยข้อมูลส่วนบุคคลของผู้ใช้งานให้แก่บุคคลภายนอก  
+เว้นแต่จะเป็นกรณีดังต่อไปนี้
+
+- ได้รับความยินยอมจากเจ้าของข้อมูลส่วนบุคคล
+- เป็นไปตามข้อกำหนดหรือหน้าที่ตามกฎหมาย
+- จำเป็นต้องเปิดเผยเพื่อให้บริการหรือปฏิบัติตามสัญญากับผู้ใช้งาน
+
+---
+
+## 4. การรักษาความปลอดภัยของข้อมูล
+
+ผู้ให้บริการใช้มาตรการด้านเทคนิคและการจัดการที่เหมาะสม  
+เพื่อป้องกันการเข้าถึง การใช้งาน การเปลี่ยนแปลง หรือการเปิดเผยข้อมูลส่วนบุคคล  
+โดยไม่ได้รับอนุญาต และเพื่อรักษาความมั่นคงปลอดภัยของข้อมูลส่วนบุคคล
+
+---
+
+## 5. สิทธิของเจ้าของข้อมูลส่วนบุคคล
+
+ผู้ใช้งานในฐานะเจ้าของข้อมูลส่วนบุคคล มีสิทธิตามที่กฎหมายกำหนด ได้แก่
+
+- สิทธิขอเข้าถึงและขอรับสำเนาข้อมูลส่วนบุคคลของตน
+- สิทธิขอแก้ไขข้อมูลส่วนบุคคลให้ถูกต้องและเป็นปัจจุบัน
+- สิทธิขอลบหรือทำลายข้อมูลส่วนบุคคล
+- สิทธิถอนความยินยอมในการเก็บรวบรวม ใช้ หรือเปิดเผยข้อมูลส่วนบุคคล
+- สิทธิอื่นใดตามที่กฎหมายคุ้มครองข้อมูลส่วนบุคคลกำหนด
+
+---
+
+## 6. การเปลี่ยนแปลงนโยบายความเป็นส่วนตัว
+
+ผู้ให้บริการขอสงวนสิทธิ์ในการแก้ไขหรือปรับปรุงนโยบายความเป็นส่วนตัวฉบับนี้เป็นครั้งคราว  
+โดยจะประกาศนโยบายฉบับล่าสุดไว้บนเว็บไซต์  
+การใช้งานเว็บไซต์อย่างต่อเนื่องหลังจากมีการเปลี่ยนแปลง  
+ถือว่าผู้ใช้งานยอมรับนโยบายความเป็นส่วนตัวที่แก้ไขแล้ว
