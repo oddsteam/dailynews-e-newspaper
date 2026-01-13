@@ -42,7 +42,7 @@
   <body data-controller="auth-handler" <%= 'data-member-signed-in="true"'.html_safe if member_signed_in? %>>
     <%= render "layouts/header" %>
     <%= yield %>
-    <% if controller_name.in?(%w[home checkouts orders]) %>
+    <% if controller_name.in?(%w[home checkouts orders policies]) %>
       <%= render "layouts/footer" %>
     <% end %>
   </body>
