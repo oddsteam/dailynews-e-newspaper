@@ -12,11 +12,11 @@
 
       p.text-xs.mt-6
         | คุณยอมรับ
-        span.text-primary.ml-1 ข้อกำหนดการให้บริการ
+        = link_to "ข้อกำหนดการให้บริการ", policy_path("terms_of_service"), class: "text-primary ml-1 hover:underline", target: "_blank"
         | ,
-        span.text-primary.ml-1 นโยบายคุกกี้
+        = link_to "นโยบายคุกกี้", policy_path("cookies"), class: "text-primary ml-1 hover:underline", target: "_blank"
         |  และ
-        span.text-primary.ml-1 นโยบายความเป็นส่วนตัว
+        = link_to "นโยบายความเป็นส่วนตัว", policy_path("privacy"), class: "text-primary ml-1 hover:underline", target: "_blank"
 
       = form.submit "สร้างบัญชีผู้ใช้", class: "btn btn-primary btn-wide mt-4 max-w-full", data: { testid: "signup-submit" }
 

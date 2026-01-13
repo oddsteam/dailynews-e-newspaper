@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     get :payment_failed
   end
   resources :newspapers, only: %i[show]
+  resources :policies, only: %i[show], path: "policies"
   resources :orders, only: %i[create] do
     member do
       get "verify"
