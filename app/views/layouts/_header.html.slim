@@ -15,14 +15,14 @@ header.w-full.flex.items-center.justify-between.top-0.z-10.h-16.px-10.shadow-md 
           span.iconify.lucide--book-open.size-8
           span.hidden.sm:inline
             | คลังหนังสือพิมพ์
-        .relative.inline-block
+        .relative.inline-block data-controller="dropdown"
           .flex.flex-cols
-            input#dropdown-toggle(type="checkbox" class="hidden peer")
+            input#dropdown-toggle(type="checkbox" class="hidden peer" data-dropdown-target="toggle")
             label.text-sm.min-sm:text-lg.transition-all.duration-200.ease-out.hover:scale-110.p-1.cursor-pointer.flex.items-center.justify-center.gap-2.text-accent.font-semibold for="dropdown-toggle"
               span.user-profile.iconify.lucide--circle-user-round.size-8
               span.hidden.sm:inline
                 | ข้อมูลของฉัน
-            .absolute.right-0.z-50.mt-12.p-4.w-64.bg-white.border.rounded-lg.shadow-lg.hidden.peer-checked:block.max-md:w-56.max-md:p-3
+            .absolute.right-0.z-50.mt-12.p-4.w-64.bg-white.border.rounded-lg.shadow-lg.hidden.peer-checked:block.max-md:w-56.max-md:p-3 data-dropdown-target="menu"
               h3.text-lg.font-semibold.mb-3.text-gray-800 ข้อมูลส่วนตัว
               ul.space-y-1
                 li
