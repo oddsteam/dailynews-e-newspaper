@@ -29,7 +29,8 @@ export default class extends Controller {
       if (response.redirected) {
         window.location.href = response.url
       } else if (response.ok) {
-        window.location.href = '/checkout'
+        const checkoutUrl = this.element.dataset.checkoutUrl || '/checkout'
+        window.location.href = checkoutUrl
       }
     } catch (error) {
       console.error('Error adding to cart:', error)

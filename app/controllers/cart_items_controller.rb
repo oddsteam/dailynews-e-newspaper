@@ -2,7 +2,6 @@ class CartItemsController < ApplicationController
   before_action :store_checkout_location, only: [ :create ]
 
   def create
-    # Prevent users with active subscriptions from adding to cart
     if member_signed_in? && current_user.subscriptions.any?(&:active?)
       redirect_to library_path, notice: "You already have an active subscription. Enjoy reading!"
       return
@@ -15,10 +14,8 @@ class CartItemsController < ApplicationController
       return
     end
 
-    # Find or create cart for current user (works for both Guest and Member)
     cart = Cart.find_or_create_by(user_id: current_user.id)
 
-    # Find or create cart item and update with the product
     cart_item = cart.cart_item || cart.build_cart_item
     cart_item.product = product
 
@@ -54,6 +51,11 @@ class CartItemsController < ApplicationController
   private
 
   def store_checkout_location
-    store_location_for(:member, checkout_path) unless member_signed_in?
+    return if member_signed_in?
+
+    script_name = Rails.application.credentials.dig(:turbo, :root) || "/"
+    checkout_url = checkout_path(script_name: script_name)
+
+    store_location_for(:member, checkout_url)
   end
 end
