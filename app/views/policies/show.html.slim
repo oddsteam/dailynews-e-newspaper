@@ -1,0 +1,13 @@
+.container.mx-auto.px-4.py-8.max-w-4xl
+  .prose.prose-neutral.max-w-none
+    == render_markdown(@content)
+  
+  style
+    |
+      .prose h1 { font-size: 1.5rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+      .prose h2 { font-size: 1.125rem; font-weight: 700; margin-top: 1rem; margin-bottom: 0.5rem; }
+      .prose h3 { font-size: 1rem; font-weight: 600; margin-top: 0.5rem; margin-bottom: 0.25rem; }
+      .prose ul { list-style-type: disc; margin-left: 1.5rem; margin-top: 0.25rem; margin-bottom: 0.13rem; }
+      .prose li { margin-left: 0.5rem; margin-bottom: 0.25rem; padding-left: 0.5rem; }
+      .prose p { margin-bottom: 0.5rem; }
+      .prose strong { font-weight: 600; }
