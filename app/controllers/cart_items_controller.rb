@@ -1,4 +1,6 @@
 class CartItemsController < ApplicationController
+  before_action :store_checkout_location, only: [ :create ]
+
   def create
     # Prevent users with active subscriptions from adding to cart
     if member_signed_in? && current_user.subscriptions.any?(&:active?)
@@ -48,4 +50,10 @@ class CartItemsController < ApplicationController
   #     redirect_to checkout_path, alert: "Failed to update cart"
   #   end
   # end
+
+  private
+
+  def store_checkout_location
+    store_location_for(:member, checkout_path) unless member_signed_in?
+  end
 end
