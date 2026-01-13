@@ -1,81 +1,38 @@
-# Cookie Policy
+# นโยบายคุกกี้ (Cookie Policy)
 
-**Effective Date:** January 13, 2026
-
-## What Are Cookies?
-
-Cookies are small text files that are placed on your computer or mobile device when you visit our website. They help us provide you with a better experience.
-
-## Types of Cookies We Use
-
-### Essential Cookies
-
-These cookies are necessary for the website to function properly:
-
-- Session cookies
-- Authentication cookies
-- Security cookies
-
-### Analytics Cookies
-
-We use analytics cookies to understand how visitors interact with our website:
-
-- Google Analytics
-- User behavior tracking
-- Performance monitoring
-
-### Functionality Cookies
-
-These cookies enable enhanced functionality:
-
-- Language preferences
-- Region selection
-- User interface customization
-
-### Marketing Cookies
-
-These cookies are used to deliver relevant advertisements:
-
-- Targeted advertising
-- Retargeting campaigns
-- Social media integration
-
-## How to Control Cookies
-
-You can control and/or delete cookies as you wish. You can:
-
-- Delete all cookies that are already on your computer
-- Set most browsers to prevent cookies from being placed
-- Accept or reject cookies on a case-by-case basis
-
-### Browser Settings
-
-Most web browsers allow you to control cookies through their settings:
-
-- **Chrome:** Settings > Privacy and security > Cookies and other site data
-- **Firefox:** Settings > Privacy & Security > Cookies and Site Data
-- **Safari:** Preferences > Privacy > Cookies and website data
-- **Edge:** Settings > Privacy, search, and services > Cookies and site data
-
-## Impact of Disabling Cookies
-
-Please note that if you disable cookies, some features of our website may not function properly.
-
-## Third-Party Cookies
-
-We may also use third-party cookies from our partners and service providers.
-
-## Updates to This Policy
-
-We may update this Cookie Policy from time to time. Please check this page regularly for updates.
-
-## Contact Us
-
-If you have any questions about our use of cookies, please contact us at:
-
-- Email: cookies@dailynews.com
-- Phone: [Your Phone Number]
+เว็บไซต์นี้ใช้คุกกี้และเทคโนโลยีที่คล้ายคลึงกัน เพื่อปรับปรุงประสบการณ์การใช้งานของผู้ใช้งาน  
+รวมถึงเพื่อวิเคราะห์การเข้าชมและการใช้งานเว็บไซต์อย่างมีประสิทธิภาพ
 
 ---
 
-*Last updated: January 13, 2026*
+## 1. คุกกี้คืออะไร
+
+คุกกี้ (Cookies) คือไฟล์ข้อมูลขนาดเล็กที่ถูกจัดเก็บไว้บนอุปกรณ์ของผู้ใช้งาน  
+เมื่อมีการเข้าชมเว็บไซต์ คุกกี้จะช่วยจดจำข้อมูลการใช้งาน การตั้งค่า และพฤติกรรมต่าง ๆ  
+เพื่อให้เว็บไซต์สามารถทำงานได้อย่างเหมาะสมและตอบสนองต่อผู้ใช้งานได้ดียิ่งขึ้น
+
+---
+
+## 2. ประเภทของคุกกี้ที่ใช้
+
+เว็บไซต์อาจใช้คุกกี้ประเภทต่าง ๆ ดังต่อไปนี้
+
+- **คุกกี้ที่จำเป็น (Necessary Cookies)**  
+  ใช้เพื่อให้เว็บไซต์สามารถทำงานได้ตามปกติ และรองรับฟังก์ชันพื้นฐานที่จำเป็น  
+  คุกกี้ประเภทนี้ไม่สามารถปิดการใช้งานได้
+
+- **คุกกี้เพื่อการวิเคราะห์ (Analytics Cookies)**  
+  ใช้เพื่อเก็บข้อมูลสถิติการเข้าชมเว็บไซต์ เช่น จำนวนผู้เข้าชม หน้าที่เข้าชม และระยะเวลาในการใช้งาน  
+  ข้อมูลดังกล่าวจะถูกนำมาใช้เพื่อปรับปรุงประสิทธิภาพและคุณภาพของเว็บไซต์
+
+- **คุกกี้เพื่อปรับปรุงประสบการณ์ผู้ใช้งาน (Preference Cookies)**  
+  ใช้เพื่อจดจำการตั้งค่าต่าง ๆ ของผู้ใช้งาน เช่น ภาษา หรือรูปแบบการแสดงผล  
+  เพื่อให้การใช้งานเว็บไซต์เป็นไปอย่างสะดวกและตรงกับความต้องการมากขึ้น
+
+---
+
+## 3. การจัดการคุกกี้
+
+ผู้ใช้งานสามารถจัดการ ตั้งค่า หรือปิดการใช้งานคุกกี้ได้ผ่านการตั้งค่าของเว็บเบราว์เซอร์ที่ใช้งานอยู่  
+อย่างไรก็ตาม การปิดการใช้งานคุกกี้บางประเภทอาจส่งผลให้เว็บไซต์ไม่สามารถทำงานได้อย่างสมบูรณ์  
+หรืออาจกระทบต่อประสบการณ์การใช้งานบางส่วน
