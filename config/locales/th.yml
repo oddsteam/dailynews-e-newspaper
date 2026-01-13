@@ -18,7 +18,7 @@ th:
     active_subscription_title: "สมัครสมาชิกเรียบร้อยแล้ว"
     active_subscription_message: "เข้าสู่คลังหนังสือพิมพ์เพื่ออ่านหนังสือพิมพ์ทั้งหมด"
     go_to_library: "เข้าสู่คลังหนังสือพิมพ์"
-    subscription_package_title: "แพ็คเกจหนังสือพิมพ์เดลินิวส์ฉบับดิจิทัล"
+    subscription_package_title: "แพ็กเกจหนังสือพิมพ์เดลินิวส์ฉบับดิจิทัล"
     member_benefits_title: "สิทธิประโยชน์สำหรับสมาชิก"
     benefit_email: "ได้รับหนังสือพิมพ์ดิจิทัล อ่านได้ทุกที่ทุกเวลา"
     benefit_unlimited: "เปิดโลกข่าวสารแบบไม่จำกัด อ่านได้ทุกหมวด"
