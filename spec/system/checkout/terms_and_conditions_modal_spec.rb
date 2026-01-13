@@ -18,14 +18,14 @@ describe "Terms and Conditions Modal", type: :system, js: true do
     it "opens when clicking the terms link" do
       expect(page).not_to have_selector("#my_modal[open]")
 
-      click_link "เงื่อนไขการใช้บริการ"
+      find('[data-testid="terms-link"]').click
 
       expect(page).to have_selector("#my_modal[open]")
       expect(page).to have_content("ข้อกำหนดและเงื่อนไขการให้บริการ")
     end
 
     it "closes when clicking the close button" do
-      click_link "เงื่อนไขการใช้บริการ"
+      find('[data-testid="terms-link"]').click
       expect(page).to have_selector("#my_modal[open]")
 
       within "#my_modal" do
@@ -36,7 +36,7 @@ describe "Terms and Conditions Modal", type: :system, js: true do
     end
 
     it "displays all section headings" do
-      click_link "เงื่อนไขการใช้บริการ"
+      find('[data-testid="terms-link"]').click
 
       within "#my_modal" do
         expect(page).to have_content("1. บทนำ")
@@ -53,7 +53,7 @@ describe "Terms and Conditions Modal", type: :system, js: true do
     it "displays properly on mobile viewport" do
       page.current_window.resize_to(375, 667) # iPhone SE size
 
-      click_link "เงื่อนไขการใช้บริการ"
+      find('[data-testid="terms-link"]').click
 
       within "#my_modal" do
         expect(page).to have_content("ข้อกำหนดและเงื่อนไขการให้บริการ")
@@ -63,7 +63,7 @@ describe "Terms and Conditions Modal", type: :system, js: true do
     it "displays properly on desktop viewport" do
       page.current_window.resize_to(1920, 1080)
 
-      click_link "เงื่อนไขการใช้บริการ"
+      find('[data-testid="terms-link"]').click
 
       within "#my_modal" do
         expect(page).to have_content("ข้อกำหนดและเงื่อนไขการให้บริการ")
@@ -75,7 +75,7 @@ describe "Terms and Conditions Modal", type: :system, js: true do
     it "allows user to read terms without interrupting checkout" do
       expect(page).to have_button("ดำเนินการต่อ", disabled: true)
 
-      click_link "เงื่อนไขการใช้บริการ"
+      find('[data-testid="terms-link"]').click
       within "#my_modal" do
         find('button[aria-label="Close"]').click
       end
@@ -86,7 +86,7 @@ describe "Terms and Conditions Modal", type: :system, js: true do
     end
 
     it "does not auto-check the terms checkbox after viewing modal" do
-      click_link "เงื่อนไขการใช้บริการ"
+      find('[data-testid="terms-link"]').click
 
       within "#my_modal .prose" do
         expect(page).to have_content("บทนำ")

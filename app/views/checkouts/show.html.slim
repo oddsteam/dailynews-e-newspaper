@@ -72,7 +72,7 @@ div class="flex flex-col px-10 py-8 bg-linear-to-t from-info/60 to-base-100 bg-n
             input.checkbox.scale-120 type="checkbox" data-action="change->checkbox#toggle" data-checkbox-target="checkbox" name="terms-checkbox" id="terms-checkbox" data-testid="terms-checkbox"
             label.text-sm.text-gray-700 name="terms-checkbox" for="terms-checkbox"
               | ยอมรับเงื่อนไขข้อตกลงการใช้งานหนังสือพิมพ์รูปแบบดิจิทัล 
-              = link_to "เงื่อนไขการใช้บริการ", "#", class: "underline", onclick: "my_modal.showModal(); return false;"
+              = link_to "เงื่อนไขการใช้บริการ", "#", class: "underline text-primary", onclick: "my_modal.showModal(); return false;", data: { testid: "terms-link" }
 
         / if user is logged as a member yet, the button will trigger the auth model
 
