@@ -11,7 +11,7 @@
       = form.input :password_confirmation, label: "ยืนยันรหัสผ่าน", icon: "lucide--key-round", placeholder: "ยืนยันรหัสผ่านของคุณ", required: false, input_html: { id: "confirm_password", autocomplete: "new-password", class: "border border-gray-300 rounded-lg p-3 text-md focus:outline-none focus:ring-2 focus:ring-primary w-full", data: { testid: "signup-password-confirmation" } }
 
       p.text-xs.mt-6
-        | คุณยอมรับ
+        | การสร้างบัญชีผู้ใช้นี้ ถือว่าคุณยอมรับ
         = link_to "ข้อกำหนดการให้บริการ", policy_path("terms_of_service"), class: "text-primary ml-1 underline", target: "_blank"
         | ,
         = link_to "นโยบายคุกกี้", policy_path("cookies"), class: "text-primary ml-1 underline", target: "_blank"
