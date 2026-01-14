@@ -36,11 +36,11 @@ div class="bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cov
               .flex.justify-center.mb-2.mt-5
                 - if member_signed_in?
                   = button_to t("subscribe"), cart_items_path(sku: "MEMBERSHIP_MONTHLY_SUBSCRIPTION"), method: :post,
-                    class: "btn btn-primary inline-block text-white px-16 py-1 rounded-3xl font-semibold text-2xl shadow-lg cursor-pointer",
+                    class: "btn btn-primary inline-block text-white px-16 py-1 rounded-lg font-semibold text-2xl shadow-lg cursor-pointer",
                     data: { testid: "subscribe-button" }
                 - else
                   = button_tag t("subscribe"), type: "button", onclick: "sessionStorage.setItem('pendingSubscriptionSku', 'MEMBERSHIP_MONTHLY_SUBSCRIPTION'); auth_modal.showModal();",
-                    class: "btn btn-primary inline-block text-white px-16 py-1 rounded-3xl font-semibold text-2xl shadow-lg cursor-pointer",
+                    class: "btn btn-primary inline-block text-white px-16 py-1 rounded-lg font-semibold text-2xl shadow-lg cursor-pointer",
                     data: { testid: "subscribe-button" }
 
           / ====== column: benefits section (right bottom) ======
@@ -64,7 +64,7 @@ div class="bg-linear-to-t from-info/60 to-base-100 bg-no-repeat bg-center bg-cov
 
 - if flash[:notice].present?
   .toast.toast-top.toast-end.m-10.z-100 data-controller="flash"
-    .alert.alert-success = flash[:notice]
+    .alert.border-none.bg-primary.text-white = flash[:notice]
 - elsif flash[:alert].present?
   .toast.toast-top.toast-end.m-10.z-100 data-controller="flash"
     .alert.alert-error = flash[:alert]

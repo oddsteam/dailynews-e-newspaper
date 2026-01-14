@@ -10,7 +10,7 @@
       .flex.flex-col
         .text-center
           / Success Icon
-          .inline-flex.items-center.justify-center.rounded-full
+          .inline-flex.items-center.justify-center.rounded-lg
             span.iconify.lucide--check-circle.text-primary style="font-size: 4rem;"
 
         h2.card-title.text-xl.lg:text-3xl.mb-2.justify-center.text-center ทำรายการเสร็จสมบูรณ์
@@ -37,10 +37,10 @@
     / Actions
     .flex.flex-col.lg:flex-row.justify-center.items-center.mt-4.gap-4.max-w-3xl.w-full
       - if @order.receipt_number.present?
-        = link_to receipt_order_path(@order), class: "btn bg-white border-1 border-primary rounded-full btn-lg flex-1 text-primary max-lg:w-full max-lg:py-2" do
+        = link_to receipt_order_path(@order), class: "btn bg-white border-1 border-primary rounded-lg btn-lg flex-1 text-primary max-lg:w-full max-lg:py-2" do
           span ดาวน์โหลดใบเสร็จ
 
-      = link_to library_path, class: "btn btn-primary btn-lg flex-1 rounded-full max-lg:w-full max-lg:py-2" do
+      = link_to library_path, class: "btn btn-primary btn-lg flex-1 rounded-lg max-lg:w-full max-lg:py-2" do
         span ไปที่คลังหนังสือพิมพ์
 
 

@@ -30,7 +30,7 @@ div.mt-8 class ="mx-4 min-lg:mr-12"
 / Flash messages
 - if flash[:notice].present?
   div(class="toast toast-top toast-end m-10 z-100" data-controller="flash")
-    div(class="alert alert-success")
+    div(class="alert border-none bg-primary text-white")
       = flash[:notice]
 - elsif flash[:alert].present?
   div(class="toast toast-top toast-end m-10 z-100" data-controller="flash")

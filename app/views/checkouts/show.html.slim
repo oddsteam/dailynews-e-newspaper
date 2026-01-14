@@ -77,13 +77,13 @@ div class="flex flex-col px-10 py-8 bg-linear-to-t from-info/60 to-base-100 bg-n
         / if user is logged as a member yet, the button will trigger the auth model
 
         - if member_signed_in?
-          = button_tag "ดำเนินการต่อ", id: "pay-button", class: "w-full btn btn-primary p-4 lg:p-6 rounded-full transition cursor-pointer lg:text-2xl disabled:!bg-[#ffa1d8] disabled:text-white disabled:cursor-not-allowed", type: "button", data: { "action": "click->omise#payButtonClicked", "checkbox-target": "button", testid: "pay-button"}
+          = button_tag "ดำเนินการต่อ", id: "pay-button", class: "w-full btn btn-primary p-4 lg:p-6 rounded-lg transition cursor-pointer lg:text-2xl disabled:!bg-[#ffa1d8] disabled:text-white disabled:cursor-not-allowed", type: "button", data: { "action": "click->omise#payButtonClicked", "checkbox-target": "button", testid: "pay-button"}
 
           = form_with model: @order, data: { omise_target: "form" } do |form|
             = form.hidden_field :token, data: { omise_target: "token" }
             = form.hidden_field :total_cents, value: @cart.total_cents
         - else 
-          = button_tag "ดำเนินการต่อ", id: "pay-button", class: "w-full btn btn-primary p-4 lg:p-6 rounded-full transition cursor-pointer lg:text-2xl disabled:!bg-[#ffa1d8] disabled:text-white disabled:cursor-not-allowed", type: "button", onclick: "auth_modal.showModal()", data: {"checkbox-target": "button", testid: "pay-button-guest"}
+          = button_tag "ดำเนินการต่อ", id: "pay-button", class: "w-full btn btn-primary p-4 lg:p-6 rounded-lg transition cursor-pointer lg:text-2xl disabled:!bg-[#ffa1d8] disabled:text-white disabled:cursor-not-allowed", type: "button", onclick: "auth_modal.showModal()", data: {"checkbox-target": "button", testid: "pay-button-guest"}
         / - if check_newspaper_memberships(@newspaper, current_user) || current_user.member?
           .border-t.border-gray-200.my-4
           = form_with model: @order, data: { payment_target: "form" } do |form|
