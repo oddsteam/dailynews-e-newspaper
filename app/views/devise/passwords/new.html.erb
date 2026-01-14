@@ -22,8 +22,8 @@
           </div>
 
           <div class="flex flex-row justify-center font-extralight gap-6 mt-6">
-            <%= link_to "เข้าสู่ระบบ", new_session_path(resource_name), data: { turbo_frame: "devise" }, class: "text-primary" %>
-            <%= link_to "สร้างบัญชีผู้ใช้", new_registration_path(resource_name), data: { turbo_frame: "devise" }, class: "text-primary" %>
+            <%= link_to "เข้าสู่ระบบ", new_session_path(resource_name), data: { turbo_frame: "devise" }, class: "text-primary underline font-medium" %>
+            <%= link_to "สร้างบัญชีผู้ใช้", new_registration_path(resource_name), data: { turbo_frame: "devise" }, class: "text-primary underline font-medium" %>
           </div>
         <% end %>
       </div>
