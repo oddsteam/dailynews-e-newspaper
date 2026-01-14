@@ -91,7 +91,7 @@
                   br
                   span.text-sm Please update your payment method to continue your subscription
               - elsif @subscription.succeeded?
-                .alert..border-none.bg-primary.text-white.py-2
+                .alert.border-none.bg-primary.text-white.py-2
                   span = @subscription.renewal_status_message
               - elsif @subscription.failed?
                 .alert.alert-error.py-2
